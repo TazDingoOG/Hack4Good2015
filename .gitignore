@@ -3,3 +3,10 @@
 *.war
 *.ini
 
+#maven
+target/
+
+#eclipse (you can generate a project with mvn eclipse:eclipse
+.project
+.classpath
+.settings
