@@ -1,0 +1,23 @@
+.center-text {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    max-width: 80%;
+    margin-top: -50px;
+}
+
+.fontblue {
+    color: #3F51B5;   
+}
+
+.background {
+    background-image: url('../img/Burning_Yellow_sunset.jpg');
+    background-size: cover;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.transparent-background {
+    background-color: rgba(255,255,255,0.75);
+}
