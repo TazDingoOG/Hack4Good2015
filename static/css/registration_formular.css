@@ -1,0 +1,13 @@
+div.registration_field {
+	border: solid black thin;
+	width: 500px;
+}
+
+label.field {
+	text-align: right;
+}
+
+label span, .required {
+	color: red;
+	font-weight: bold;
+}

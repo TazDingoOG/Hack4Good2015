@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Tazdingo - Registration Formular</title>
+  <meta name="description" content="Tazdingo">
+  <meta name="author" content="TazDingo">
+  <script src="registration_formular_functions.js"></script>
+
+  <link rel="stylesheet" href="registration_formular.css">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+
+    <!-- Custom Theme -->
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+
+    <!-- Optional theme -->
+    <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+</head>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <h1>
+  	The TazDingo Formular
+  </h1>
+
+  <p class="required">* Required</p>
+  <div class="registration_field container">
+      <legend>Registration Formular</legend>
+      <form name="registration" onsubmit="return formValidation();"> 
+        <p>
+          <!-- refugee camp name -->
+          <label class="field" for="refugee_camp_name">
+            <span>* </span>Refugee Camp Name:
+          </label>
+          <input type="text" name="refugee_camp_name" class="textbox"/>
+          <br>
+
+          <!-- street name -->
+          <label class="field" for="street_name">
+            <span>* </span>Street Name:
+          </label>
+          <input type="text" name="street_name" class="textbox"/>
+          <br>
+          
+          <!-- street number -->
+          <label class="field" for="street_number">
+            <span>* </span>Street Number:
+          </label>
+          <input type="integer" name="street_number" class="textbox"/>
+          <br>
+          
+          <!-- PLZ / ZIP -->
+          <label class="field" for="zip">
+            <span>* </span>ZIP / PLZ:
+          </label>
+          <input type="integer" name="zip" class="textbox"/>
+          <br>
+          
+          <!-- phone number -->
+          <label class="field" for="phone_number">
+            Phone Number:
+          </label>
+          <input type="integer" name="phone_number" class="textbox"/>
+          <br>
+          
+          <!-- contact person -->
+          <label class="field" for="contact_person">
+            <span>* </span>Contact Person:
+          </label>
+          <input type="integer" name="contact_person" class="textbox"/>
+          <br>
+          
+          <!-- email -->
+          <label class="field" for="email">
+            <span>* </span>EMail:
+          </label>
+          <input type="text" name="email" class="textbox"/>
+          <br>
+
+          <input type="submit" name="submit" value="Submit Formular" />
+          
+        </p>
+      </form>
+  </div>
+
+</body>
+</html>
