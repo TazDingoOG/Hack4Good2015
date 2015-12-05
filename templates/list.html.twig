@@ -2,9 +2,30 @@
 
 {% block title %}Accommodation XY{% endblock %}
 
-{% block scripts_head %} {# add script to head #}
+{% block stylesheets %} {# add script to head #}
     <!-- Custom Theme -->
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+{% endblock %}
+
+{% block scripts_bottom %}
+    <!-- custom javascript -->
+    <script type="text/javascript" src="/static/js/live-search.js"></script>
+    <script>
+        $(document).on("click", ".add-to-requests", function () {
+            var myItemId = $(this).data('desc');
+            $(".modal-body #item-name-modal").text(myItemId);
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+    </script>
+
+    <!-- tooltip script -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 {% endblock %}
 
 
@@ -166,26 +187,6 @@
                 </div>
             </div>
 
-
         </div>
     </div>
-
-    <!-- cutom javascript -->
-    <script type="text/javascript" src="/static/js/live-search.js"></script>
-    <script>
-        $(document).on("click", ".add-to-requests", function () {
-            var myItemId = $(this).data('desc');
-            $(".modal-body #item-name-modal").text(myItemId);
-            // As pointed out in comments,
-            // it is superfluous to have to manually call the modal.
-            // $('#addBookDialog').modal('show');
-        });
-    </script>
-
-    <!-- tooltip script -->
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 {% endblock %}

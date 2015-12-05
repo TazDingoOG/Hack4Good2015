@@ -16,7 +16,7 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block scripts_head %}{% endblock %}
+    {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
@@ -31,6 +31,8 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="../static/js/bootstrap.min.js"></script>
+
+{% block scripts_bottom %}{% endblock %}
 
 </body>
 </html>

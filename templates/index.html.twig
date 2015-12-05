@@ -2,14 +2,17 @@
 
 {% block title %}TheOneThatWorks{% endblock %}
 
-{% block scripts_head %} {# add script to head #}
+{% block stylesheets %} {# add script to head #}
     {{ parent() }}
     <link rel="stylesheet" href="/static/css/main-web.css">
 {% endblock %}
 
 
+{% block scripts_bottom %} {# add script to head #}
+    <script src="/static/js/registration_formular_functions.js"></script>
+{% endblock %}
+
 {% block body %}
-    <!--<img src="../static/img/Burning_Yellow_Sunset.jpg" style="max-height:100%" />-->
     <div class="container">
         <div class="jumbotron center centered-jumbotron transparent-background">
             <div class="center">
@@ -56,5 +59,4 @@
         </div>
     </div>
 
-    <script src="/static/js/registration_formular_functions.js"></script>
 {% endblock body %}
