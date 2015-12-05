@@ -104,7 +104,25 @@ INSERT INTO `Item` (id,name,image) VALUES
  (79,'Kravatte',NULL),
  (80,'Hemd',NULL),
  (81,'Haargel',NULL),
- (82,'Jacke',NULL);
+ (82,'Seife',NULL),
+ (83,'Kondom',NULL),
+ (84,'Wattestäbchen',NULL),
+ (85,'Bodylotion',NULL),
+ (86,'Putzhandschuhe',NULL),
+ (87,'Nagelschere',NULL),
+ (88,'Ohrenstöpsel',NULL),
+ (89,'Zahnseide',NULL),
+ (90,'Umzugskarton',NULL),
+ (91,'Stift',NULL),
+ (92,'Tesafilm',NULL),
+ (93,'Trinkflasche',NULL),
+ (94,'Wäschekorb',NULL),
+ (95,'Gebetsteppich',NULL),
+ (96,'Hustensaft',NULL),
+ (97,'Schmerzmittel',NULL),
+ (98,'Nasenspray',NULL),
+ (99,'Jodsalbe',NULL),
+ (100,'Jacke',NULL);
 
 
 INSERT INTO `Accommodation` (id,name,email,telnr,authtoken) VALUES 
