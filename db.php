@@ -11,7 +11,7 @@ class MyDB extends SQLite3 {
 
         // create default values, if they dont exist
         $this->exec(file_get_contents(MyDB::DB_STRUCTURE));
-}
+    }
 }
 
 ?>

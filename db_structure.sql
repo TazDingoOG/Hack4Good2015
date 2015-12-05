@@ -1,21 +1,22 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS `Unterkunft` (
+CREATE TABLE IF NOT EXISTS `Accommodation` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`name`	TEXT NOT NULL UNIQUE,
 	`email`	TEXT,
 	`telnr`	TEXT,
 	`authtoken`	TEXT UNIQUE
 );
-CREATE TABLE IF NOT EXISTS  `Objekt` (
+CREATE TABLE IF NOT EXISTS  `Item` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`name`	TEXT NOT NULL UNIQUE,
 	`image`	TEXT
 );
-CREATE TABLE IF NOT EXISTS  `Bedarf` (
+CREATE TABLE IF NOT EXISTS  `Request` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`unterkunft_id`	INTEGER NOT NULL,
-	`objekt_id`	INTEGER NOT NULL,
-	FOREIGN KEY(`unterkunft_id`) REFERENCES Unterkunft(id),
-	FOREIGN KEY(`objekt_id`) REFERENCES Objekt(id)
+	`accommodation_id`	INTEGER NOT NULL,
+	`item_id`	INTEGER NOT NULL,
+	`expiration`	TEXT,
+	FOREIGN KEY(`accommodation_id`) REFERENCES Accommodation(id),
+	FOREIGN KEY(`item_id`) REFERENCES Item(id)
 );
 COMMIT;
