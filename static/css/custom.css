@@ -76,6 +76,10 @@
     height: 64px;
 }
 
+.item-description {
+    font-size:1.2em;
+}
+
 .item-timer {
     text-align:center;
 }
