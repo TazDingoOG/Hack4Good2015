@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>IndexServlet</servlet-name>
+  	<display-name>IndexServlet</display-name>
+  	<description></description>
+  	<servlet-class>de.hack4good.refugees.servlets.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>IndexServlet</servlet-name>
+  	<url-pattern>/IndexServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
