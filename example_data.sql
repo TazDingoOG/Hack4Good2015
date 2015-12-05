@@ -103,10 +103,12 @@ INSERT INTO `Item` (id,name,image) VALUES
  (100,'Jacke',NULL);
 
 INSERT INTO `Accommodation` (id,name,email,telnr,authtoken) VALUES 
-(1,'Test Brennpunkt','nonofyour@business.de','0123/456789',"besser-wisser-martin"),
- (2,'Test Moabit','nonofyour@business.de','0123/456789',"erde-erde-erde"),
- (3,'Test Mitte','nonofyour@business.de','0123/456789',"tanz-koch-kurs"),
- (4,'Test Steglitz','nonofyour@business.de','0123/456789',"feuer-wasser-luft");
+(1,'NUK Brennpunkt','nonofyour@business.de','0123/456789',"besser-wisser-martin"),
+ (2,'NUK Moabit','nonofyour@business.de','0123/456789',"erde-erde-erde"),
+ (3,'NUK Mitte','nonofyour@business.de','0123/456789',"tanz-koch-kurs"),
+ (4,'NUK Steglitz','nonofyour@business.de','0123/456789',"feuer-wasser-luft");
+
+
 INSERT INTO `Request` (id,accommodation_id,item_id,expiration) VALUES 
 (1,1,1,NULL),
 (2,1,13,NULL),
