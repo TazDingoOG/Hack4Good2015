@@ -41,7 +41,7 @@
 
     <div class="container">
         <div class="container-fluid ">
-            <h2>Was wird bereits gebraucht?</h2>
+            <h2 class="list-categories-header">Was wird bereits gebraucht?</h2>
         </div>
         <table class="table">
             <thead>
@@ -57,7 +57,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description">T-Shirt</td>
-                <td class="item-timer table-content">24 Stunden</td>
+                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
 
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
@@ -69,7 +69,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Pullover</td>
-                <td class="item-timer table-content">24 Stunden</td>
+                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -80,7 +80,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Jacke</td>
-                <td class="item-timer table-content">24 Stunden</td>
+                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -91,7 +91,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Hemd</td>
-                <td class="item-timer table-content">24 Stunden</td>
+                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -100,7 +100,7 @@
         </table>
 
         <div class="container-fluid">
-            <h2>Was soll hinzugefügt werden?</h2>
+            <h2 class="list-categories-header">Was soll hinzugefügt werden?</h2>
         </div>
 
         <table class="table">
@@ -117,10 +117,10 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description">Hose</td>
-                <td class="item-timer">24 Stunden</td>
+                <td class="item-timer"><input type="text" value="24"></input> Stunden</td>
 
                 <td class="item-checkoff">
-                    <button type="button" desc="Shirt" class="btn btn-success add-to-requests"><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
+                    <button type="button" data-desc="Shirt" class="add-to-requests btn btn-success "><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
                     </button>
                 </td>
             </tr>
@@ -137,14 +137,13 @@
                         <h4 class="modal-title">Gegenstand zur Bedarfsliste hinzuf&uuml;gen</h4>
                     </div>
                     <div class="modal-body">
-                        <p id="item-modal-name">
+                        <p id="item-name-modal">
                             <!-- Name des Gegenstandes -->
+                            Shirt
                         </p>
-                        <p>
+                        <p id="item-duration-modal">
                             <!-- Gültigkeitsdauer des Gegenstandes -->
-                        </p>
-                        <p>
-                            <!-- Name des Gegenstandes -->
+                           Für X Stunden
                         </p>
 
                     </div>
@@ -163,7 +162,7 @@
 <script>
     $(document).on("click", ".add-to-requests", function () {
         var myItemId = $(this).data('desc');
-        $(".modal-body #item-modal-name").text(myItemId);
+        $(".modal-body #item-name-modal").text(myItemId);
         // As pointed out in comments, 
         // it is superfluous to have to manually call the modal.
         // $('#addBookDialog').modal('show');
