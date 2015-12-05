@@ -11,15 +11,19 @@ if (!preg_match("/^[a-z]*-[a-z]*-[a-z]*$/", $id)) {
 
 $codeText = 'http://donutplanet.de:1337/a/'.$id; 
 $qrfile = '/tmp/' . $id . '.png';
+$unterkunft = "NUK Asdfhausen";
 error_log("[INFO] qrfile is " . $qrfile);
 
-QRcode::png($codeText, $qrfile);
+QRcode::png($codeText, $qrfile,null,20);
 
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',16);
-$pdf->Cell(40,10,'Hello World!');
-$pdf->image($qrfile,40,20,0,0,'PNG');
+$pdf->Cell(null,null,$unterkunft,null,null,"C");
+$pdf->Ln();
+$pdf->Image($qrfile,$pdf->w/2-20,$pdf->GetY()+10,40,null,'PNG');
+$pdf->Ln();
+$pdf->Cell(null,$pdf->GetY()+100,$codeText,null,null,"C");
 unlink($qrfile);
 $pdf->Output();
 ?>
