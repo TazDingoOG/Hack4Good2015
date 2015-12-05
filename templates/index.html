@@ -52,51 +52,20 @@
                     <th style="text-align:center">Entfernen</th>
                 </tr>
             </thead>
-            <tr>
-                <td class="item-picture">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description">T-Shirt</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
+            {% for request in requests %}
+                <tr>
+                    <td class="item-picture">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description">{{ request.name }}</td>
+                    <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
 
-                <td class="item-checkoff table-content">
-                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Pullover</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
-                <td class="item-checkoff table-content">
-                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Jacke</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
-                <td class="item-checkoff table-content">
-                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Hemd</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
-                <td class="item-checkoff table-content">
-                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
+                    <td class="item-checkoff table-content">
+                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
 
         <div class="container-fluid">
