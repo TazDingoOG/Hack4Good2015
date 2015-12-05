@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Tazdingo - Main Page</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <script src="main_page_functions.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <h1>
+  	Welcome to Tazdingo!
+  </h1>
+  
+  <img src="help_help_logo.png">
+
+  <div>
+    <p>
+    	Which refugee camp would you like to help?
+
+
+
+    </p>
+    <p>
+      
+  <script type="text/javascript">
+  window.onload = function(){ 
+    //Get submit button
+    var submitbutton = document.getElementById("search_button");
+    //Add listener to submit button
+    if(submitbutton.addEventListener){
+      submitbutton.addEventListener("click", function() {
+        if (submitbutton.value == 'NotMoabit') {
+          // if not found delete input
+          submitbutton.value = '';
+          var div = document.createElement("div");
+          div.className = "not_found_div";
+          not_found_div.textContent = "nothing was found";
+          document.body.tfheader.appendChild(not_found_div);
+        } else {
+          // add read only file with needed items
+          var div = document.createElement("div");
+          div.className = "read_only_div";
+          div.id = "read_only_div";
+
+          var elem = document.createElement("img");
+          elem.setAttribute("src", "get_picture_from_server.png");
+          elem.setAttribute("height", "768");
+          elem.setAttribute("width", "1024");
+          elem.setAttribute("alt", "Flower");
+          document.getElementById("read_only_div").appendChild(elem);
+
+          document.body.tfheader.appendChild(read_only_div);
+
+
+        }
+      });
+    }
+  }
+  </script>
+
+  <!-- HTML for SEARCH BAR -->
+  <div id="tfheader">
+    <form id="tfnewsearch" method="get" action="http://www.google.com">
+            <input type="text" id="search_button" class="tftextinput2" name="q" size="21" maxlength="120" value="Search for Refugee Camp"><input type="submit" value=">" class="tfbutton2">
+    </form>
+    <div class="tfclear"></div>
+  </div>
+
+
+
+
+    </p>
+  </div>
+
+
+  <!--
+  	schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
+  	und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
+  -->
+  <div>
+    <p>
+    	Ist ein Flüchtlingsheim noch nicht in der Liste?
+      <br>
+      <button onclick="window.location.href='registration_formular.html'">Go to formular</button>
+    </p>
+  </div>
+</body>
+</html>
