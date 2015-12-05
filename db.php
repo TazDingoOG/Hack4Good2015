@@ -23,9 +23,9 @@ class MyDB extends SQLite3
         return self::fetchAll($result);
     }
 
-    public function getAccomodationFromToken($token)
+    public function getAccommodationFromToken($token)
     {
-        $statement = $this->prepare("SELECT * FROM Accomodation a
+        $statement = $this->prepare("SELECT * FROM Accommodation a
             WHERE a.authtoken = :token");
         $statement->bindValue('token', $token, SQLITE3_TEXT);
         $result = $statement->execute();
