@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registrierung{% endblock %}
+
+{% block scripts_head %}
+    <link rel="stylesheet" type="text/css" href="../static/css/main-web.css">
+    <link rel="stylesheet" href="../static/css/registration_formular.css">
+{% endblock %}
+
+
+{% block body %}
+    <div class="registration_field container">
+        <div class="jumbotron transparent-background">
+            <h2 class="fontblue">Registration Formular</h2>
+
+            <form role="form" name="registration" onsubmit="return formValidation();" action="POST" target="/register">
+
+                <!-- refugee camp name -->
+                <div class="form-group">
+                    <label class="field" for="refugee_camp_name">
+                        <span>* </span>Refugee Camp Name:
+                    </label>
+                    <input type="text" name="refugee_camp_name" class="form-control"/>
+                </div>
+
+                <!-- street number -->
+                <div class="form-group">
+                    <label class="field" for="street_number">
+                        <span>* </span>Street, Number:
+                    </label>
+                    <input type="integer" name="street_number" class="form-control"/>
+                </div>
+
+                <!-- PLZ / ZIP -->
+                <div class="form-group">
+                    <label class="field" for="zip">
+                        <span>* </span>ZIP / PLZ:
+                    </label>
+                    <input type="integer" name="zip" class="form-control"/>
+                </div>
+
+                <!-- phone number -->
+                <div class="form-group">
+                    <label class="field" for="phone_number">
+                        Phone Number:
+                    </label>
+                    <input type="integer" name="phone_number" class="form-control"/>
+                </div>
+
+                <!-- contact person -->
+                <div class="form-group">
+                    <label class="field" for="contact_person">
+                        <span>* </span>Contact Person:
+                    </label>
+                    <input type="integer" name="contact_person" class="form-control"/>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label class="field" for="email">
+                        <span>* </span>EMail:
+                    </label>
+                    <input type="email" name="email" class="form-control"/>
+                </div>
+                <p class="required">* Required</p>
+                <input type="submit" name="submit" value="Submit Formular" class="btn btn-primary"/>
+                <input type="reset" name="cancel" value="Cancel" class="btn btn-default" style="margin-right: 5px"/>
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

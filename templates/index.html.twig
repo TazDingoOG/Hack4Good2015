@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TheOneThatWorks{% endblock %}
+
+{% block scripts_head %} {# add script to head #}
+    {{ parent() }}
+    <link rel="stylesheet" href="../static/css/main-web.css">
+{% endblock %}
+
+
+{% block body %}
+    <!--<img src="../static/img/Burning_Yellow_Sunset.jpg" style="max-height:100%" />-->
+    <div class="container">
+        <div class="jumbotron center-text transparent-background">
+            <div class="center">
+                <h1 class="fontblue">
+                    <b>Welcome to Tazdingo</b>
+                </h1>
+
+                <h3 class="fontblue">
+                    Easy to use application for volunteers
+                </h3>
+                <br>
+            </div>
+
+
+            <div>
+                <!-- HTML for SEARCH BAR -->
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Search for your refugee accommandation"
+                           aria-label="...">
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" aria-label="Right Align">
+                            <span class="" aria-hidden="true">Go!</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <!--
+                schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
+                und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
+            -->
+            <div>
+                <div class="center">
+                    <h3>Is your refugee accommadation not at the <a href="TODO"> list</a>?</h3>
+                    <a href="/register">
+                        <button class="btn btn-success btn-lg">
+                            <b>Register now</b>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/registration_formular_functions.js"></script>
+{% endblock body %}

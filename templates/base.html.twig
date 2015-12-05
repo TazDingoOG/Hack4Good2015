@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+
+    <!-- Custom Theme -->
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block scripts_head %}{% endblock %}
+</head>
+
+<body>
+
+{% block body %}
+    BODY
+{% endblock %}
+
+<!-- Optional theme -->
+<!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="../static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

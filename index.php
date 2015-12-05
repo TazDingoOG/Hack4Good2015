@@ -32,6 +32,8 @@ class Volunteerio
             $acom = substr($path, 12); // remove the '/unterkunft/'
 
             $this->render_accommodation($acom);
+        } else if ($path == '/register') {
+            $this->render_registration();
         } else if (strpos($path, '/a') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
@@ -45,7 +47,13 @@ class Volunteerio
 
     function render_homepage()
     {
-        echo $this->twig->render('index.html');
+        echo $this->twig->render('index.html.twig');
+        exit;
+    }
+
+    function render_registration()
+    {
+        echo $this->twig->render('registration_formular.html.twig');
         exit;
     }
 
@@ -53,7 +61,7 @@ class Volunteerio
     {
         $requests = $this->db->getRequestsForAccommodation(1);
 
-        echo "TODO";
+        echo $this->twig->render('list.html.twig', array('requests' => $requests));
         exit;
     }
 
@@ -65,7 +73,7 @@ class Volunteerio
 
     function render_404()
     {
-        echo $this->twig->render('404.html');
+        echo $this->twig->render('404.html.twig');
         exit;
     }
 }

@@ -10,12 +10,9 @@
     color: #3F51B5;   
 }
 
-.background {
-    background-image: url('../img/Burning_Yellow_sunset.jpg');
+body {
     background-size: cover;
-    background-position: fixed;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url('/static/img/Burning_Yellow_sunset.jpg') no-repeat fixed center center;
 }
 
 .transparent-background {
