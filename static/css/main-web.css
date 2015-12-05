@@ -1,9 +1,5 @@
-.center-text {
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    max-width: 80%;
-    margin-top: -50px;
+.centered-jumbotron {
+    margin-top: 50px;
 }
 
 .fontblue {
@@ -12,7 +8,7 @@
 
 body {
     background-size: cover;
-    background: url('/static/img/Burning_Yellow_sunset.jpg') no-repeat fixed center center;
+    background: url('/static/img/main_background.jpg') no-repeat fixed center center;
 }
 
 .transparent-background {
