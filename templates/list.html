@@ -1,56 +1,109 @@
-<html>
+    <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 
-    <!-- Custom Theme -->
-    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+        <!-- Custom Theme -->
+        <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
 
-    <!-- Optional theme -->
-    <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <!-- Optional theme -->
+        <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="../static/js/bootstrap.min.js"></script>
-</head>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../static/js/bootstrap.min.js"></script>
+    </head>
 
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">TazDingoOG</a>
-                <p class="navbar-text navbar-location">Standort: Berlin</p>
-            </div>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">TazDingoOG</a>
+                    <p class="navbar-text navbar-location">Standort: Berlin</p>
+                </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <form class="navbar-form search-form" role="search">
+                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="form-group">
                     <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden" id="search" />
                 </div>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Neuer Gegenstand</button>
-            </form>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 
-    <div class="container">
-        <div class="container-fluid ">
-            <h2 class="list-categories-header">Was wird bereits gebraucht?</h2>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="container create-new-item">
+
+            <!-- Floating button for creating new items -->
+            <button class="btn-primary floating-add-button" data-toggle="tooltip" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
         </div>
-        <table class="table">
-            <thead>
+        <div class="container">
+            <div class="container-fluid ">
+                <h2 class="list-categories-header">Was wird bereits gebraucht?</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Bild</th>
+                        <th>Name</th>
+                        <!-- <th>G&uuml;ltigkeit</th> -->
+                        <th style="text-align:center">Entfernen</th>
+                    </tr>
+                </thead>
                 <tr>
-                    <th>Bild</th>
-                    <th>Name</th>
-                    <th>G&uuml;ltigkeit</th>
-                    <th style="text-align:center">Entfernen</th>
+                    <td class="item-picture">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description">T-Shirt</td>
+                    <!-- <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+
+                    <td class="item-checkoff table-content">
+                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </tr>
+                <tr>
+                    <td class="item-picture table-content">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description table-content">Pullover</td>
+                    <!--  <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+                    <td class="item-checkoff table-content">
+                        <button  class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="item-picture table-content">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description table-content">Jacke</td>
+                    <!-- <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+                    <td class="item-checkoff table-content">
+                        <button  class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="item-picture table-content">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description table-content">Hemd</td>
+                    <!--   <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+                    <td class="item-checkoff table-content">
+                        <button  class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="container-fluid">
+                <h2 class="list-categories-header">Was soll hinzugefügt werden?</h2>
+            </div>
             </thead>
 
             {% for request in requests %}
@@ -88,15 +141,54 @@
         <div class="container-fluid">
             <h2 class="list-categories-header">Was soll hinzugefügt werden?</h2>
         </div>
-
-        <table class="table">
-            <thead>
+            <table class="table" id="complete-list">
+                <thead>
+                    <tr>
+                        <th>Bild</th>
+                        <th>Name</th>
+                        <!-- <th>G&uuml;ltigkeit</th> -->
+                        <th style="text-align:center">Hinzuf&uuml;gen</th>
+                    </tr>
+                </thead>
                 <tr>
-                    <th>Bild</th>
-                    <th>Name</th>
-                    <th>G&uuml;ltigkeit</th>
-                    <th style="text-align:center">Hinzuf&uuml;gen</th>
+                    <td class="item-picture">
+                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                    </td>
+                    <td class="item-description">Hose</td>
+                    <!-- <td class="item-timer"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+
+                    <td class="item-checkoff">
+                        <button type="button" data-desc="Shirt" class="add-to-requests btn btn-success" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
                 </tr>
+            </table>
+
+            <!-- Model for adding items to the request list -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Gegenstand zur Bedarfsliste hinzuf&uuml;gen</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p id="item-name-modal">
+                                <!-- Name des Gegenstandes -->
+                                Shirt
+                            </p>
+                            <p id="item-duration-modal">
+                                <!-- Gültigkeitsdauer des Gegenstandes -->
+                                Für X Tage
+                            </p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Abbrechen</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Best&auml;gen</button>
+                        </div>
             </thead>
             <tr>
                 <td class="item-picture">
@@ -122,24 +214,32 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Gegenstand zur Bedarfsliste hinzuf&uuml;gen</h4>
                     </div>
-                    <div class="modal-body">
-                        <p id="item-name-modal">
-                            <!-- Name des Gegenstandes -->
-                            Shirt
-                        </p>
-                        <p id="item-duration-modal">
-                            <!-- Gültigkeitsdauer des Gegenstandes -->
-                            Für X Tage
-                        </p>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Hinzuf&uuml;gen</button>
-                    </div>
                 </div>
-
             </div>
+        </body>
+
+        <!-- custom javascript -->
+        <script type="text/javascript" src="../static/js/live-search.js"></script>
+        <script>
+            $(document).on("click", ".add-to-requests", function () {
+                var myItemId = $(this).data('desc');
+                $(".modal-body #item-name-modal").text(myItemId);
+            // As pointed out in comments, 
+            // it is superfluous to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+        </script>
+
+        <!-- tooltip script -->
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip(); 
+            });
+        </script>
+
+        </html>
+
         </div>
     </body>
 

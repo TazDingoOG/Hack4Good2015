@@ -1,5 +1,8 @@
 div.registration_field {
-	max-width: 500px;
+    position: absolute;
+    top: 10%;
+	max-width: 60%;
+    left: 20%;
 }
 
 label.field {
@@ -9,7 +12,7 @@ label.field {
 label span, .required {
 	color: red;
 	font-weight: bold;
-    
+
 }
 
 input.btn {

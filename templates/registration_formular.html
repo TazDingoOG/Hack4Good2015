@@ -25,6 +25,8 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/main-web.css">
 </head>
 
   <!--[if lt IE 9]>
@@ -32,27 +34,12 @@
   <![endif]-->
 </head>
 
-<body>
+<body class="background">
 
-<nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="main_page.html">TazDingoOG</a>
-            </div>
-            <div class="navbar-body">
-              <a class="navbar-text"></a>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 <div class="registration_field container">
-  <h1>
-  	The TazDingo Formular
-  </h1>
-      <legend>Registration Formular</legend>
-      <form role="form" name="registration" onsubmit="return formValidation();"> 
+<div class="jumbotron transparent-background">
+      <h2 class="fontblue">Registration Formular</h2>
+      <form role="form" name="registration" onsubmit="return formValidation();" action="POST" target="/register"> 
         
           <!-- refugee camp name -->
           <div class="form-group">
@@ -62,18 +49,10 @@
           <input type="text" name="refugee_camp_name" class="form-control"/>
           </div>
 
-          <!-- street name -->
-          <div class="form-group">
-          <label class="field" for="street_name">
-            <span>* </span>Street Name:
-          </label>
-          <input type="text" name="street_name" class="form-control"/>
-          </div>
-          
           <!-- street number -->
           <div class="form-group">
           <label class="field" for="street_number">
-            <span>* </span>Street Number:
+            <span>* </span>Street, Number:
           </label>
           <input type="integer" name="street_number" class="form-control"/>
           </div>
@@ -107,13 +86,14 @@
           <label class="field" for="email">
             <span>* </span>EMail:
           </label>
-          <input type="text" name="email" class="form-control"/>
+          <input type="email" name="email" class="form-control"/>
           </div>
           <p class="required">* Required</p> 
-          <input type="submit" name="submit" value="Submit Formular" class="btn btn-primary"/>
-          <input type="reset" name="cancel" value="Cancel" class="btn btn-default"/>
+          <input type="submit" name="submit" value="Submit Formular" class="btn btn-primary"  />
+          <input type="reset" name="cancel" value="Cancel" class="btn btn-default" style="margin-right: 5px"/>
         </p>
       </form>
+  </div>
   </div>
 </body>
 </html>
