@@ -11,6 +11,11 @@
      vertical-align: middle;
 }
 
+/*.img-rounded {
+    max-height: 25px;
+    min-width: 25px;
+}*/
+
 /*
 .search-input{
      content:'';
@@ -52,7 +57,7 @@
 }
 
 .item-picture, .item-timer, .item-description, .item-checkoff {
-    display:inline-block;   
+    vertical-align: middle;
     width: 24%;
 }
 
