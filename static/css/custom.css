@@ -7,6 +7,10 @@
     padding-left: 26px;
 }
 
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
 /*
 .search-input{
      content:'';
