@@ -100,13 +100,12 @@
     height: 64px;
 }
 
-<<<<<<< HEAD
 .item-description {
     font-size:1.5em;
-=======
+}
+
 .item-name {
     font-size:1.2em;
->>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
 }
 
 .item-timer {
