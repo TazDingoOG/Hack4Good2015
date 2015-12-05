@@ -27,7 +27,7 @@ protected $CurPageSize;        // current page size
 protected $CurRotation;        // current page rotation
 protected $PageInfo;           // page-related data
 protected $wPt, $hPt;          // dimensions of current page in points
-protected $w, $h;              // dimensions of current page in user unit
+public $w, $h;              // dimensions of current page in user unit
 protected $lMargin;            // left margin
 protected $tMargin;            // top margin
 protected $rMargin;            // right margin
