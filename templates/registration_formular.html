@@ -5,9 +5,9 @@
   <title>Tazdingo - Registration Formular</title>
   <meta name="description" content="Tazdingo">
   <meta name="author" content="TazDingo">
-  <script src="registration_formular_functions.js"></script>
+  <script src="../static/js/registration_formular_functions.js"></script>
 
-  <link rel="stylesheet" href="registration_formular.css">
+  <link rel="stylesheet" href="../static/css/registration_formular.css">
 
   <head>
     <meta charset="utf-8">
@@ -33,69 +33,87 @@
 </head>
 
 <body>
+
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="main_page.html">TazDingoOG</a>
+            </div>
+            <div class="navbar-body">
+              <a class="navbar-text"></a>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<div class="registration_field container">
   <h1>
   	The TazDingo Formular
   </h1>
-
-  <p class="required">* Required</p>
-  <div class="registration_field container">
       <legend>Registration Formular</legend>
-      <form name="registration" onsubmit="return formValidation();"> 
-        <p>
+      <form role="form" name="registration" onsubmit="return formValidation();"> 
+        
           <!-- refugee camp name -->
+          <div class="form-group">
           <label class="field" for="refugee_camp_name">
             <span>* </span>Refugee Camp Name:
           </label>
-          <input type="text" name="refugee_camp_name" class="textbox"/>
-          <br>
+          <input type="text" name="refugee_camp_name" class="form-control"/>
+          </div>
 
           <!-- street name -->
+          <div class="form-group">
           <label class="field" for="street_name">
             <span>* </span>Street Name:
           </label>
-          <input type="text" name="street_name" class="textbox"/>
-          <br>
+          <input type="text" name="street_name" class="form-control"/>
+          </div>
           
           <!-- street number -->
+          <div class="form-group">
           <label class="field" for="street_number">
             <span>* </span>Street Number:
           </label>
-          <input type="integer" name="street_number" class="textbox"/>
-          <br>
+          <input type="integer" name="street_number" class="form-control"/>
+          </div>
           
           <!-- PLZ / ZIP -->
+          <div class="form-group">
           <label class="field" for="zip">
             <span>* </span>ZIP / PLZ:
           </label>
-          <input type="integer" name="zip" class="textbox"/>
-          <br>
+          <input type="integer" name="zip" class="form-control"/>
+          </div>
           
           <!-- phone number -->
+          <div class="form-group">
           <label class="field" for="phone_number">
             Phone Number:
           </label>
-          <input type="integer" name="phone_number" class="textbox"/>
-          <br>
+          <input type="integer" name="phone_number" class="form-control"/>
+          </div>
           
           <!-- contact person -->
+          <div class="form-group">
           <label class="field" for="contact_person">
             <span>* </span>Contact Person:
           </label>
-          <input type="integer" name="contact_person" class="textbox"/>
-          <br>
+          <input type="integer" name="contact_person" class="form-control"/>
+          </div>
           
           <!-- email -->
+          <div class="form-group">
           <label class="field" for="email">
             <span>* </span>EMail:
           </label>
-          <input type="text" name="email" class="textbox"/>
-          <br>
-
-          <input type="submit" name="submit" value="Submit Formular" />
-          
+          <input type="text" name="email" class="form-control"/>
+          </div>
+          <p class="required">* Required</p> 
+          <input type="submit" name="submit" value="Submit Formular" class="btn btn-primary"/>
+          <input type="reset" name="cancel" value="Cancel" class="btn btn-default"/>
         </p>
       </form>
   </div>
-
 </body>
 </html>

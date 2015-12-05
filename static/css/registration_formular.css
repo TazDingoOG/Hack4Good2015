@@ -1,6 +1,5 @@
 div.registration_field {
-	border: solid black thin;
-	width: 500px;
+	max-width: 500px;
 }
 
 label.field {
@@ -10,4 +9,9 @@ label.field {
 label span, .required {
 	color: red;
 	font-weight: bold;
+    
+}
+
+input.btn {
+    float:right;
 }
