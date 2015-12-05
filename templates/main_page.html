@@ -1,96 +1,73 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
 
-  <title>Tazdingo - Main Page</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-  <script src="main_page_functions.js"></script>
+  <title>Tazdingo - Registration Formular</title>
+  <meta name="description" content="Tazdingo">
+  <meta name="author" content="TazDingo">
+  <script src="../static/js/registration_formular_functions.js"></script>
 
-  <link rel="stylesheet" href="../static/css/styles.css?v=1.0">
+  <link rel="stylesheet" href="../static/css/registration_formular.css">
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+
+    <!-- Custom Theme -->
+    <link rel="stylesheet" type="text/css" href="../static/css/main-web.css">
+
+    <!-- Optional theme -->
+    <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-  <h1>
-  	Welcome to Tazdingo!
+<body class="background">
+
+<!--<img src="../static/img/Burning_Yellow_Sunset.jpg" style="max-height:100%" />-->
+<div class="container">
+<div class="jumbotron center-text transparent-background" >
+<center>
+  <h1 class="fontblue">
+  	<b>Welcome to Tazdingo</b>
   </h1>
-  
-  <img src="../static/img/help_help_logo.png">
+  <h3 class="fontblue">
+    Easy to use application for volunteers
+  </h3>
+  <br>
+  </center>
+
 
   <div>
-    <p>
-    	Which refugee camp would you like to help?
-
-
-
-    </p>
-    <p>
-      
-  <script type="text/javascript">
-  window.onload = function(){ 
-    //Get submit button
-    var submitbutton = document.getElementById("search_button");
-    //Add listener to submit button
-    if(submitbutton.addEventListener){
-      submitbutton.addEventListener("click", function() {
-        if (submitbutton.value == 'NotMoabit') {
-          // if not found delete input
-          submitbutton.value = '';
-          var div = document.createElement("div");
-          div.className = "not_found_div";
-          not_found_div.textContent = "nothing was found";
-          document.body.tfheader.appendChild(not_found_div);
-        } else {
-          // add read only file with needed items
-          var div = document.createElement("div");
-          div.className = "read_only_div";
-          div.id = "read_only_div";
-
-          var elem = document.createElement("img");
-          elem.setAttribute("src", "get_picture_from_server.png");
-          elem.setAttribute("height", "768");
-          elem.setAttribute("width", "1024");
-          elem.setAttribute("alt", "Flower");
-          document.getElementById("read_only_div").appendChild(elem);
-
-          document.body.tfheader.appendChild(read_only_div);
-
-
-        }
-      });
-    }
-  }
-  </script>
 
   <!-- HTML for SEARCH BAR -->
-  <div id="tfheader">
-    <form id="tfnewsearch" method="get" action="http://www.google.com">
-            <input type="text" id="search_button" class="tftextinput2" name="q" size="21" maxlength="120" value="Search for Refugee Camp"><input type="submit" value=">" class="tfbutton2">
-    </form>
-    <div class="tfclear"></div>
+  <div class="input-group input-group-lg">
+  <input type="text" class="form-control" placeholder="Search for your refugee accommandation"aria-label="...">
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-default" aria-label="Right Align">
+      <span class="" aria-hidden="true">Go!</span>
+    </button>
   </div>
-
-
-
-
-    </p>
-  </div>
-
+</div>
+</div>
+<br>
 
   <!--
   	schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
   	und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
   -->
   <div>
-    <p>
-    	Ist ein Flüchtlingsheim noch nicht in der Liste?
-      <br>
-      <button onclick="window.location.href='registration_formular.html'">Go to formular</button>
-    </p>
+  <center>
+    	<h3>Is your refugee accommadation not at the <a href="list.html"> list</a>?</h3>
+        <button onclick="window.location.href='registration_formular.html'" class="btn btn-success btn-lg"><b>Register now</b></button>
+        </center>
+  </div>
   </div>
 </body>
 </html>

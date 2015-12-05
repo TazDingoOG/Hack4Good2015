@@ -1,6 +1,5 @@
 $("#search").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    console.log(value);
     $("table tr").each(function(index) {
         if (index !== 0) {
 
