@@ -14,13 +14,23 @@ INSERT INTO `Request` (id,accommodation_id,item_id,expiration) VALUES
 (13,1,19,NULL),
 (14,1,27,NULL),
 (15,1,41,NULL),
- (16,1,50,NULL);
-
-
-
-
-
-
+(17,1,95,NULL),
+(18,1,95,NULL),
+(19,1,95,NULL),
+(20,1,95,NULL),
+(21,1,95,NULL),
+(22,1,95,NULL),
+(23,1,95,NULL),
+(24,1,95,NULL),
+(25,1,95,NULL),
+(26,1,95,NULL),
+(27,1,95,NULL),
+(28,1,95,NULL),
+(29,1,95,NULL),
+(30,1,95,NULL),
+(31,1,95,NULL),
+(32,1,95,NULL),
+(16,1,50,NULL);
 
 INSERT INTO `Item` (id,name,image) VALUES 
 (1,'T-Shirt',NULL),
@@ -124,9 +134,8 @@ INSERT INTO `Item` (id,name,image) VALUES
  (99,'Jodsalbe',NULL),
  (100,'Jacke',NULL);
 
-
 INSERT INTO `Accommodation` (id,name,email,telnr,authtoken) VALUES 
-(1,'Test Brennpunkt','nonofyour@business.de','0123/456789',"besser_wisser_martin"),
- (2,'Test Moabit','nonofyour@business.de','0123/456789',"erde_erde_erde"),
- (3,'Test Mitte','nonofyour@business.de','0123/456789',"tanz_koch_kurs"),
- (4,'Test Steglitz','nonofyour@business.de','0123/456789',"feuer_wasser_luft");
+(1,'Test Brennpunkt','nonofyour@business.de','0123/456789',"besser-wisser-martin"),
+ (2,'Test Moabit','nonofyour@business.de','0123/456789',"erde-erde-erde"),
+ (3,'Test Mitte','nonofyour@business.de','0123/456789',"tanz-koch-kurs"),
+ (4,'Test Steglitz','nonofyour@business.de','0123/456789',"feuer-wasser-luft");
