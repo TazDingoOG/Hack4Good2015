@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 
     <!-- Custom Theme -->
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
 
     <!-- Optional theme -->
     <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">-->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -44,72 +45,62 @@
             <h1>Berlin</h1>
         </div>
         <div class="row">
-            <ul class="item-list-header">
-            <li>Bild</li>
-            <li>Name</li>
-            <li>G&uuml;ltigkeit</li>
-            <li>Entfernen</li>
 
             </ul>
             
-            <ul class="item-list">
-                <li>
-                    <div class="item-container container-fluid">
-                        <div class="item-picture">
+            <table class="table">
+            <tr>
+            <th>Bild</th>
+            <th>Name</th>
+            <th>G&uuml;ltigkeit</th>
+            <th>Entfernen</th>
+            </tr>
+                <tr>
+                        <td class="item-picture">
                             <img src="../static/img/t-shirt.png" class="img-rounded">
-                        </div>
-                        <div class="item-description">Lorem Ipsum</div>
-                        <div class="item-timer">24 Stunden</div>
+                        </td>
+                        <td class="item-description">Lorem Ipsum</td>
+                        <td class="item-timer">24 Stunden</td>
 
-                        <div class="item-checkoff">
+                        <td class="item-checkoff">
                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                             </button>
-                        </div>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="item-container container-fluid">
-                        <div class="item-picture">
+                        </td>
+                </tr>
+                <tr>
+                        <td class="item-picture">
                             <img src="../static/img/t-shirt.png" class="img-rounded">
-                        </div>
-                        <div class="item-description">Lorem Ipsum</div>
-                        <div class="item-timer">24 Stunden</div>
-                        <div class="item-checkoff">
+                        </td>
+                        <td class="item-description">Lorem Ipsum</td>
+                        <td class="item-timer">24 Stunden</td>
+                        <td class="item-checkoff">
                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                             </button>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="item-container container-fluid">
-                        <div class="item-picture">
+                        </td>
+                </tr>
+                <tr>
+                        <td class="item-picture">
                             <img src="../static/img/t-shirt.png" class="img-rounded">
-                        </div>
-                        <div class="item-description">Lorem Ipsum</div>
-                        <div class="item-timer">24 Stunden</div>
-                        <div class="item-checkoff">
+                        </td>
+                        <td class="item-description">Lorem Ipsum</td>
+                        <td class="item-timer">24 Stunden</td>
+                        <td class="item-checkoff">
                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                             </button>
-                        </div>
-                    </div>
-
-                </li>
-                <li>
-                    <div class="item-container container-fluid">
-                        <div class="item-picture">
+                        </td>
+                </tr>
+                <tr>
+                        <td class="item-picture">
                             <img src="../static/img/t-shirt.png" class="img-rounded">
-                        </div>
-                        <div class="item-description">Lorem Ipsum</div>
-                        <div class="item-timer">24 Stunden</div>
-                        <div class="item-checkoff">
+                        </td>
+                        <td class="item-description">Lorem Ipsum</td>
+                        <td class="item-timer">24 Stunden</td>
+                        <td class="item-checkoff">
                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                             </button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                        </td>
+                </tr>
+            </table>
     </div>
 </body>
 
