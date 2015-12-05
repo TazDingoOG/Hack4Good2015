@@ -35,6 +35,11 @@ body {
     text-align: center;   
 }
 
+#search {
+    margin-top: 7px;
+    width:100%;
+}
+
 .search-input {
     text-align: center;
 }

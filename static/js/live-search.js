@@ -1,7 +1,6 @@
 $("#search").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#table1 tr").each(function(index) {
-        if (index !== 0) {
 
             $row = $(this);
 
@@ -12,7 +11,6 @@ $("#search").on("keyup", function() {
             }else {
                 $row.hide(400);
             }
-        }
     });
 });
 
@@ -20,7 +18,6 @@ $("#search").on("keyup", function() {
 $("#search_modal").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#table_modal tr").each(function(index) {
-        if (index !== 0) {
 
             $row = $(this);
 
@@ -31,6 +28,5 @@ $("#search_modal").on("keyup", function() {
             }else {
                 $row.hide(400);
             }
-        }
     });
 });
