@@ -20,13 +20,29 @@ class MyDB extends SQLite3
         $statement->bindValue('accommodation_id', $acc_id, SQLITE3_INTEGER);
         $result = $statement->execute();
 
+        return self::fetchAll($result);
+    }
+
+    public function getAccomodationFromToken($token)
+    {
+        $statement = $this->prepare("SELECT * FROM Accomodation a
+            WHERE a.authtoken = :token");
+        $statement->bindValue('token', $token, SQLITE3_TEXT);
+        $result = $statement->execute();
+
+        $results = self::fetchAll($result);
+        if (count($results) != 1) {
+            return false;
+        }
+        return $results[0];
+    }
+
+    private static function fetchAll($result)
+    {
         $requests = array();
         while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
             array_push($requests, $req);
         }
-
-
-
         return $requests;
     }
 }
