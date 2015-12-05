@@ -47,7 +47,7 @@ INSERT INTO `Item` (id,name,image) VALUES
  (44,'Kaffee',NULL),
  (45,'Kakao',NULL),
  (46,'Kekse',NULL),
- (47,'Milch',NULL),
+ (47,'Astronautenanzug',NULL),
  (48,'Wasser (still)',NULL),
  (49,'Klopapier',NULL),
  (50,'Milch',NULL),
