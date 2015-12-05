@@ -88,7 +88,7 @@
     height: 80px;
 }
 
-.item-picture, .item-timer, .item-description, .item-checkoff {
+.item-picture, .item-timer, .item-name, .item-checkoff {
     vertical-align: middle;
     width: 33%;
 }
@@ -100,8 +100,13 @@
     height: 64px;
 }
 
+<<<<<<< HEAD
 .item-description {
     font-size:1.5em;
+=======
+.item-name {
+    font-size:1.2em;
+>>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
 }
 
 .item-timer {

@@ -1,0 +1,82 @@
+INSERT INTO `Request` (id,accommodation_id,item_id,expiration) VALUES 
+(1,1,1,NULL),
+(2,1,13,NULL),
+(3,1,16,NULL),
+(4,1,11,NULL),
+(5,1,22,NULL),
+(6,1,35,NULL),
+(7,1,47,NULL),
+(8,1,22,NULL),
+(9,1,11,NULL),
+(10,1,12,NULL),
+(11,1,31,NULL),
+(12,1,17,NULL),
+(13,1,19,NULL),
+(14,1,27,NULL),
+(15,1,41,NULL),
+ (16,1,50,NULL);
+
+
+
+
+
+
+
+INSERT INTO `Item` (id,name,image) VALUES 
+(1,'T-Shirt',NULL),
+ (2,'Pullover',NULL),
+ (3,'Babyflasche',NULL),
+ (4,'Babylotion',NULL),
+ (5,'Babynahrung',NULL),
+ (6,'Babyöl',NULL),
+ (7,'Babypflege',NULL),
+ (8,'Babypuder',NULL),
+ (9,'Babytragen',NULL),
+ (10,'Kamm',NULL),
+ (11,'Bürste',NULL),
+ (12,'Kuscheltier',NULL),
+ (13,'Schnuller',NULL),
+ (14,'Kindershampoo',NULL),
+ (15,'Wundschutzcreme',NULL),
+ (16,'Sprachmittler',NULL),
+ (17,'Decke',NULL),
+ (18,'Hackenporsche',NULL),
+ (19,'Isomatte',NULL),
+ (20,'Kinderwagen',NULL),
+ (21,'Reisetasche',NULL),
+ (22,'Rucksack',NULL),
+ (23,'Schlafsack',NULL),
+ (24,'Tragetasche',NULL),
+ (25,'Hand, Gesichts, Pflegecreme',NULL),
+ (26,'Damenbinden',NULL),
+ (27,'Deoroller',NULL),
+ (28,'Duschgel',NULL),
+ (29,'Einwegrasierer',NULL),
+ (30,'Zahnbürste',NULL),
+ (31,'Kinderzahnbürste',NULL),
+ (32,'Lippenpflegestift',NULL),
+ (33,'Rasierschaum',NULL),
+ (34,'Shampoo',NULL),
+ (35,'Taschentücher',NULL),
+ (36,'Zahnpasta',NULL),
+ (37,'Schuhpaar',NULL),
+ (38,'Outdoorjacke',NULL),
+ (39,'Handschuhe',NULL),
+ (40,'Hose',NULL),
+ (41,'Socken',NULL),
+ (42,'Küchenrolle',NULL),
+ (43,'Plastik, Pappbecher',NULL),
+ (44,'Kaffee',NULL),
+ (45,'Kakao',NULL),
+ (46,'Kekse',NULL),
+ (47,'Milch',NULL),
+ (48,'Wasser (still)',NULL),
+ (49,'Klopapier',NULL),
+ (50,'Jacke',NULL);
+
+
+INSERT INTO `Accommodation` (id,name,email,telnr,authtoken) VALUES 
+(1,'Test Brennpunkt','nonofyour@business.de','0123/456789',"besser_wisser_martin"),
+ (2,'Test Moabit','nonofyour@business.de','0123/456789',"erde_erde_erde"),
+ (3,'Test Mitte','nonofyour@business.de','0123/456789',"tanz_koch_kurs"),
+ (4,'Test Steglitz','nonofyour@business.de','0123/456789',"feuer_wasser_luft");

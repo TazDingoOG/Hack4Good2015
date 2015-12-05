@@ -66,6 +66,7 @@
                         </button>
                     </td>
                 </tr>
+<<<<<<< HEAD
                 <tr>
                     <td class="item-picture table-content">
                         <img src="../static/img/t-shirt.png" class="img-rounded">
@@ -104,6 +105,45 @@
             <div class="container-fluid">
                 <h2 class="list-categories-header">Was soll hinzugefügt werden?</h2>
             </div>
+=======
+            </thead>
+
+            {% for request in requests %}
+                <tr>
+                    <!-- picture -->
+                    <td class="item-picture">
+                        {% if request.image %}
+                            <img src="../static/img/{{ request.image }}" class="img-rounded">
+                        {% else %}
+                            <span class="glyphicon glyphicon-gift"></span>
+                        {% endif %}
+                    </td>
+
+                    <!-- name -->
+                    <td class="item-name">{{ request.name }}</td>
+
+                    <!-- expiration -->
+                    <td class="item-timer table-content">
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                        <input type="text" class="form-control" value="24" title="expiration">
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage
+                    </td>
+
+                    <!-- remove -->
+                    <td class="item-checkoff table-content">
+                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="container-fluid">
+            <h2 class="list-categories-header">Was soll hinzugefügt werden?</h2>
+        </div>
+>>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
 
             <table class="table" id="complete-list">
                 <thead>
@@ -126,6 +166,7 @@
                         </button>
                     </td>
                 </tr>
+<<<<<<< HEAD
             </table>
 
             <!-- Model for adding items to the request list -->
@@ -153,10 +194,37 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Abbrechen</button>
                             <button type="button" class="btn btn-success" data-dismiss="modal">Best&auml;gen</button>
                         </div>
+=======
+            </thead>
+            <tr>
+                <td class="item-picture">
+                    <img src="../static/img/t-shirt.png" class="img-rounded">
+                </td>
+                <td class="item-name">Hose</td>
+                <td class="item-timer"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td>
+
+                <td class="item-checkoff">
+                    <button type="button" data-desc="Shirt" class="add-to-requests btn btn-success "><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Model for adding items to the request list -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Gegenstand zur Bedarfsliste hinzuf&uuml;gen</h4>
+>>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
                     </div>
 
                 </div>
             </div>
+<<<<<<< HEAD
         </body>
 
         <!-- custom javascript -->
@@ -179,3 +247,21 @@
         </script>
 
         </html>
+=======
+        </div>
+    </body>
+
+    <!-- cutom javascript -->
+    <script type="text/javascript" src="../static/js/live-search.js"></script>
+    <script>
+        $(document).on("click", ".add-to-requests", function () {
+            var myItemId = $(this).data('desc');
+            $(".modal-body #item-name-modal").text(myItemId);
+        // As pointed out in comments, 
+        // it is superfluous to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+    </script>
+
+    </html>
+>>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
