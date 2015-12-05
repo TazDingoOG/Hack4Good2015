@@ -4,6 +4,7 @@ class MyDB extends SQLite3
 {
 
     const DB_FILENAME = 'data.db'; // contains the database (sqlite3)
+    const DEFAULT_IMAGE = 'default.png';
 
     function __construct()
     {
@@ -23,6 +24,8 @@ class MyDB extends SQLite3
         while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
             array_push($requests, $req);
         }
+
+
 
         return $requests;
     }

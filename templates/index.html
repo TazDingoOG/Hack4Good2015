@@ -30,7 +30,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <form class="navbar-form search-form" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control search-input" placeholder="Search" id="search" />
+                    <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden" id="search" />
                 </div>
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Neuer Gegenstand</button>
             </form>
@@ -52,14 +52,31 @@
                     <th style="text-align:center">Entfernen</th>
                 </tr>
             </thead>
+
             {% for request in requests %}
                 <tr>
+                    <!-- picture -->
                     <td class="item-picture">
-                        <img src="../static/img/t-shirt.png" class="img-rounded">
+                        {% if request.image %}
+                            <img src="../static/img/{{ request.image }}" class="img-rounded">
+                        {% else %}
+                            <span class="glyphicon glyphicon-gift"></span>
+                        {% endif %}
                     </td>
-                    <td class="item-description">{{ request.name }}</td>
-                    <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
 
+                    <!-- name -->
+                    <td class="item-name">{{ request.name }}</td>
+
+                    <!-- expiration -->
+                    <td class="item-timer table-content">
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                        <input type="text" class="form-control" value="24" title="expiration">
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage
+                    </td>
+
+                    <!-- remove -->
                     <td class="item-checkoff table-content">
                         <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                         </button>
@@ -85,8 +102,8 @@
                 <td class="item-picture">
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
-                <td class="item-description">Hose</td>
-                <td class="item-timer"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-name">Hose</td>
+                <td class="item-timer"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td>
 
                 <td class="item-checkoff">
                     <button type="button" data-desc="Shirt" class="add-to-requests btn btn-success "><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
@@ -112,7 +129,7 @@
                         </p>
                         <p id="item-duration-modal">
                             <!-- Gültigkeitsdauer des Gegenstandes -->
-                           Für X Stunden
+                            Für X Tage
                         </p>
 
                     </div>
@@ -124,18 +141,18 @@
 
             </div>
         </div>
-</body>
+    </body>
 
-<!-- cutom javascript -->
-<script type="text/javascript" src="../static/js/live-search.js"></script>
-<script>
-    $(document).on("click", ".add-to-requests", function () {
-        var myItemId = $(this).data('desc');
-        $(".modal-body #item-name-modal").text(myItemId);
+    <!-- cutom javascript -->
+    <script type="text/javascript" src="../static/js/live-search.js"></script>
+    <script>
+        $(document).on("click", ".add-to-requests", function () {
+            var myItemId = $(this).data('desc');
+            $(".modal-body #item-name-modal").text(myItemId);
         // As pointed out in comments, 
         // it is superfluous to have to manually call the modal.
         // $('#addBookDialog').modal('show');
     });
-</script>
+    </script>
 
-</html>
+    </html>
