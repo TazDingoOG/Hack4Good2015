@@ -20,6 +20,7 @@
 .th {
     border-top: 0px;   
 }
+
 /*
 .search-input{
      content:'';
@@ -61,7 +62,7 @@
 }
 
 .item-picture, .item-timer, .item-description, .item-checkoff {
-    display:inline-block;   
+    vertical-align: middle;
     width: 24%;
 }
 
