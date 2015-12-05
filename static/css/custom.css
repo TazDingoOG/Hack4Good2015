@@ -1,20 +1,22 @@
 
+.navbar-location {
+    
+}
+
 .search-form {
     text-align: center;   
 }
 
 .search-input {
-    padding-left: 26px;
 }
 
 .table > tbody > tr > td {
      vertical-align: middle;
 }
 
-/*.img-rounded {
-    max-height: 25px;
-    min-width: 25px;
-}*/
+.th {
+    border-top: 0px;   
+}
 
 /*
 .search-input{
@@ -65,5 +67,5 @@
     text-align: center;   
 }
 .item-picture > img {
-    height: 100%;
+    height: 64px;
 }
