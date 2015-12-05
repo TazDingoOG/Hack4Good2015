@@ -8,7 +8,7 @@ class MyDB extends SQLite3 {
     function __construct()
     {
         if(!is_file(MyDB::DB_FILENAME)) {
-            copy(MyDB::DB_FILENAME, MyDB::DB_DEFAULT_FILENAME) or die("Failed to copy default DB");
+            copy(MyDB::DB_DEFAULT_FILENAME, MyDB::DB_FILENAME) or die("Failed to copy default DB");
         }
         $this->open(MyDB::DB_FILENAME);
     }
