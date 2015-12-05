@@ -37,12 +37,11 @@ class Volunteerio
         } else if (strpos($path, '/a') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
-            $acom = $this->handle_token($token);
-
-            $this->render_accommodation($acom);
+            $this->handle_token($token);
         } else {
             $this->render_404();
         }
+        exit;
     }
 
     function render_homepage()
@@ -57,24 +56,36 @@ class Volunteerio
         exit;
     }
 
-    function render_accommodation($accommodation)
+    function render_accommodation($acom_name)
     {
-        $requests = $this->db->getRequestsForAccommodation(1);
+        $requests = $this->db->getAccommodationFromCleanName($acom_name);
+        if($requests === false) {
+            $this->render_404();
+            return;
+        }
 
         echo $this->twig->render('list.html.twig', array('requests' => $requests));
-        exit;
     }
 
     function handle_token($token)
     {
-        echo "TODO";
-        return "";
+        $acom = $this->db->getAccommodationFromToken($token);
+        if($acom === false) {
+            $this->render_invalid_token();
+        } else {
+            setcookie('acom_token', $token);
+            header('Location:/unterkunft/'.MyDB::getAcomIdentifier($acom));
+        }
+    }
+
+    function render_invalid_token()
+    {
+        echo $this->twig->render('token_403.html.twig');
     }
 
     function render_404()
     {
         echo $this->twig->render('404.html.twig');
-        exit;
     }
 }
 
