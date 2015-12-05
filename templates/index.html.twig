@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'simple_jumbotron.html.twig' %}
 
 {% block title %}TheOneThatWorks{% endblock %}
 
@@ -7,56 +7,45 @@
     <link rel="stylesheet" href="/static/css/main-web.css">
 {% endblock %}
 
-
-{% block scripts_bottom %} {# add script to head #}
-    <script src="/static/js/registration_formular_functions.js"></script>
+{% block headline %}
+    Welcome to Tazdingo
 {% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="jumbotron center centered-jumbotron transparent-background">
-            <div class="center">
-                <h1 class="fontblue">
-                    <b>Welcome to Tazdingo</b>
-                </h1>
-
-                <h3 class="fontblue">
-                    Easy to use application for volunteers
-                </h3>
-                <br>
-            </div>
+{% block content %}
+    <h3 class="fontblue">
+        Easy to use application for volunteers
+    </h3>
+    <br>
 
 
-            <div>
-                <!-- HTML for SEARCH BAR -->
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Search for your refugee accommandation"
-                           aria-label="...">
+    <div>
+        <!-- HTML for SEARCH BAR -->
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Search for your refugee accommandation"
+                   aria-label="...">
 
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" aria-label="Right Align">
-                            <span class="" aria-hidden="true">Go!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-            <!--
-                schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
-                und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
-            -->
-            <div>
-                <div class="center">
-                    <h3>Is your refugee accommadation not at the <a href="TODO"> list</a>?</h3>
-                    <a href="/register">
-                        <button class="btn btn-success btn-lg">
-                            <b>Register now</b>
-                        </button>
-                    </a>
-                </div>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" aria-label="Right Align">
+                    <span class="" aria-hidden="true">Go!</span>
+                </button>
             </div>
         </div>
     </div>
+    <br>
 
-{% endblock body %}
+    <!--
+        schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
+        und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
+    -->
+    <div>
+        <div class="center">
+            <h3>Is your refugee accommadation not at the <a href="TODO"> list</a>?</h3>
+            <a href="/register">
+                <button class="btn btn-success btn-lg">
+                    <b>Register now</b>
+                </button>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

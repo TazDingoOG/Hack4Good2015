@@ -125,8 +125,8 @@ INSERT INTO `Item` (id,name,image) VALUES
  (100,'Jacke',NULL);
 
 
-INSERT INTO `Accommodation` (id,name,email,telnr,authtoken) VALUES 
-(1,'Test Brennpunkt','nonofyour@business.de','0123/456789',"besser_wisser_martin"),
- (2,'Test Moabit','nonofyour@business.de','0123/456789',"erde_erde_erde"),
- (3,'Test Mitte','nonofyour@business.de','0123/456789',"tanz_koch_kurs"),
- (4,'Test Steglitz','nonofyour@business.de','0123/456789',"feuer_wasser_luft");
+INSERT INTO `Accommodation` (id,name,clean_name,email,telnr,authtoken) VALUES 
+(1, 'Test Brennpunkt', 'test-brennpunkt','nonofyour@business.de','0123/456789',"besser_wisser_martin"),
+ (2, 'Test Moabit', 'test-moabit','nonofyour@business.de','0123/456789',"erde_erde_erde"),
+ (3, 'Test Mitte', 'test-mitte','nonofyour@business.de','0123/456789',"tanz_koch_kurs"),
+ (4, 'Test Steglitz', 'test-steglitz','nonofyour@business.de','0123/456789',"feuer_wasser_luft");

@@ -23,15 +23,35 @@ class MyDB extends SQLite3
         return self::fetchAll($result);
     }
 
+    public function getAccommodationFromCleanName($cn)
+    {
+        $statement = $this->prepare("SELECT * FROM Accommodation a
+            WHERE a.clean_name = :cn");
+        $statement->bindValue('cn', $cn, SQLITE3_TEXT);
+        $r = $statement->execute();
+
+        $results = self::fetchAll($r);
+        if (count($results) != 1) {
+            if (count($results) > 1) {
+                echo("Should not happen: more than one acom!");
+            }
+            return false;
+        }
+        return $results[0];
+    }
+
     public function getAccommodationFromToken($token)
     {
         $statement = $this->prepare("SELECT * FROM Accommodation a
             WHERE a.authtoken = :token");
         $statement->bindValue('token', $token, SQLITE3_TEXT);
-        $result = $statement->execute();
+        $r = $statement->execute();
 
-        $results = self::fetchAll($result);
+        $results = self::fetchAll($r);
         if (count($results) != 1) {
+            if (count($results) > 1) {
+                echo("Should not happen: more than one acom!");
+            }
             return false;
         }
         return $results[0];
