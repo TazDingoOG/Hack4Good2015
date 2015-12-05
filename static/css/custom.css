@@ -1,8 +1,8 @@
 
 .floating-add-button {
     position: fixed;
-    right: 12.5%;
-    bottom: 50;
+    right: 10%;
+    bottom: 5%;
     z-index: 1000;
     width: 50px;
     height: 50px;
@@ -100,13 +100,12 @@
     height: 64px;
 }
 
-<<<<<<< HEAD
 .item-description {
     font-size:1.5em;
-=======
+}
+
 .item-name {
     font-size:1.2em;
->>>>>>> 86e85588ee218c38c47e71de10521eea65dd78e3
 }
 
 .item-timer {
