@@ -1,3 +1,4 @@
+
 .list-categories-header {
     margin-bottom: 50px;
 }
@@ -73,4 +74,15 @@
 }
 .item-picture > img {
     height: 64px;
+}
+
+.item-timer {
+    text-align:center;
+}
+.item-timer > input{
+    text-align:center;
+    width: 50px;
+    display:inline-block;
+    margin-left:10px;
+    margin-right:10px;
 }

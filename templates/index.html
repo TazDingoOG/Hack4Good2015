@@ -57,7 +57,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description">T-Shirt</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-timer table-content"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Stunden</td>
 
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
@@ -69,7 +69,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Pullover</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-timer table-content"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -80,7 +80,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Jacke</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-timer table-content"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -91,7 +91,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description table-content">Hemd</td>
-                <td class="item-timer table-content"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-timer table-content"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Stunden</td>
                 <td class="item-checkoff table-content">
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
                     </button>
@@ -117,7 +117,7 @@
                     <img src="../static/img/t-shirt.png" class="img-rounded">
                 </td>
                 <td class="item-description">Hose</td>
-                <td class="item-timer"><input type="text" value="24"></input> Stunden</td>
+                <td class="item-timer"><button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Stunden</td>
 
                 <td class="item-checkoff">
                     <button type="button" data-desc="Shirt" class="add-to-requests btn btn-success "><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
@@ -143,7 +143,7 @@
                         </p>
                         <p id="item-duration-modal">
                             <!-- Gültigkeitsdauer des Gegenstandes -->
-                           Für X Stunden
+                            Für X Stunden
                         </p>
 
                     </div>
@@ -155,18 +155,18 @@
 
             </div>
         </div>
-</body>
+    </body>
 
-<!-- cutom javascript -->
-<script type="text/javascript" src="../static/js/live-search.js"></script>
-<script>
-    $(document).on("click", ".add-to-requests", function () {
-        var myItemId = $(this).data('desc');
-        $(".modal-body #item-name-modal").text(myItemId);
+    <!-- cutom javascript -->
+    <script type="text/javascript" src="../static/js/live-search.js"></script>
+    <script>
+        $(document).on("click", ".add-to-requests", function () {
+            var myItemId = $(this).data('desc');
+            $(".modal-body #item-name-modal").text(myItemId);
         // As pointed out in comments, 
         // it is superfluous to have to manually call the modal.
         // $('#addBookDialog').modal('show');
     });
-</script>
+    </script>
 
-</html>
+    </html>
