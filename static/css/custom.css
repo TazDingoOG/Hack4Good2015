@@ -1,3 +1,13 @@
+@media (min-width: 768px) {
+  .navbar-form .input-group-btn,
+  .navbar-form .input-group-addon {
+    width: auto;
+  }
+}
+
+body { 
+    padding-top: 70px; 
+}
 
 .floating-add-button {
     position: fixed;
@@ -23,6 +33,11 @@
 
 .search-form {
     text-align: center;   
+}
+
+#search {
+    margin-top: 7px;
+    width:100%;
 }
 
 .search-input {
