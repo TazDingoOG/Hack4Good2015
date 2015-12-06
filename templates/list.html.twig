@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/static/js/live-search.js"></script>
     <script>
         $('#myModal').on('shown.bs.modal', function () {
+            $('#floating_button').blur();
             $('#modal_search').focus();
             $("#table-new-elem").hide();
         })
