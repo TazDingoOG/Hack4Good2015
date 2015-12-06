@@ -87,7 +87,7 @@ $("#table1").on('click', '.item-checkoff button', function () {
 });
 
 /** Modal -> Add items via '+' **/
-$("#table_modal").on('click', '.item-checkoff button', function () {
+$("#myModal").on('click', '.item-checkoff button', function () {
     var item_id = $(this).val();
     var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
@@ -101,9 +101,15 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
         item_id: item_id,
         item_name: item_name
     }).success(function (data) {
-        if (data == "success") {
-            console.log("success: " + data);
-            $("#table_modal .item-checkoff button[value=" + item_id + "]")
+        // data should look like this: 'success[ID]'
+        var successRegex = /^success\[(\d+)\]$/;
+        var match = successRegex.exec(data);
+
+        if (match) {
+            var new_id = match[1];
+            console.log("success: " + new_id);
+
+            $("#myModal .item-checkoff button[value=" + item_id + "]")
                 .parents("tr").hide(400, function () { // remove entry in modal
                 var me = $(this);
                 me.detach();
@@ -111,6 +117,7 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
                 // convert to main list format
                 var btn = me.find(".item-checkoff button");
                 btn.attr('class', 'btn');
+                btn.val(new_id);
                 btn.attr('data-hoverclass', 'btn-success');
                 btn.find('span').attr('class', 'glyphicon glyphicon-ok');
                 me.appendTo("#table1 tbody").show(400);
