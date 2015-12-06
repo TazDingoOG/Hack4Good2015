@@ -60,10 +60,19 @@ class TheOneThatWorks // name for now
         }
     }
 
+    function getHostString()
+    {
+        $host = "http://" . $_SERVER['SERVER_NAME'];
+        if ($_SERVER['SERVER_PORT'] != "80") {
+            $host .= ":" . $_SERVER['SERVER_PORT'];
+        }
+        return $host;
+    }
+
 	//this function creates the qr code for a given id as a png image
 	function qr($id)
 	{
-		$codeText = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+		$codeText = $this->getHostString() . '/a/' . $id;
 
 		QRcode::png($codeText, false, null, 10);
 	}
@@ -87,9 +96,9 @@ class TheOneThatWorks // name for now
 
         $template = array();
         $template['unterkunft'] = $accommodation['name'];
-        $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accommodation['clean_name'];
+        $template['readonly_list'] = $this->getHostString() . '/unterkunft/' . $accommodation['clean_name'];
         $template['qr_src'] = '/qr/' . $id;
-        $template['list_url'] = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+        $template['list_url'] = $this->getHostString() . '/a/' . $id;
 
         echo $this->twig->render('print.html.twig', $template);
     }
