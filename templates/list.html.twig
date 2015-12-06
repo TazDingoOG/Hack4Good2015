@@ -4,7 +4,11 @@
 
 {% block stylesheets %} {# add script to head #}
 <!-- Custom Theme -->
-<link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+<link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+
+<!-- bootstrap tour -->
+<link href="bootstrap-tour.min.css" rel="stylesheet">
+
 {% endblock %}
 
 {% block scripts_bottom %}
@@ -26,100 +30,107 @@
             $('[data-tooltip="tooltip"]').tooltip();
         });
     </script>
-    {% endblock %}
+
+    <!-- bootstrap tour -->
+    <script src="/static/js/bootstrap-tour.min.js">
+        </script>
+        {% endblock %}
 
 
-    {% block body %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        {% block body %}
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-
-
-            <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
-            id="search" autocomplete="off"/>
+                <!-- Collect the nav links, forms, and other content for toggling -->
 
 
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <!-- Floating button for creating new items -->
-    <button class="btn-primary floating-add-button"
-    data-toggle="modal"
-    data-target="#myModal" id="floating_button" data-tooltip="tooltip" data-placement="top" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
-    <div class="container">
-        <h3>Ort: Berlin</h3>
-        <div id="table_content">
-        <table class="table" id="table1">
-            {% for request in requests %}
-            <tr>
-                <td class="item-picture">
-                    {% if request.image %}
-                    <img src="/static/img/{{ request.image }}" class="img-rounded">
-                    {% else %}
-                    <span class="glyphicon glyphicon-gift"></span>
-                    {% endif %}
-                </td>
-
-                <td class="item-name">{{ request.name }}</td>
-
-                <td class="item-checkoff">
-                    <button class="btn btn-danger"
-                    value="{{ request.req_id }}">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    </div>
+                <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
+                id="search" autocomplete="off"/>
 
 
-    <!-- Model for adding items to the request list -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="form-group">
-                        <input type="text" class="form-control search-input"
-                        placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
-                        id="search_modal" autocomplete="off"/>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <table class="table" id="table_modal">
-                        {% for item in suggestions %}
-                        <tr>
-                            <td class="item-picture">
-                                {% if item.image %}
-                                <img src="/static/img/{{ item.image }}" class="img-rounded">
-                                {% else %}
-                                <span class="glyphicon glyphicon-gift"></span>
-                                {% endif %}
-                            </td>
-                            <td class="item-name">{{ item.name }}</td>
-
-                            <td class="item-checkoff">
-                                <button type="button" class="btn btn-success"
-                                data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                value="{{ item.item_id }}">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- Floating button for creating new items -->
+        <button class="btn-primary floating-add-button"
+        data-toggle="modal"
+        data-target="#myModal" id="floating_button" data-tooltip="tooltip" data-placement="top" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
+        <div class="container">
+            <h3>Ort: Berlin</h3>
+            <button class="btn btn-info guided-tour-button">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+            <div id="table_content">
+                <table class="table" id="table1">
+                    {% for request in requests %}
+                    <tr>
+                        <td class="item-picture">
+                            {% if request.image %}
+                            <img src="/static/img/{{ request.image }}" class="img-rounded">
+                            {% else %}
+                            <span class="glyphicon glyphicon-gift"></span>
+                            {% endif %}
                         </td>
-                    </tr>
-                    {% endfor %}
-                </table>
 
+                        <td class="item-name">{{ request.name }}</td>
+
+                        <td class="item-checkoff">
+                            <button class="btn btn-danger"
+                            value="{{ request.req_id }}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+        <!-- Model for adding items to the request list -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="form-group">
+                            <input type="text" class="form-control search-input"
+                            placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
+                            id="search_modal" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" id="table_modal">
+                            {% for item in suggestions %}
+                            <tr>
+                                <td class="item-picture">
+                                    {% if item.image %}
+                                    <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                    {% else %}
+                                    <span class="glyphicon glyphicon-gift"></span>
+                                    {% endif %}
+                                </td>
+                                <td class="item-name">{{ item.name }}</td>
+
+                                <td class="item-checkoff">
+                                    <button type="button" class="btn btn-success"
+                                    data-desc="{{ item.name }} hinzuf&uuml;gen"
+                                    value="{{ item.item_id }}">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 {% endblock %}
