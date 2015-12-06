@@ -81,7 +81,7 @@ class Volunteerio
         } else {
             setcookie(self::COOKIE_NAME,
                 $token,
-                time()+60*60*24*30, // TODO: other cookie expiration ?
+                time() + 60 * 60 * 24 * 30, // TODO: other cookie expiration ?
                 '/'
             );
             header('Location:/unterkunft/' . $acom['clean_name']);

@@ -1,20 +1,20 @@
 div.registration_field {
     position: absolute;
     top: 10%;
-	max-width: 60%;
+    max-width: 60%;
     left: 20%;
 }
 
 label.field {
-	text-align: right;
+    text-align: right;
 }
 
 label span, .required {
-	color: red;
-	font-weight: bold;
+    color: red;
+    font-weight: bold;
 
 }
 
 input.btn {
-    float:right;
+    float: right;
 }
