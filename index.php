@@ -37,7 +37,7 @@ class TheOneThatWorks // name for now
             $this->render_registration();
         } else if ($path == '/api_update') {
             $this->handle_api($_POST);
-        } else if (strpos($path, '/a') === 0) {
+        } else if (strpos($path, '/a/') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
