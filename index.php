@@ -216,7 +216,7 @@ class TheOneThatWorks // name for now
 				$items[] = $request['name'];
 			}
 			//name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
-			$first = array($acom['name'],"","","","","","","","","12",join('|',$items));
+			$first = array($acom['name'],$acom['addr'],$acom['plz'],$acom['telnr'],$acom['email'],"Das hier sind eventuell noch Testdaten. Bitte nur aus dem Haus gehen, wenn ihr wirklich sicher seid, dass hier eine Unterkunft ist","","","","12",join('|',$items));
 			echo join(',',$first);
         }
     }
