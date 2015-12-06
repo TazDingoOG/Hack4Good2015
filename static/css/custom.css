@@ -122,17 +122,19 @@ body {
 
 .item-picture, .item-timer, .item-name, .item-checkoff {
     vertical-align: middle;
-    width: 33%;
 }
 
 .item-checkoff {
-    text-align:center;
+    text-align:right;
 }
 
 .item-checkoff > button {
     line-height: 1em;
 }
 
+.item-picture: {
+    width: 50px;
+}
 .item-picture > img {
     height: 32px;
 }

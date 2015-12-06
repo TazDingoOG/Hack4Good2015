@@ -32,31 +32,44 @@
     </script>
 
     <!-- bootstrap tour -->
-    <script src="/static/js/bootstrap-tour.min.js">
+    <script type="text/javascript" src="/static/js/bootstrap-tour.min.js">
     </script>
 
-    <script type="text/javascript">
-     var tour = new Tour ({
+    <!-- guided tour script -->
+    <script>
+        var tour = new Tour ({
+            storage: false,
             steps: [
             {
                 element: "#search",
                 title: "Suche nach Gegenständen",
-                content: "Suche hier nach Gegenständen, die du zur Liste hinzufügen oder entfernen möchtest."
+                content: "Suche hier nach Gegenständen, die du zur Liste hinzufügen oder entfernen möchtest.",
+                placement: "bottom",
+                backdrop: true,
+                backdropContainer: "body"
             },
             {
                 element: "#floating_button",
                 title: "Erstelle neue Gegenstände/Bedürfnisse/Items",
-                content: "Wenn, deine Suche erfolglos war, kannst du hier neue Items erstellen, um sie der Liste hinzuzufügen."
+                content: "Wenn, deine Suche erfolglos war, kannst du hier neue Items erstellen, um sie der Liste hinzuzufügen.",
+                placement: "left"
+            },
+            {
+                element: "#table1",
+                title: "Organisation der Liste",
+                content: "Organisiere hier alle Gegenstände, indem du sie später im rechten Bereich hinzufügst oder entfernst.",
+                placement: "top",
             }
-            ]});
+            ],
 
+
+        });
+        
         tour.init();
-        tour.start();  
-        </script>
-    <!-- guided tour script -->
-    <script>
-       function startGuidedTour() {
-         
+
+        function startGuidedTour() {
+
+            tour.restart();  
         }
     </script>
     {% endblock %}
