@@ -6,6 +6,10 @@
 {% block headline %}404 page{% endblock %}
 
 {% block content %}
-    <p>Page not found: <pre>{{ request_uri }}</pre><br>
-        <b>-> TODO: more info</b></p>
+    <p>Page not found: <br></p>
+
+    <div class="container">
+        <pre style="margin-bottom: 0px">{{ request_uri }}</pre>
+        <img src="/static/img/404.png" width="100%" />
+    </div>
 {% endblock %}
