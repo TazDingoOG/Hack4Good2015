@@ -121,6 +121,7 @@ $("#myModal").on('click', '.item-checkoff button', function () {
                 me.detach();
 
                 // convert to main list format
+                me.removeClass("new-item")
                 var btn = me.find(".item-checkoff button");
                 btn.attr('class', 'btn');
                 btn.val(new_id);
