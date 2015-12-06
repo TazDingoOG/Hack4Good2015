@@ -11,7 +11,7 @@ $("#search").on("keyup", function () {
             $row.show();
             bol = true;
         } else {
-            $row.hide(200);
+            $row.hide(400);
         }
     });
     if(!bol) {
@@ -22,12 +22,12 @@ $("#search").on("keyup", function () {
 });
 
 
-$("#search_modal").on("keyup", function () {
+$("#modal_search").on("keyup", function () {
     var org_value = $(this).val();
     var value = $(this).val().toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
-
+        console.log(value)
         $row = $(this);
 
         var id = $row.find("td").eq(1).text().toLowerCase();
@@ -41,11 +41,11 @@ $("#search_modal").on("keyup", function () {
     });
     if(!bol) {
         $('#table_modal tr:last').after('<tr>'
-            +'<td class="item-picture">'
+            +'<td class="item-picture new-item">'
                + '<span class="glyphicon glyphicon-gift"></span>'
            + '</td>'
-           + '<td class="item-name"> ' + org_value + ' </td>'
-            + '<td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
+           + '<td class="item-name new-item"> ' + org_value + ' </td>'
+            + '<td class="item-checkoff new-item"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
                + '<span class="glyphicon glyphicon-plus"></span>'
             + '</button>'
            + '</td>'

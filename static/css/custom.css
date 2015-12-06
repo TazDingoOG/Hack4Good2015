@@ -72,6 +72,10 @@ body {
     border-top: 0px;
 }
 
+.new-item {
+    background-color: #F1F8E9;
+}
+
 #complete-list {
     margin-bottom: 200px;
 }
