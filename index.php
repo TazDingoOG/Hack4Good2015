@@ -2,7 +2,7 @@
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 require_once __DIR__ . '/phpqrcode/qrlib.php';
 
-class TheOneThatWorks // name for now
+class Inventeerio // name for now
 {
     const COOKIE_NAME = 'acom_token';
     public $twig;
@@ -159,8 +159,8 @@ class TheOneThatWorks // name for now
         if ($editable) {
             $token_acom = $this->db->getAccommodationFromToken(@$_COOKIE[self::COOKIE_NAME]);
             if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
-                setcookie(TheOneThatWorks::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
-                die("Error: invalid acom_token - Login again? (" . @$_COOKIE[TheOneThatWorks::COOKIE_NAME] . ")");
+                setcookie(Inventeerio::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
+                die("Error: invalid acom_token - Login again? (" . @$_COOKIE[Inventeerio::COOKIE_NAME] . ")");
             }
         }
 
@@ -245,8 +245,7 @@ class TheOneThatWorks // name for now
     }
 }
 
-$totw = new TheOneThatWorks();
-$totw->serve_url($_SERVER['REQUEST_URI']);
-exit;
+$main = new Inventeerio();
+$main->serve_url($_SERVER['REQUEST_URI']);
 
 ?>

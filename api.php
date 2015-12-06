@@ -16,10 +16,10 @@ function handle_api(MyDB $db, $post)
         die("Error: invalid accommodation " . $post['clean_acom_name']);
     }
 
-    $token_acom = $db->getAccommodationFromToken(@$_COOKIE[TheOneThatWorks::COOKIE_NAME]);
+    $token_acom = $db->getAccommodationFromToken(@$_COOKIE[Inventeerio::COOKIE_NAME]);
     if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
-        setcookie(TheOneThatWorks::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
-        die("Error: invalid acom_token - Login again? (" . @$_COOKIE[TheOneThatWorks::COOKIE_NAME] . ")");
+        setcookie(Inventeerio::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
+        die("Error: invalid acom_token - Login again? (" . @$_COOKIE[Inventeerio::COOKIE_NAME] . ")");
     }
 
     if ($post['action'] == 'add') {
