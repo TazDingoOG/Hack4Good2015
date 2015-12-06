@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accommodation XY{% endblock %}
+{% block title %} {{ acom_name }} {% endblock %}
 
 {% block stylesheets %} {# add script to head #}
     <!-- Custom Theme -->
@@ -48,21 +48,21 @@
                     {
                         element: "#search",
                         title: "Suche nach Gegenständen",
-                        content: "Suche hier nach Gegenständen, die du zur Liste hinzufügen oder entfernen möchtest.",
+                        content: "Suche hier nach Gegenständen, um sie als erledigt zu markieren.",
                         placement: "bottom",
                         backdrop: true,
                         backdropContainer: "body"
                     },
                     {
                         element: "#floating_button",
-                        title: "Erstelle neue Gegenstände/Bedürfnisse/Items",
-                        content: "Wenn, deine Suche erfolglos war, kannst du hier neue Items erstellen, um sie der Liste hinzuzufügen.",
+                        title: "Füge neue Gegenstände zur Bedarfsliste hinzu",
+                        content: "Hier kannst du neue Gegenstände zur Liste hinzufügen. Sollten diese bereits in der Liste vorhanden sein wird dies entsprechend gekennzeichnet.",
                         placement: "left"
                     },
                     {
                         element: "#table1",
                         title: "Organisation der Liste",
-                        content: "Organisiere hier alle Gegenstände, indem du sie später im rechten Bereich hinzufügst oder entfernst.",
+                        content: "Organisiere hier alle Gegenstände auf der Bedarfsliste, indem du nicht mehr benötigte Sachen im rechten Bereich als erledigt markierst.",
                         placement: "top",
                     }
                 ],
@@ -83,7 +83,9 @@
 
 {% block body %}
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        <a href="/" style="color:black; text-decoration: none;"><span class="glyphicon glyphicon-home" style="position: absolute; font-size: 19px; left: 8px; top: 14px"></span></a>
+
+        <div class="container-fluid" style="margin-left: 22px">
 
             <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -106,7 +108,7 @@
     {% endif %}
 
     <div class="container">
-        <h3>Ort: Berlin</h3>
+        <h3>{{ acom_name }}</h3>
         {% if editable %}
             <button class="btn btn-info guided-tour-button" id="help-button" onclick="startGuidedTour()">
                 <span class="glyphicon glyphicon-question-sign"></span>

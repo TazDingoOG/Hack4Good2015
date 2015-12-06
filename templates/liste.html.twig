@@ -1,0 +1,16 @@
+{% extends 'simple_jumbotron.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block headline %}
+    Liste der Fl&uuml;chtlingsunterk&uuml;nfte
+{% endblock %}
+
+{% block content %}
+    <br>
+    <ul style="font-size: 2em;">
+        {% for acom in accommodations %}
+            <li><a href="/unterkunft/{{ acom.clean_name }}">{{ acom.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
