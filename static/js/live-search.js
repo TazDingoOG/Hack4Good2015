@@ -23,7 +23,8 @@ $("#search").on("keyup", function () {
 
 
 $("#search_modal").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
+    var org_value = $(this).val();
+    var value = value.toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
 
@@ -43,8 +44,8 @@ $("#search_modal").on("keyup", function () {
             +'<td class="item-picture">'
                + '<span class="glyphicon glyphicon-gift"></span>'
            + '</td>'
-           + '<td class="item-name"> ' + value + ' </td>'
-            + '<td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="' + value + ' hinzuf&uuml;gen" value="-1">'
+           + '<td class="item-name"> ' + org_value + ' </td>'
+            + '<td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
                + '<span class="glyphicon glyphicon-plus"></span>'
             + '</button>'
            + '</td>'
