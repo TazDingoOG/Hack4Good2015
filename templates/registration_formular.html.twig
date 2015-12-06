@@ -9,7 +9,7 @@
 
 
 {% block body %}
-    <div class="registration_field container">
+    <div class="container">
         <div class="jumbotron transparent-background">
             <h2 class="fontblue">Registrierungsformular</h2>
 
@@ -62,10 +62,16 @@
                     </label>
                     <input type="email" name="email" class="form-control"/>
                 </div>
+                <table class="table">
+                <tr>
+                <td>
                 <p class="required">* erforderlich</p>
+                <td>
                 <input type="submit" name="submit" value="Bestätigen" class="btn btn-primary"/>
                 <input type="reset" name="cancel" value="Abbrechen" class="btn btn-default" style="margin-right: 5px"/>
-                </p>
+                </td>
+                </tr>
+                </table>
             </form>
         </div>
     </div>
