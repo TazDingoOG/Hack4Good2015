@@ -117,7 +117,11 @@ body {
 }
 
 .item-checkoff {
-    text-align: center;
+    text-align:center;
+}
+
+.item-checkoff > button {
+    line-height: 1em;
 }
 
 .item-picture > img {
