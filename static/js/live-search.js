@@ -119,6 +119,7 @@ $("#myModal").on('click', '.item-checkoff button', function () {
                 .parents("tr").hide(400, function () { // remove entry in modal
                 var me = $(this);
                 me.detach();
+                me.find('#item-row-content').removeAttr('id');
 
                 // convert to main list format
                 me.removeClass("new-item")
@@ -129,6 +130,7 @@ $("#myModal").on('click', '.item-checkoff button', function () {
                 btn.find('span').attr('class', 'glyphicon glyphicon-ok');
                 me.appendTo("#table1 tbody").show(400);
             });
+            $('#new-item-table tr:first').after('<tr id="row-content"><td class="item-picture"><span class="glyphicon glyphicon-gift"></span></td><td class="item-name" id="item-row-content">Element hinzugefügt..</td><td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="neues Item hinzuf&uuml;gen" value="-1"><span class="glyphicon glyphicon-plus"></span></button></td></tr>');
         } else {
             fail(data);
         }
