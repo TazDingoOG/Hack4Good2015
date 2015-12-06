@@ -9,13 +9,13 @@ $("#search").on("keyup", function() {
             if (id.indexOf(value) >= 0) {
                 $row.show();
             }else {
-                $row.hide(400);
+                $row.hide(200);
             }
     });
 });
 
 
-$("#search_modal").on("keyup", function() {
+$("#modal_search").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#table_modal tr").each(function(index) {
 
@@ -26,7 +26,7 @@ $("#search_modal").on("keyup", function() {
             if (id.indexOf(value) >= 0) {
                 $row.show();
             }else {
-                $row.hide(400);
+                $row.hide(200);
             }
     });
 });

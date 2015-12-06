@@ -12,7 +12,7 @@
     <script type="text/javascript" src="/static/js/live-search.js"></script>
     <script>
         $('#myModal').on('shown.bs.modal', function () {
-            $('#search_modal').focus();
+            $('#modal_search').focus();
         })
     </script>
 
@@ -103,12 +103,13 @@ data-target="#myModal" id="floating_button"><span class="glyphicon glyphicon-plu
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="form-group">
-                        <input type="text" class="form-control search-input" placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
-                        id="search_modal"/>
+                <div class="modal-header search_modal">
+                    <div class="cell">
+                        <input id="modal_search" type="text" class="form-control search-input" placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen" />
+                    </div>
+
+                    <div class="cell cell-right">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -125,8 +126,19 @@ data-target="#myModal" id="floating_button"><span class="glyphicon glyphicon-plu
                                 </button>
                             </td>
                         </tr>
-                    </table>
+                        <tr>
+                            <td class="item-picture">
+                                <img src="/static/img/t-shirt.png" class="img-rounded">
+                            </td>
+                            <td class="item-description">Tanga</td>
+                            <!-- <td class="item-timer"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
 
+                            <td class="item-checkoff">
+                                <button type="button" data-desc="Shirt" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
