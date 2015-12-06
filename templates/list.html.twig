@@ -72,7 +72,7 @@
             tour.restart();  
         }
     </script>
-    {% endblock %}
+{% endblock %}
 
 
 {% block body %}
@@ -114,9 +114,9 @@
                     <td class="item-name">{{ request.name }}</td>
 
                     <td class="item-checkoff">
-                        <button class="btn btn-danger"
+                        <button class="btn" data-hoverclass="btn-success"
                         value="{{ request.req_id }}">
-                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </td>
             </tr>
@@ -156,7 +156,7 @@
                                 <td class="item-name">{{ item.name }}</td>
 
                                 <td class="item-checkoff">
-                                    <button type="button" class="btn btn-success"
+                                    <button type="button" class="btn" data-hoverclass="btn-info"
                                             data-desc="{{ item.name }} hinzuf&uuml;gen"
                                             value="{{ item.item_id }}">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -169,6 +169,6 @@
             </div>
         </div>
     </div>
-</div>
+</div><!-- TODO: fix this intendation -->
 
 {% endblock %}

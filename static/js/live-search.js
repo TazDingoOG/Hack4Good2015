@@ -55,6 +55,15 @@ $("#modal_search").on("keyup", function () {
 });
 
 
+/** animate btn hovers **/
+$(document.body).on('mouseenter', "[data-hoverclass]", function() {
+    $(this).addClass($(this).data('hoverclass'));
+});
+$(document.body).on('mouseleave', "[data-hoverclass]", function() {
+    $(this).removeClass($(this).data('hoverclass'));
+});
+
+
 /** Remove items via 'x' **/
 $("#table1").on('click', '.item-checkoff button', function () {
     var request_id = $(this).val();
