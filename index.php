@@ -148,8 +148,8 @@ class TheOneThatWorks // name for now
                 time() + 60 * 60 * 24 * 30, // TODO: other cookie expiration ?
                 '/'
             );
-            //header('Location:/unterkunft/' . $acom['clean_name']);
-            $this->render_accommodation($acom);
+            
+            $this->render_accommodation($acom, true);
         }
     }
 
