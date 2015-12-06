@@ -94,7 +94,11 @@ VALUES (:accom_id, :item_id)");
         $stmt->bindValue('accom_id', $accom_id);
         $stmt->bindValue('item_id', $item_id);
         $stmt->execute();
-        return $this->changes(); // return the change count
+
+        if ($this->changes() > 0)
+            return $this->lastInsertRowID(); // return the change count
+        else
+            return -1; // insert failed
     }
 
     public function removeRequest($request_id)
@@ -110,7 +114,11 @@ VALUES (:accom_id, :item_id)");
         $stmt = $this->prepare("INSERT INTO ITEM (name) VALUES (:name)");
         $stmt->bindValue('name', $name);
         $stmt->execute();
-        return $this->changes();
+
+        if ($this->changes() > 0)
+            return $this->lastInsertRowID(); // return the change count
+        else
+            return -1; // insert failed
     }
 
     public static function fetchAll($result)

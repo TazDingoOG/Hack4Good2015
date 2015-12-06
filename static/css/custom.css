@@ -13,6 +13,7 @@ body {
     padding-top: 70px;
 }
 
+
 .floating-add-button {
     position: fixed;
     right: 25px;
@@ -84,7 +85,7 @@ body {
     margin-bottom: 200px;
 }
 
-.table-bottom {
+.table {
     margin-bottom:100px;
 }
 /*
@@ -188,4 +189,9 @@ body {
 }
 .search_modal .cell-right {
     width: 34px;
+}
+
+.register-form {
+    display: inline-block;
+    width:100%;
 }

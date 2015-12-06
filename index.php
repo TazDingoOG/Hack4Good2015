@@ -48,7 +48,8 @@ class TheOneThatWorks // name for now
             $this->render_registration();
             }
         } else if ($path == '/api_update') {
-            $this->handle_api($_POST);
+            require_once("api.php");
+            handle_api($this->db, $_POST);
         } else if (strpos($path, '/a/') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
@@ -132,13 +133,21 @@ class TheOneThatWorks // name for now
         exit;
     }
 
-    function render_accommodation($acom)
+    function render_accommodation($acom, $editable = false)
     {
+        if ($editable) {
+            $token_acom = $this->db->getAccommodationFromToken(@$_COOKIE[self::COOKIE_NAME]);
+            if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
+                setcookie(TheOneThatWorks::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
+                die("Error: invalid acom_token - Login again? (" . @$_COOKIE[TheOneThatWorks::COOKIE_NAME] . ")");
+            }
+        }
 
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
         $suggestions = $this->db->getSuggestions($acom);
 
         echo $this->twig->render('list.html.twig', array(
+            'editable' => $editable,
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
             'suggestions' => $suggestions,
@@ -156,79 +165,8 @@ class TheOneThatWorks // name for now
                 time() + 60 * 60 * 24 * 30, // TODO: other cookie expiration ?
                 '/'
             );
-            //header('Location:/unterkunft/' . $acom['clean_name']);
-            $this->render_accommodation($acom);
-        }
-    }
-
-    function handle_api($post)
-    {
-        if (!array_key_exists('action', $post)) {
-            die("Error: no api action given");
-        }
-        if (!array_key_exists('clean_acom_name', $post)) { // no accommodation name given
-            die("Error: no api accommodation name given");
-        }
-
-        $acom = $this->db->getAccommodationFromCleanName($post['clean_acom_name']);
-        if ($acom === false) {
-            die("Error: invalid accommodation " . $post['clean_acom_name']);
-        }
-
-        $token_acom = $this->db->getAccommodationFromToken(@$_COOKIE[self::COOKIE_NAME]);
-        if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
-            setcookie(self::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
-            die("Error: invalid acom_token - Login again? (" . @$_COOKIE[self::COOKIE_NAME] . ")");
-        }
-
-        if ($post['action'] == 'add') {
-            if (!array_key_exists('item_id', $post)) { // no accommodation name given
-                die("Error: no api item given");
-            }
-
-            if ($post['item_id'] == -1) { // CREATE new item
-                if (!array_key_exists('item_name', $post)) { // no accommodation name given
-                    die("Error: no item name given");
-                }
-                $new_name = $post['item_name'];
-                if (strlen($new_name) > 50) { // max length
-                    die("Error: name too long");
-                }
-
-                $item_id = $this->db->createItem($new_name);
-                if (!$item_id) {
-                    die("Error: create item failed");
-                }
-            } else {
-                $item = $this->db->getItemFromId($post['item_id']);
-                if (!$item) {
-                    die("Error: invalid api item " . $post['item_id']);
-                }
-                $item_id = $item['item_id'];
-            }
-
-                //TODO: handle duplicates
-                if ($this->db->addRequest($acom['accom_id'], $item_id) > 0) {
-                    echo "success";
-                } else {
-                    die("Error: insert failed");
-                }
-        } else if ($post['action'] == 'delete') {
-            if (!array_key_exists('request_id', $post)) { // no accommodation name given
-                die("Error: no api request_id given");
-            }
-            $item = $this->db->getItemFromId($post['request_id']);
-            if (!$item) {
-                die("Error: invalid api request_id " . $post['request_id']);
-            }
-
-            if ($this->db->removeRequest($post['request_id']) > 0) {
-                echo "success";
-            } else {
-                die("Error: delete failed");
-            }
-        } else {
-            die("Error: unknown api action " . $post['action']);
+            
+            $this->render_accommodation($acom, true);
         }
     }
 
