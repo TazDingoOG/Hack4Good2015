@@ -66,7 +66,7 @@ class TheOneThatWorks // name for now
 
         $template = array();
         $template['unterkunft'] = $accommodation['name'];
-        $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accomodation['clean_name'];
+        $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accommodation['clean_name'];
         $template['qr_src'] = '/qr.php?id=' . $id;
         $template['list_url'] = $_SERVER['SERVER_NAME'] . '/a/' . $id;
 
