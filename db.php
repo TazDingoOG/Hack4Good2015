@@ -2,8 +2,7 @@
 
 class MyDB extends SQLite3
 {
-
-    const DB_FILENAME = 'data.db'; // contains the database (sqlite3)
+    const DB_FILENAME = "data/data.db"; // contains the database (sqlite3)
     const DEFAULT_IMAGE = 'default.png';
 
     function __construct()
