@@ -1,5 +1,6 @@
 $("#search").on("keyup", function () {
     var value = $(this).val().toLowerCase();
+    var bol = false;
     $("#table1 tr").each(function (index) {
 
         $row = $(this);
@@ -8,10 +9,16 @@ $("#search").on("keyup", function () {
 
         if (id.indexOf(value) >= 0) {
             $row.show();
+            bol = true;
         } else {
             $row.hide(400);
         }
     });
+    if(!bol) {
+        $("#table_content").hide(400);
+    } else {
+        $("#table_content").show(400);
+    }
 });
 
 
@@ -42,7 +49,7 @@ $("#search_modal").on("keyup", function () {
             + '</button>'
            + '</td>'
        + '</tr>');
-    }
+    } 
 
 });
 

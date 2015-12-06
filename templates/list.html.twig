@@ -50,6 +50,7 @@
     data-target="#myModal" id="floating_button" data-tooltip="tooltip" data-placement="top" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
     <div class="container">
         <h3>Ort: Berlin</h3>
+        <div id="table_content">
         <table class="table" id="table1">
             {% for request in requests %}
             <tr>
@@ -72,6 +73,7 @@
         </tr>
         {% endfor %}
     </table>
+    </div>
 
 
     <!-- Model for adding items to the request list -->
