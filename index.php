@@ -207,12 +207,14 @@ class TheOneThatWorks // name for now
 
     function renderCSVOverview()
     {
+        /*
 		echo "<ul>";
 		$result = $this->db->getAccommodationList();
 		foreach ($result as $row) {
 			echo "<li><a href=\"/csv/" . $row['clean_name'] . "\">" . $row['name'] . "</a></li>";
 		}
 		echo "</ul>";
+         */
     }
 
     function renderCSVFromName($acom_name)
