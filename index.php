@@ -30,9 +30,9 @@ class TheOneThatWorks // name for now
         if ($path == "/") {
             $this->render_homepage();
         } else if (strpos($path, '/unterkunft') === 0) {
-            $acom = substr($path, 12); // remove the '/unterkunft/'
+            $acom_name = substr($path, 12); // remove the '/unterkunft/'
 
-            $this->render_accommodation($acom);
+            $this->renderAccommodationFromName($acom_name);
         } else if ($path == '/register') {
             $this->render_registration();
         } else if ($path == '/api_update') {
@@ -58,13 +58,8 @@ class TheOneThatWorks // name for now
         exit;
     }
 
-    function render_accommodation($acom_name)
+    function render_accommodation($acom)
     {
-        $acom = $this->db->getAccommodationFromCleanName($acom_name);
-        if ($acom === false) {
-            $this->render_404();
-            return;
-        }
 
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
         $suggestions = $this->db->getSuggestions($acom);
@@ -87,7 +82,8 @@ class TheOneThatWorks // name for now
                 time() + 60 * 60 * 24 * 30, // TODO: other cookie expiration ?
                 '/'
             );
-            header('Location:/unterkunft/' . $acom['clean_name']);
+            //header('Location:/unterkunft/' . $acom['clean_name']);
+            $this->render_accommodation($acom);
         }
     }
 
@@ -155,6 +151,16 @@ class TheOneThatWorks // name for now
         echo $this->twig->render('404.html.twig', array(
             'request_uri' => $_SERVER['REQUEST_URI']
         ));
+    }
+
+    private function renderAccommodationFromName($acom_name)
+    {
+        $acom = $this->db->getAccommodationFromCleanName($acom_name);
+        if ($acom === false) {
+            $this->render_404();
+        } else {
+            $this->render_accommodation($acom);
+        }
     }
 }
 
