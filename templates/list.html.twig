@@ -166,6 +166,23 @@
                                 </td>
                             </tr>
                         {% endfor %}
+                        {% for request in requests %}
+                        <tr>
+                        <td class="item-picture">
+                            {% if request.image %}
+                            <img src="/static/img/{{ request.image }}"  class="img-rounded">
+                            {% else %}
+                            <span class="glyphicon glyphicon-gift"></span>
+                            {% endif %}
+                        </td>
+
+                        <td class="item-name">{{ request.name }}</td>
+
+                        <td class="item-checkoff">
+                            <b>Bereits hinzugefügt</b>
+                        </td>
+                    </tr>
+                    {% endfor %}
                         </table>
 
                         <div id="table-new-elem">
