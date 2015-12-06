@@ -41,9 +41,36 @@ class TheOneThatWorks // name for now
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
+        } else if (strpos($path, '/print/') === 0) {
+            $token = substr($path, 7);
+            $this->print_qr($token);
         } else {
             $this->render_404();
         }
+    }
+
+    function print_qr($id)
+    {
+        //check if the id is benevolent
+        if (!preg_match("/^[a-z]*-[a-z]*-[a-z]*$/", $id)) {
+            $this->render_invalid_token();
+            exit;
+        }
+
+        $accommodation = $this->db->getAccommodationFromToken($id);
+
+        if (!$accommodation) {
+            $this->render_invalid_token();
+            exit;
+        }
+
+        $template = array();
+        $template['unterkunft'] = $accommodation['name'];
+        $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accomodation['clean_name'];
+        $template['qr_src'] = '/qr.php?id=' . $id;
+        $template = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+
+        echo $this->twig->render('print.html.twig', $template);
     }
 
     function render_homepage()
