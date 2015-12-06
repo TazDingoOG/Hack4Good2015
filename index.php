@@ -50,6 +50,8 @@ class TheOneThatWorks // name for now
         } else if ($path == '/api_update') {
             require_once("api.php");
             handle_api($this->db, $_POST);
+        } else if ($path == '/liste') {
+            $this->render_liste();
         } else if (strpos($path, '/a/') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
@@ -144,6 +146,14 @@ class TheOneThatWorks // name for now
         exit;
     }
 
+    function render_liste()
+    {
+        echo $this->twig->render('liste.html.twig', array(
+            'accommodations' => $this->db->getAccommodationList()
+        ));
+        exit;
+    }
+
     function render_accommodation($acom, $editable = false)
     {
         if ($editable) {
@@ -157,8 +167,9 @@ class TheOneThatWorks // name for now
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
         $suggestions = $this->db->getSuggestions($acom);
 
-        echo $this->twig->render('list.html.twig', array(
+        echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
+            'acom_name' => $acom['name'],
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
             'suggestions' => $suggestions,
