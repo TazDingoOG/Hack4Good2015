@@ -21,7 +21,9 @@
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#modal_search').focus();
+            $("#table-new-elem").hide();
         })
+
     </script>
 
     <!-- tooltip script -->
@@ -164,11 +166,30 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                    </table>
+                        </table>
+
+                        <div id="table-new-elem">
+                        <h4>Neues Item erstellen:</h4>
+                        <table class="table  table-bottom">
+                            <tr id="row-content">
+                                <td class="item-picture new-item">
+                                        <span class="glyphicon glyphicon-gift"></span>
+                                </td>
+                                <td class="item-name new-item" id="item-row-content"></td>
+
+                                <td class="item-checkoff new-item">
+                                    <button type="button" class="btn btn-success"
+                                            data-desc="neues Item hinzuf&uuml;gen"
+                                            value="-1">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div><!-- TODO: fix this intendation -->
-
+</div>
 {% endblock %}
