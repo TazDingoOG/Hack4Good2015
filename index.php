@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
+require_once __DIR__ . '/phpqrcode/qrlib.php';
 
 class TheOneThatWorks // name for now
 {
@@ -41,6 +42,9 @@ class TheOneThatWorks // name for now
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
+		} else if (strpos($path, '/qr/') === 0) {
+            $token = substr($path, 4);
+			$this->qr($token);
         } else if (strpos($path, '/print/') === 0) {
             $token = substr($path, 7);
             $this->print_qr($token);
@@ -49,6 +53,16 @@ class TheOneThatWorks // name for now
         }
     }
 
+	//this function creates the qr code for a given id as a png image
+	function qr($id)
+	{
+		$codeText = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+
+		QRcode::png($codeText, false, null, 10);
+	}
+
+	//this function is responsible for creating the printable page that
+	//containsthe qr code, not the qr code itself
     function print_qr($id)
     {
         //check if the id is benevolent
@@ -67,7 +81,7 @@ class TheOneThatWorks // name for now
         $template = array();
         $template['unterkunft'] = $accommodation['name'];
         $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accommodation['clean_name'];
-        $template['qr_src'] = '/qr.php?id=' . $id;
+        $template['qr_src'] = '/qr/' . $id;
         $template['list_url'] = $_SERVER['SERVER_NAME'] . '/a/' . $id;
 
         echo $this->twig->render('print.html.twig', $template);
