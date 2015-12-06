@@ -3,16 +3,18 @@
 {% block title %}Accommodation XY{% endblock %}
 
 {% block stylesheets %} {# add script to head #}
-<!-- Custom Theme -->
-<link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <!-- Custom Theme -->
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
 
-<!-- bootstrap tour -->
-<link href="/static/css/bootstrap-tour.min.css" rel="stylesheet">
+    {% if editable %}
+        <!-- bootstrap tour -->
+        <link href="/static/css/bootstrap-tour.min.css" rel="stylesheet">
+    {% endif %}
 
 {% endblock %}
 
 {% block scripts_bottom %}
-<script type="text/javascript">
+    <script type="text/javascript">
         // some information from php to JS about the current page
         var clean_acom_name = '{{ clean_acom_name }}';
     </script>
@@ -33,47 +35,49 @@
         });
     </script>
 
-    <!-- bootstrap tour -->
-    <script type="text/javascript" src="/static/js/bootstrap-tour.min.js">
-    </script>
+    {% if editable %}
+        <!-- bootstrap tour -->
+        <script type="text/javascript" src="/static/js/bootstrap-tour.min.js">
+        </script>
 
-    <!-- guided tour script -->
-    <script>
-        var tour = new Tour ({
-            storage: false,
-            steps: [
-            {
-                element: "#search",
-                title: "Suche nach Gegenständen",
-                content: "Suche hier nach Gegenständen, die du zur Liste hinzufügen oder entfernen möchtest.",
-                placement: "bottom",
-                backdrop: true,
-                backdropContainer: "body"
-            },
-            {
-                element: "#floating_button",
-                title: "Erstelle neue Gegenstände/Bedürfnisse/Items",
-                content: "Wenn, deine Suche erfolglos war, kannst du hier neue Items erstellen, um sie der Liste hinzuzufügen.",
-                placement: "left"
-            },
-            {
-                element: "#table1",
-                title: "Organisation der Liste",
-                content: "Organisiere hier alle Gegenstände, indem du sie später im rechten Bereich hinzufügst oder entfernst.",
-                placement: "top",
+        <!-- guided tour script -->
+        <script>
+            var tour = new Tour({
+                storage: false,
+                steps: [
+                    {
+                        element: "#search",
+                        title: "Suche nach Gegenständen",
+                        content: "Suche hier nach Gegenständen, die du zur Liste hinzufügen oder entfernen möchtest.",
+                        placement: "bottom",
+                        backdrop: true,
+                        backdropContainer: "body"
+                    },
+                    {
+                        element: "#floating_button",
+                        title: "Erstelle neue Gegenstände/Bedürfnisse/Items",
+                        content: "Wenn, deine Suche erfolglos war, kannst du hier neue Items erstellen, um sie der Liste hinzuzufügen.",
+                        placement: "left"
+                    },
+                    {
+                        element: "#table1",
+                        title: "Organisation der Liste",
+                        content: "Organisiere hier alle Gegenstände, indem du sie später im rechten Bereich hinzufügst oder entfernst.",
+                        placement: "top",
+                    }
+                ],
+
+
+            });
+
+            tour.init();
+
+            function startGuidedTour() {
+
+                tour.restart();
             }
-            ],
-
-
-        });
-        
-        tour.init();
-
-        function startGuidedTour() {
-
-            tour.restart();  
-        }
-    </script>
+        </script>
+    {% endif %}
 {% endblock %}
 
 
@@ -85,128 +89,140 @@
 
 
             <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
-            id="search" autocomplete="off"/>
+                   id="search" autocomplete="off"/>
 
 
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <!-- Floating button for creating new items -->
-    <button class="btn-primary floating-add-button"
-    data-toggle="modal"
-    data-target="#myModal" id="floating_button" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
+
+    {% if editable %}
+        <!-- Floating button for creating new items -->
+        <button class="btn-primary floating-add-button"
+                data-toggle="modal"
+                data-target="#myModal" id="floating_button" title="Erstelle einen neuen Gegenstand!"><span
+                    class="glyphicon glyphicon-plus"></span></button>
+    {% endif %}
+
     <div class="container">
         <h3>Ort: Berlin</h3>
-        <button class="btn btn-info guided-tour-button" id="help-button" onclick="startGuidedTour()">
-            <span class="glyphicon glyphicon-question-sign"></span>
-        </button>
+        {% if editable %}
+            <button class="btn btn-info guided-tour-button" id="help-button" onclick="startGuidedTour()">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+        {% endif %}
+
         <div id="table_content">
             <table class="table" id="table1">
                 {% for request in requests %}
-                <tr>
-                    <td class="item-picture">
-                        {% if request.image %}
-                        <img src="/static/img/{{ request.image }}" class="img-rounded">
-                        {% else %}
-                        <span class="glyphicon glyphicon-gift"></span>
-                        {% endif %}
-                    </td>
-
-                    <td class="item-name">{{ request.name }}</td>
-
-                    <td class="item-checkoff">
-                        <button class="btn" data-hoverclass="btn-success"
-                        value="{{ request.req_id }}">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-
-    <!-- Model for adding items to the request list -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header search_modal">
-                    <div class="cell">
-                        <input id="modal_search" type="text" class="form-control search-input"
-                               placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
-                               id="modal_search" autocomplete="off"/>
-                    </div>
-
-                    <div class="cell cell-right">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <table class="table" id="table_modal">
-                        {% for item in suggestions %}
-                            <tr>
-                                <td class="item-picture">
-                                    {% if item.image %}
-                                        <img src="/static/img/{{ item.image }}" class="img-rounded">
-                                    {% else %}
-                                        <span class="glyphicon glyphicon-gift"></span>
-                                    {% endif %}
-                                </td>
-                                <td class="item-name">{{ item.name }}</td>
-
-                                <td class="item-checkoff">
-                                    <button type="button" class="btn" data-hoverclass="btn-info"
-                                            data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                            value="{{ item.item_id }}">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        {% for request in requests %}
-                        <tr>
+                    <tr>
                         <td class="item-picture">
                             {% if request.image %}
-                            <img src="/static/img/{{ request.image }}"  class="img-rounded">
+                                <img src="/static/img/{{ request.image }}" class="img-rounded">
                             {% else %}
-                            <span class="glyphicon glyphicon-gift"></span>
+                                <span class="glyphicon glyphicon-gift"></span>
                             {% endif %}
                         </td>
 
                         <td class="item-name">{{ request.name }}</td>
 
+                        {% if editable %}
                         <td class="item-checkoff">
-                            <b>Bereits hinzugefügt</b>
+                            <button class="btn" data-hoverclass="btn-success"
+                                    value="{{ request.req_id }}">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            {% endif %}
                         </td>
                     </tr>
-                    {% endfor %}
-                        </table>
+                {% endfor %}
+            </table>
+        </div>
 
-                        <div id="table-new-elem">
-                        <h4>Neues Item erstellen:</h4>
-                        <table class="table  table-bottom">
-                            <tr id="row-content">
-                                <td class="item-picture new-item">
-                                        <span class="glyphicon glyphicon-gift"></span>
-                                </td>
-                                <td class="item-name new-item" id="item-row-content"></td>
+        {% if editable %}
+            <!-- Model for adding items to the request list -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-                                <td class="item-checkoff new-item">
-                                    <button type="button" class="btn btn-success"
-                                            data-desc="neues Item hinzuf&uuml;gen"
-                                            value="-1">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header search_modal">
+                            <div class="cell">
+                                <input id="modal_search" type="text" class="form-control search-input"
+                                       placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
+                                       id="modal_search" autocomplete="off"/>
+                            </div>
+
+                            <div class="cell cell-right">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <table class="table" id="table_modal">
+                                {% for item in suggestions %}
+                                    <tr>
+                                        <td class="item-picture">
+                                            {% if item.image %}
+                                                <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                            {% else %}
+                                                <span class="glyphicon glyphicon-gift"></span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="item-name">{{ item.name }}</td>
+
+                                        <td class="item-checkoff">
+                                            <button type="button" class="btn" data-hoverclass="btn-info"
+                                                    data-desc="{{ item.name }} hinzuf&uuml;gen"
+                                                    value="{{ item.item_id }}">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% for request in requests %}
+                                    <tr>
+                                        <td class="item-picture">
+                                            {% if request.image %}
+                                                <img src="/static/img/{{ request.image }}" class="img-rounded">
+                                            {% else %}
+                                                <span class="glyphicon glyphicon-gift"></span>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="item-name">{{ request.name }}</td>
+
+                                        <td class="item-checkoff">
+                                            <b>Bereits hinzugefügt</b>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+
+                            <div id="table-new-elem">
+                                <h4>Neues Item erstellen:</h4>
+                                <table class="table  table-bottom">
+                                    <tr id="row-content">
+                                        <td class="item-picture new-item">
+                                            <span class="glyphicon glyphicon-gift"></span>
+                                        </td>
+                                        <td class="item-name new-item" id="item-row-content"></td>
+
+                                        <td class="item-checkoff new-item">
+                                            <button type="button" class="btn btn-success"
+                                                    data-desc="neues Item hinzuf&uuml;gen"
+                                                    value="-1">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
-</div>
 {% endblock %}

@@ -116,13 +116,21 @@ class TheOneThatWorks // name for now
         exit;
     }
 
-    function render_accommodation($acom)
+    function render_accommodation($acom, $editable = false)
     {
+        if ($editable) {
+            $token_acom = $this->db->getAccommodationFromToken(@$_COOKIE[self::COOKIE_NAME]);
+            if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
+                setcookie(TheOneThatWorks::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
+                die("Error: invalid acom_token - Login again? (" . @$_COOKIE[TheOneThatWorks::COOKIE_NAME] . ")");
+            }
+        }
 
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
         $suggestions = $this->db->getSuggestions($acom);
 
         echo $this->twig->render('list.html.twig', array(
+            'editable' => $editable,
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
             'suggestions' => $suggestions,

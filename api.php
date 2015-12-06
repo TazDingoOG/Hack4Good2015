@@ -18,7 +18,7 @@ function handle_api(MyDB $db, $post)
 
     $token_acom = $db->getAccommodationFromToken(@$_COOKIE[TheOneThatWorks::COOKIE_NAME]);
     if (!$token_acom || $token_acom['accom_id'] !== $acom['accom_id']) {
-        setcookie(self::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
+        setcookie(TheOneThatWorks::COOKIE_NAME, null, -1, '/'); // remove cookie, so the message won't come again
         die("Error: invalid acom_token - Login again? (" . @$_COOKIE[TheOneThatWorks::COOKIE_NAME] . ")");
     }
 
