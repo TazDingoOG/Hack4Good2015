@@ -11,14 +11,14 @@
 {% block body %}
     <div class="registration_field container">
         <div class="jumbotron transparent-background">
-            <h2 class="fontblue">Registration Formular</h2>
+            <h2 class="fontblue">Registrierungsformular</h2>
 
             <form role="form" name="registration" onsubmit="return formValidation();" action="POST" target="/register">
 
                 <!-- refugee camp name -->
                 <div class="form-group">
                     <label class="field" for="refugee_camp_name">
-                        <span>* </span>Refugee Camp Name:
+                        <span>* </span>Flüchtlingsunterkunft:
                     </label>
                     <input type="text" name="refugee_camp_name" class="form-control"/>
                 </div>
@@ -26,7 +26,7 @@
                 <!-- street number -->
                 <div class="form-group">
                     <label class="field" for="street_number">
-                        <span>* </span>Street, Number:
+                        <span>* </span>Straße, Hausnummer:
                     </label>
                     <input type="integer" name="street_number" class="form-control"/>
                 </div>
@@ -34,7 +34,7 @@
                 <!-- PLZ / ZIP -->
                 <div class="form-group">
                     <label class="field" for="zip">
-                        <span>* </span>ZIP / PLZ:
+                        <span>* </span>PLZ:
                     </label>
                     <input type="integer" name="zip" class="form-control"/>
                 </div>
@@ -42,7 +42,7 @@
                 <!-- phone number -->
                 <div class="form-group">
                     <label class="field" for="phone_number">
-                        Phone Number:
+                        Telephonenummer:
                     </label>
                     <input type="integer" name="phone_number" class="form-control"/>
                 </div>
@@ -50,7 +50,7 @@
                 <!-- contact person -->
                 <div class="form-group">
                     <label class="field" for="contact_person">
-                        <span>* </span>Contact Person:
+                        <span>* </span>Kontaktperson:
                     </label>
                     <input type="integer" name="contact_person" class="form-control"/>
                 </div>
@@ -62,9 +62,9 @@
                     </label>
                     <input type="email" name="email" class="form-control"/>
                 </div>
-                <p class="required">* Required</p>
-                <input type="submit" name="submit" value="Submit Formular" class="btn btn-primary"/>
-                <input type="reset" name="cancel" value="Cancel" class="btn btn-default" style="margin-right: 5px"/>
+                <p class="required">* erforderlich</p>
+                <input type="submit" name="submit" value="Bestätigen" class="btn btn-primary"/>
+                <input type="reset" name="cancel" value="Abbrechen" class="btn btn-default" style="margin-right: 5px"/>
                 </p>
             </form>
         </div>
