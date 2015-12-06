@@ -34,6 +34,13 @@ class TheOneThatWorks // name for now
             $acom_name = substr($path, 12); // remove the '/unterkunft/'
 
             $this->renderAccommodationFromName($acom_name);
+        } else if (strpos($path, '/csv/') === 0) {
+            $acom_name = substr($path, 5); //remove '/csv/'
+            if (empty($acom_name)) {
+                $this->renderCSVOverview();
+            } else {
+                $this->renderCSVFromName($acom_name);
+            }
         } else if ($path == '/register') {
             $this->render_registration();
         } else if ($path == '/api_update') {
@@ -209,6 +216,21 @@ class TheOneThatWorks // name for now
         echo $this->twig->render('404.html.twig', array(
             'request_uri' => $_SERVER['REQUEST_URI']
         ));
+    }
+
+    function renderCSVOverview()
+    {
+        echo "<html><body><ul><li>übersicht</li></ul></body></html";
+    }
+
+    function renderCSVFromName($acom_name)
+    {
+        $acom = $this->db->getAccommodationFromCleanName($acom_name);
+        if ($acom === false) {
+            $this->render_404();
+        } else {
+            //TODO:
+        }
     }
 
     private function renderAccommodationFromName($acom_name)
