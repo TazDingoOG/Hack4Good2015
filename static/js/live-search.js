@@ -31,8 +31,37 @@ $("#search_modal").on("keyup", function() {
                 $row.hide(400);
             }
     });
-    if(!bol) {
-        
+    if (!bol) {
+        //TODO: handle empty search in add-modal
     }
 
+});
+
+
+/** HANDLE CLICKS **/
+$("#table_modal").on('click', '.item-checkoff button', function () {
+    var item_id = $(this).val();
+
+    function fail(err) {
+        alert(err);
+    }
+
+    $.post('/api_update', {
+        action: 'add',
+        clean_acom_name: clean_acom_name,
+        item_id: item_id
+    }).success(function (data) {
+        if(data == "success") {
+            console.log("success: " + data);
+            //TODO: handle successful add
+        } else {
+            fail(data);
+        }
+    }).fail(function (err) {
+        fail(err);
+    });
+
+    // TODO: add item to list in bg
+    // TODO: remove item from list of items that one could add
+    // -> maybe move it from the modal to the background list
 });

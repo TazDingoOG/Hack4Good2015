@@ -30,31 +30,25 @@ class MyDB extends SQLite3
         $statement->bindValue('cn', $cn, SQLITE3_TEXT);
         $r = $statement->execute();
 
-        $results = self::fetchAll($r);
-        if (count($results) != 1) {
-            if (count($results) > 1) {
-                echo("Should not happen: more than one acom!");
-            }
-            return false;
-        }
-        return $results[0];
+        return self::singleResult($r);
     }
 
     public function getAccommodationFromToken($token)
     {
-        $statement = $this->prepare("SELECT * FROM Accommodation a
-            WHERE a.authtoken = :token");
+        $statement = $this->prepare("SELECT * FROM Accommodation a WHERE a.authtoken = :token");
         $statement->bindValue('token', $token, SQLITE3_TEXT);
         $r = $statement->execute();
 
-        $results = self::fetchAll($r);
-        if (count($results) != 1) {
-            if (count($results) > 1) {
-                echo("Should not happen: more than one acom!");
-            }
-            return false;
-        }
-        return $results[0];
+        return self::singleResult($r);
+    }
+
+    public function getItemFromId($id)
+    {
+        $statement = $this->prepare("SELECT * FROM Item i WHERE i.id = :id");
+        $statement->bindValue('id', $id, SQLITE3_TEXT);
+        $r = $statement->execute();
+
+        return self::singleResult($r);
     }
 
     private static function fetchAll($result)
@@ -64,6 +58,18 @@ class MyDB extends SQLite3
             array_push($requests, $req);
         }
         return $requests;
+    }
+
+    private static function singleResult($r)
+    {
+        $results = self::fetchAll($r);
+        if (count($results) != 1) {
+            if (count($results) > 1) {
+                echo("Should not happen: more than one result!");
+            }
+            return false;
+        }
+        return $results[0];
     }
 }
 

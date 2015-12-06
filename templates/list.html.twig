@@ -8,6 +8,10 @@
 {% endblock %}
 
 {% block scripts_bottom %}
+    <script type="text/javascript">
+        // some information from php to JS about the current page
+        var clean_acom_name = '{{ clean_acom_name }}';
+    </script>
     <!-- custom javascript -->
     <script type="text/javascript" src="/static/js/live-search.js"></script>
     <script>
@@ -121,7 +125,8 @@ data-target="#myModal" id="floating_button"><span class="glyphicon glyphicon-plu
                             <!-- <td class="item-timer"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
 
                             <td class="item-checkoff">
-                                <button type="button" data-desc="Shirt" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>
+                                <button type="button" class="btn btn-success" data-desc="Hose hinzuf&uuml;gen" value="1">
+                                    <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </td>
                         </tr>

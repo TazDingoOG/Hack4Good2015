@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `Accommodation` (
 	`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`name` TEXT NOT NULL UNIQUE,
-	`clean_name` TEXT UNIQUE,
+	`clean_name` TEXT NOT NULL UNIQUE,
 	`email`	TEXT,
 	`telnr`	TEXT,
 	`authtoken`	TEXT UNIQUE
