@@ -31,8 +31,17 @@ $("#search_modal").on("keyup", function () {
             $row.hide(400);
         }
     });
-    if (!bol) {
-        //TODO: handle empty search in add-modal
+    if(!bol) {
+        $('#table_modal tr:last').after('<tr>'
+            +'<td class="item-picture">'
+               + '<span class="glyphicon glyphicon-gift"></span>'
+           + '</td>'
+           + '<td class="item-name"> ' + value + ' </td>'
+            + '<td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="' + value + ' hinzuf&uuml;gen" value="-1">'
+               + '<span class="glyphicon glyphicon-plus"></span>'
+            + '</button>'
+           + '</td>'
+       + '</tr>');
     }
 
 });
