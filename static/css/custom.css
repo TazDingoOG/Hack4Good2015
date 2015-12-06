@@ -21,6 +21,7 @@ body {
     box-shadow: grey 0px 0px 7px;
 }
 
+
 .list-categories-header {
     margin-bottom: 50px;
 }
@@ -66,6 +67,9 @@ body {
     margin-bottom: 200px;
 }
 
+.table {
+    margin-bottom:100px;
+}
 /*
 .search-input{
      content:'';
