@@ -20,7 +20,7 @@ class MyDB extends SQLite3
     {
         $statement = $this->prepare("INSERT INTO Accommodation
         (name, clean_name, email, telnr, authtoken, addr, plz, city) VALUES
-        (:name, :cleanName, :email, :telnr, :auttoken, :addr, :plz, :city)");
+        (:name, :cleanName, :email, :telnr, :authtoken, :addr, :plz, :city)");
         $statement->bindValue('name', $name, SQLITE3_TEXT);
         $statement->bindValue('cleanName', $cleanName, SQLITE3_TEXT);
         $statement->bindValue('email', $email, SQLITE3_TEXT);

@@ -13,14 +13,14 @@
         <div class="jumbotron transparent-background register-form">
             <h2 class="fontblue">Registrierungsformular</h2>
 
-            <form role="form" name="registration" onsubmit="return formValidation();" action="POST" target="/register">
+            <form role="form" name="registration" onsubmit="return formValidation();" method="POST" action="/register">
 
                 <!-- refugee camp name -->
                 <div class="form-group">
-                    <label class="field" for="refugee_camp_name">
+                    <label class="field" for="name">
                         <span>* </span>Flüchtlingsunterkunft:
                     </label>
-                    <input type="text" name="refugee_camp_name" class="form-control"/>
+                    <input type="text" name="name" class="form-control"/>
                 </div>
 
                 <!-- street number -->

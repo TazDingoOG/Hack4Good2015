@@ -114,17 +114,28 @@ class TheOneThatWorks // name for now
         exit;
     }
 
+	private function generateRandomString($length = 10) {
+		$characters = 'abcdefghijklmnopqrstuvwxyz';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+
     function handle_registration_post()
     {
         $name = $_POST['name'];
-        $cleanName = '';
+        $cleanName = preg_replace("/[^A-z0-9äöüßÄÖÜ]+/","-",$name);
         $email = $_POST['email'];
-        $telnr = $_POST['telnr'];
-        $auttoken = '';
-        $addr = $_POST['addr'];
-        $plz = $_POST['plz'];
+        $telnr = $_POST['phone_number'];
+        $authtoken = $this->generateRandomString(4) . '-' . $this->generateRandomString(4) . '-' . $this->generateRandomString(4);
+        $addr = $_POST['street_number'];
+        $plz = $_POST['zip'];
         $city = $_POST['city'];
-//        $this->db->register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city)
+        $this->db->register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city);
+        header('Location: /print/'.$authtoken);
     }
 
     function render_registration()
