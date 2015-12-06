@@ -27,31 +27,23 @@ $("#modal_search").on("keyup", function () {
     var value = $(this).val().toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
-        console.log(value)
-        $row = $(this);
+        var row = $(this);
 
-        var id = $row.find("td").eq(1).text().toLowerCase();
+        var id = row.find("td").eq(1).text().toLowerCase();
 
         if (id.indexOf(value) >= 0) {
-            $row.show();
+            row.show();
             bol = true;
         } else {
-            $row.hide(200);
+            row.hide(200);
         }
     });
-    if(!bol) {
-        $('#table_modal tr:last').after('<tr>'
-            +'<td class="item-picture new-item">'
-               + '<span class="glyphicon glyphicon-gift"></span>'
-           + '</td>'
-           + '<td class="item-name new-item"> ' + org_value + ' </td>'
-            + '<td class="item-checkoff new-item"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
-               + '<span class="glyphicon glyphicon-plus"></span>'
-            + '</button>'
-           + '</td>'
-       + '</tr>');
-    } 
-
+    if(value.length > 0){
+        $("#table-new-elem").show();
+        $("#item-row-content").html(org_value);
+    } else {
+        $("#table-new-elem").hide();
+    }
 });
 
 

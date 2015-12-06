@@ -21,8 +21,11 @@
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#modal_search').focus();
-        });
+            $("#table-new-elem").hide();
+        })
+
     </script>
+
     <!-- tooltip script -->
     <script>
         $(document).ready(function () {
@@ -71,10 +74,10 @@
             tour.restart();  
         }
     </script>
-    {% endblock %}
+{% endblock %}
 
 
-    {% block body %}
+{% block body %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 
@@ -92,7 +95,7 @@
     <!-- Floating button for creating new items -->
     <button class="btn-primary floating-add-button"
     data-toggle="modal"
-    data-target="#myModal" id="floating_button" data-tooltip="tooltip" data-placement="top"  data-trigger="hover" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
+    data-target="#myModal" id="floating_button" data-tooltip="tooltip" data-placement="top" title="Erstelle einen neuen Gegenstand!"><span class="glyphicon glyphicon-plus"></span></button>
     <div class="container">
         <h3>Ort: Berlin</h3>
         <button class="btn btn-info guided-tour-button" id="help-button" onclick="startGuidedTour()">
@@ -133,8 +136,8 @@
                 <div class="modal-header search_modal">
                     <div class="cell">
                         <input id="modal_search" type="text" class="form-control search-input"
-                        placeholder="Neuen Gegenstand erstellen und zur Bedarfsliste hinzuf&uuml;gen"
-                        id="modal_search" autocomplete="off"/>
+                               placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
+                               id="modal_search" autocomplete="off"/>
                     </div>
 
                     <div class="cell cell-right">
@@ -144,30 +147,49 @@
                 <div class="modal-body">
                     <table class="table" id="table_modal">
                         {% for item in suggestions %}
-                        <tr>
-                            <td class="item-picture">
-                                {% if item.image %}
-                                <img src="/static/img/{{ item.image }}" class="img-rounded">
-                                {% else %}
-                                <span class="glyphicon glyphicon-gift"></span>
-                                {% endif %}
-                            </td>
-                            <td class="item-name">{{ item.name }}</td>
+                            <tr>
+                                <td class="item-picture">
+                                    {% if item.image %}
+                                        <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-gift"></span>
+                                    {% endif %}
+                                </td>
+                                <td class="item-name">{{ item.name }}</td>
 
-                            <td class="item-checkoff">
-                                <button type="button" class="btn" data-hoverclass="btn-info"
-                                data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                value="{{ item.item_id }}">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                                <td class="item-checkoff">
+                                    <button type="button" class="btn" data-hoverclass="btn-info"
+                                            data-desc="{{ item.name }} hinzuf&uuml;gen"
+                                            value="{{ item.item_id }}">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+
+                        <div id="table-new-elem">
+                        <h4>Neues Item erstellen:</h4>
+                        <table class="table  table-bottom">
+                            <tr id="row-content">
+                                <td class="item-picture new-item">
+                                        <span class="glyphicon glyphicon-gift"></span>
+                                </td>
+                                <td class="item-name new-item" id="item-row-content"></td>
+
+                                <td class="item-checkoff new-item">
+                                    <button type="button" class="btn btn-success"
+                                            data-desc="neues Item hinzuf&uuml;gen"
+                                            value="-1">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div><!-- TODO: fix this intendation -->
-
 {% endblock %}
