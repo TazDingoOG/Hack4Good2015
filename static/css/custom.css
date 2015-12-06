@@ -1,12 +1,12 @@
 @media (min-width: 768px) {
-  .navbar-form .input-group-btn,
-  .navbar-form .input-group-addon {
-    width: auto;
-  }
+    .navbar-form .input-group-btn,
+    .navbar-form .input-group-addon {
+        width: auto;
+    }
 }
 
-body { 
-    padding-top: 70px; 
+body {
+    padding-top: 70px;
 }
 
 .floating-add-button {
@@ -24,20 +24,22 @@ body {
 .list-categories-header {
     margin-bottom: 50px;
 }
+
 .row {
- margin-bottom: 50px;   
+    margin-bottom: 50px;
 }
+
 .navbar-location {
-    
+
 }
 
 .search-form {
-    text-align: center;   
+    text-align: center;
 }
 
 #search {
     margin-top: 7px;
-    width:100%;
+    width: 100%;
 }
 
 .search-input {
@@ -49,14 +51,15 @@ body {
 }
 
 .table > tbody > tr > td {
-     vertical-align: middle;
+    vertical-align: middle;
 }
 
 .table > tbody > tr:last-child {
     margin-bottom: 200px;
 }
+
 .th {
-    border-top: 0px;   
+    border-top: 0px;
 }
 
 #complete-list {
@@ -78,27 +81,28 @@ body {
 */
 
 .item-list-header {
-    list-style: none;   
+    list-style: none;
 }
+
 .item-list-header > li {
     display: inline-block;
 }
 
 .item-list {
-    list-style: none;   
+    list-style: none;
     padding: 0;
 }
 
 .item-list > li:not(:first-child) {
-    border-top: 1px solid #E3E3E3;   
+    border-top: 1px solid #E3E3E3;
 }
 
 .item-container {
-/*    border: 1px solid #999;*/
-/*    border-radius: 3px;*/
+    /*    border: 1px solid #999;*/
+    /*    border-radius: 3px;*/
     background-color: #eee;
-    display:inline-block;
-    width:100%;
+    display: inline-block;
+    width: 100%;
     padding: 15px;
     height: 80px;
 }
@@ -109,25 +113,31 @@ body {
 }
 
 .item-checkoff {
-    text-align: center;   
-}
-.item-picture > img {
-    height: 64px;
+    text-align: center;
 }
 
-.item-description {
-    font-size:1.5em;
+.item-picture > img {
+    height: 32px;
+}
+
+.item-picture > span.glyphicon {
+    font-size: 32px;
 }
 
 .item-name {
-    font-size:1.2em;
+    font-size: 1.5em;
+}
+
+.item-name {
+    font-size: 1.2em;
 }
 
 .item-timer {
-    text-align:center;
+    text-align: center;
 }
-.item-timer > input{
-    text-align:center;
+
+.item-timer > input {
+    text-align: center;
     width: 50px;
     display:inline-block;
     margin-left:10px;

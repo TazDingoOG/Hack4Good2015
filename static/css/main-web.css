@@ -3,7 +3,7 @@
 }
 
 .fontblue {
-    color: #3F51B5;   
+    color: #3F51B5;
 }
 
 body {
@@ -12,5 +12,5 @@ body {
 }
 
 .transparent-background {
-    background-color: rgba(255,255,255,0.75);
+    background-color: rgba(255, 255, 255, 0.75);
 }
