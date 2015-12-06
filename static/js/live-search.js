@@ -11,7 +11,7 @@ $("#search").on("keyup", function () {
             $row.show();
             bol = true;
         } else {
-            $row.hide(400);
+            $row.hide(200);
         }
     });
     if(!bol) {
@@ -36,7 +36,7 @@ $("#search_modal").on("keyup", function () {
             $row.show();
             bol = true;
         } else {
-            $row.hide(400);
+            $row.hide(200);
         }
     });
     if(!bol) {
