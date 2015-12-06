@@ -87,6 +87,7 @@ $("#table1").on('click', '.item-checkoff button', function () {
 /** Modal -> Add items via '+' **/
 $("#table_modal").on('click', '.item-checkoff button', function () {
     var item_id = $(this).val();
+    var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
     function fail(err) {
         alert(err);
@@ -95,11 +96,12 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
     $.post('/api_update', {
         action: 'add',
         clean_acom_name: clean_acom_name, // we got that from the little javascript inserted into the body by php
-        item_id: item_id
+        item_id: item_id,
+        item_name: item_name
     }).success(function (data) {
         if (data == "success") {
             console.log("success: " + data);
-            $("#table_modal .item-checkoff button[value="+item_id+"]")
+            $("#table_modal .item-checkoff button[value=" + item_id + "]")
                 .parents("tr").hide(400); // remove entry in modal
             // TODO: add to list in background
         } else {

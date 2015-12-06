@@ -111,17 +111,34 @@ class TheOneThatWorks // name for now
             if (!array_key_exists('item_id', $post)) { // no accommodation name given
                 die("Error: no api item given");
             }
-            $item = $this->db->getItemFromId($post['item_id']);
-            if (!$item) {
-                die("Error: invalid api item " . $post['item_id']);
+
+            if ($post['item_id'] == -1) { // CREATE new item
+                if (!array_key_exists('item_name', $post)) { // no accommodation name given
+                    die("Error: no item name given");
+                }
+                $new_name = $post['item_name'];
+                if (strlen($new_name) > 50) { // max length
+                    die("Error: name too long");
+                }
+
+                $item_id = $this->db->createItem($new_name);
+                if (!$item_id) {
+                    die("Error: create item failed");
+                }
+            } else {
+                $item = $this->db->getItemFromId($post['item_id']);
+                if (!$item) {
+                    die("Error: invalid api item " . $post['item_id']);
+                }
+                $item_id = $item['item_id'];
             }
 
-            //TODO: handle duplicates
-            if ($this->db->addRequest($acom['accom_id'], $item['item_id']) > 0) {
-                echo "success";
-            } else {
-                die("Error: insert failed");
-            }
+                //TODO: handle duplicates
+                if ($this->db->addRequest($acom['accom_id'], $item_id) > 0) {
+                    echo "success";
+                } else {
+                    die("Error: insert failed");
+                }
         } else if ($post['action'] == 'delete') {
             if (!array_key_exists('request_id', $post)) { // no accommodation name given
                 die("Error: no api request_id given");
