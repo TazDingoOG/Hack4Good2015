@@ -50,14 +50,14 @@ class MyDB extends SQLite3
 
     public function getSuggestions($acom) //TODO: better suggestions
     {
-        $stmt = $this->prepare("SELECT * FROM
+        $stmt = $this->prepare(
+            "SELECT * FROM
   (SELECT item_id FROM Item
 EXCEPT
 SELECT item_id FROM Request
   NATURAL JOIN Item
   WHERE accom_id=:accom_id )
-NATURAL JOIN Item
-"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+NATURAL JOIN Item"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
         $stmt->bindValue('accom_id', $acom['accom_id']);
         $result = $stmt->execute();
 
@@ -68,7 +68,7 @@ NATURAL JOIN Item
     {
         $stmt = $this->prepare("INSERT INTO Request
 ('accom_id', 'item_id')
-VALUES (:accom_id, :item_id)"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+VALUES (:accom_id, :item_id)");
         $stmt->bindValue('accom_id', $accom_id);
         $stmt->bindValue('item_id', $item_id);
         $stmt->execute();
@@ -77,8 +77,16 @@ VALUES (:accom_id, :item_id)"); // I'm glad that you asked... That are the first
 
     public function removeRequest($request_id)
     {
-        $stmt = $this->prepare("DELETE FROM Request WHERE req_id=:request_id"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt = $this->prepare("DELETE FROM Request WHERE req_id=:request_id");
         $stmt->bindValue('request_id', $request_id);
+        $stmt->execute();
+        return $this->changes();
+    }
+
+    public function createItem($name)
+    {
+        $stmt = $this->prepare("INSERT INTO ITEM (name) VALUES (:name)");
+        $stmt->bindValue('name', $name);
         $stmt->execute();
         return $this->changes();
     }

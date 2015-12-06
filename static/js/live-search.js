@@ -22,12 +22,12 @@ $("#search").on("keyup", function () {
 });
 
 
-$("#search_modal").on("keyup", function () {
+$("#modal_search").on("keyup", function () {
     var org_value = $(this).val();
-    var value = value.toLowerCase()
+    var value = $(this).val().toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
-
+        console.log(value)
         $row = $(this);
 
         var id = $row.find("td").eq(1).text().toLowerCase();
@@ -36,16 +36,16 @@ $("#search_modal").on("keyup", function () {
             $row.show();
             bol = true;
         } else {
-            $row.hide(400);
+            $row.hide(200);
         }
     });
     if(!bol) {
         $('#table_modal tr:last').after('<tr>'
-            +'<td class="item-picture">'
+            +'<td class="item-picture new-item">'
                + '<span class="glyphicon glyphicon-gift"></span>'
            + '</td>'
-           + '<td class="item-name"> ' + org_value + ' </td>'
-            + '<td class="item-checkoff"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
+           + '<td class="item-name new-item"> ' + org_value + ' </td>'
+            + '<td class="item-checkoff new-item"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
                + '<span class="glyphicon glyphicon-plus"></span>'
             + '</button>'
            + '</td>'
@@ -88,6 +88,7 @@ $("#table1").on('click', '.item-checkoff button', function () {
 /** Modal -> Add items via '+' **/
 $("#table_modal").on('click', '.item-checkoff button', function () {
     var item_id = $(this).val();
+    var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
     function fail(err) {
         alert(err);
@@ -96,11 +97,12 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
     $.post('/api_update', {
         action: 'add',
         clean_acom_name: clean_acom_name, // we got that from the little javascript inserted into the body by php
-        item_id: item_id
+        item_id: item_id,
+        item_name: item_name
     }).success(function (data) {
         if (data == "success") {
             console.log("success: " + data);
-            $("#table_modal .item-checkoff button[value="+item_id+"]")
+            $("#table_modal .item-checkoff button[value=" + item_id + "]")
                 .parents("tr").hide(400); // remove entry in modal
             // TODO: add to list in background
         } else {

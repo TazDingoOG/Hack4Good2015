@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
+require_once __DIR__ . '/phpqrcode/qrlib.php';
 
 class TheOneThatWorks // name for now
 {
@@ -37,13 +38,53 @@ class TheOneThatWorks // name for now
             $this->render_registration();
         } else if ($path == '/api_update') {
             $this->handle_api($_POST);
-        } else if (strpos($path, '/a') === 0) {
+        } else if (strpos($path, '/a/') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
+		} else if (strpos($path, '/qr/') === 0) {
+            $token = substr($path, 4);
+			$this->qr($token);
+        } else if (strpos($path, '/print/') === 0) {
+            $token = substr($path, 7);
+            $this->print_qr($token);
         } else {
             $this->render_404();
         }
+    }
+
+	//this function creates the qr code for a given id as a png image
+	function qr($id)
+	{
+		$codeText = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+
+		QRcode::png($codeText, false, null, 10);
+	}
+
+	//this function is responsible for creating the printable page that
+	//containsthe qr code, not the qr code itself
+    function print_qr($id)
+    {
+        //check if the id is benevolent
+        if (!preg_match("/^[a-z]*-[a-z]*-[a-z]*$/", $id)) {
+            $this->render_invalid_token();
+            exit;
+        }
+
+        $accommodation = $this->db->getAccommodationFromToken($id);
+
+        if (!$accommodation) {
+            $this->render_invalid_token();
+            exit;
+        }
+
+        $template = array();
+        $template['unterkunft'] = $accommodation['name'];
+        $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accommodation['clean_name'];
+        $template['qr_src'] = '/qr/' . $id;
+        $template['list_url'] = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+
+        echo $this->twig->render('print.html.twig', $template);
     }
 
     function render_homepage()
@@ -111,17 +152,34 @@ class TheOneThatWorks // name for now
             if (!array_key_exists('item_id', $post)) { // no accommodation name given
                 die("Error: no api item given");
             }
-            $item = $this->db->getItemFromId($post['item_id']);
-            if (!$item) {
-                die("Error: invalid api item " . $post['item_id']);
+
+            if ($post['item_id'] == -1) { // CREATE new item
+                if (!array_key_exists('item_name', $post)) { // no accommodation name given
+                    die("Error: no item name given");
+                }
+                $new_name = $post['item_name'];
+                if (strlen($new_name) > 50) { // max length
+                    die("Error: name too long");
+                }
+
+                $item_id = $this->db->createItem($new_name);
+                if (!$item_id) {
+                    die("Error: create item failed");
+                }
+            } else {
+                $item = $this->db->getItemFromId($post['item_id']);
+                if (!$item) {
+                    die("Error: invalid api item " . $post['item_id']);
+                }
+                $item_id = $item['item_id'];
             }
 
-            //TODO: handle duplicates
-            if ($this->db->addRequest($acom['accom_id'], $item['item_id']) > 0) {
-                echo "success";
-            } else {
-                die("Error: insert failed");
-            }
+                //TODO: handle duplicates
+                if ($this->db->addRequest($acom['accom_id'], $item_id) > 0) {
+                    echo "success";
+                } else {
+                    die("Error: insert failed");
+                }
         } else if ($post['action'] == 'delete') {
             if (!array_key_exists('request_id', $post)) { // no accommodation name given
                 die("Error: no api request_id given");

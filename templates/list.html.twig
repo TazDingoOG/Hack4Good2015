@@ -20,7 +20,7 @@
     <script type="text/javascript" src="/static/js/live-search.js"></script>
     <script>
         $('#myModal').on('shown.bs.modal', function () {
-            $('#search_modal').focus();
+            $('#modal_search').focus();
         })
     </script>
 
@@ -75,7 +75,7 @@
     {% endblock %}
 
 
-    {% block body %}
+{% block body %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 
@@ -131,44 +131,44 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="form-group">
-                        <input type="text" class="form-control search-input"
-                        placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
-                        id="search_modal" autocomplete="off"/>
+                <div class="modal-header search_modal">
+                    <div class="cell">
+                        <input id="modal_search" type="text" class="form-control search-input"
+                               placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
+                               id="modal_search" autocomplete="off"/>
+                    </div>
+
+                    <div class="cell cell-right">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <table class="table" id="table_modal">
                         {% for item in suggestions %}
-                        <tr>
-                            <td class="item-picture">
-                                {% if item.image %}
-                                <img src="/static/img/{{ item.image }}" class="img-rounded">
-                                {% else %}
-                                <span class="glyphicon glyphicon-gift"></span>
-                                {% endif %}
-                            </td>
-                            <td class="item-name">{{ item.name }}</td>
+                            <tr>
+                                <td class="item-picture">
+                                    {% if item.image %}
+                                        <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-gift"></span>
+                                    {% endif %}
+                                </td>
+                                <td class="item-name">{{ item.name }}</td>
 
-                            <td class="item-checkoff">
-                                <button type="button" class="btn btn-success"
-                                data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                value="{{ item.item_id }}">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-
+                                <td class="item-checkoff">
+                                    <button type="button" class="btn btn-success"
+                                            data-desc="{{ item.name }} hinzuf&uuml;gen"
+                                            value="{{ item.item_id }}">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
 </div>
 
 {% endblock %}

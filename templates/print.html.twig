@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Bedarfsliste für {{ unterkunft }}
+{% endblock %}
+
+{% block stylesheets %} {# add script to head #}
+    {{ parent() }}
+    <link rel="stylesheet" href="/static/css/print.css">
+{% endblock %}
+
+{% block body %}
+<h1>{{ block('title') }}</h1>
+<img src="{{ qr_src }}" />
+
+{% endblock %}
