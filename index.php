@@ -220,7 +220,12 @@ class TheOneThatWorks // name for now
 
     function renderCSVOverview()
     {
-        echo "<html><body><ul><li>übersicht</li></ul></body></html";
+		echo "<ul>";
+		$result = $this->db->getAccommodationList();
+		foreach ($result as $row) {
+			echo "<li><a href=\"/csv/" . $row['clean_name'] . "\">" . $row['name'] . "</a></li>";
+		}
+		echo "</ul>";
     }
 
     function renderCSVFromName($acom_name)
@@ -229,7 +234,14 @@ class TheOneThatWorks // name for now
         if ($acom === false) {
             $this->render_404();
         } else {
-            //TODO:
+			$requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
+			$items = array();
+			foreach ($requests as $request) {
+				$items[] = $request['name'];
+			}
+			//name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
+			$first = array($acom['name'],"","","","","","","","","12",join('|',$items));
+			echo join(',',$first);
         }
     }
 

@@ -27,31 +27,23 @@ $("#modal_search").on("keyup", function () {
     var value = $(this).val().toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
-        console.log(value)
-        $row = $(this);
+        var row = $(this);
 
-        var id = $row.find("td").eq(1).text().toLowerCase();
+        var id = row.find("td").eq(1).text().toLowerCase();
 
         if (id.indexOf(value) >= 0) {
-            $row.show();
+            row.show();
             bol = true;
         } else {
-            $row.hide(200);
+            row.hide(200);
         }
     });
-    if(!bol) {
-        $('#table_modal tr:last').after('<tr>'
-            +'<td class="item-picture new-item">'
-               + '<span class="glyphicon glyphicon-gift"></span>'
-           + '</td>'
-           + '<td class="item-name new-item"> ' + org_value + ' </td>'
-            + '<td class="item-checkoff new-item"><button type="button" class="btn btn-success" data-desc="' + org_value + ' hinzuf&uuml;gen" value="-1">'
-               + '<span class="glyphicon glyphicon-plus"></span>'
-            + '</button>'
-           + '</td>'
-       + '</tr>');
-    } 
-
+    if(value.length > 0){
+        $("#table-new-elem").show();
+        $("#item-row-content").html(org_value);
+    } else {
+        $("#table-new-elem").hide();
+    }
 });
 
 
@@ -79,7 +71,7 @@ $("#table1").on('click', '.item-checkoff button', function () {
     }).success(function (data) {
         if (data == "success") {
             console.log("success: " + data);
-            $("#table1 .item-checkoff button[value="+request_id+"]")
+            $("#table1 .item-checkoff button[value=" + request_id + "]")
                 .parents("tr").hide(400); // remove entry in modal
             // TODO: add to list in background
         } else {
@@ -112,8 +104,17 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
         if (data == "success") {
             console.log("success: " + data);
             $("#table_modal .item-checkoff button[value=" + item_id + "]")
-                .parents("tr").hide(400); // remove entry in modal
-            // TODO: add to list in background
+                .parents("tr").hide(400, function () { // remove entry in modal
+                var me = $(this);
+                me.detach();
+
+                // convert to main list format
+                var btn = me.find(".item-checkoff button");
+                btn.attr('class', 'btn');
+                btn.attr('data-hoverclass', 'btn-success');
+                btn.find('span').attr('class', 'glyphicon glyphicon-ok');
+                me.appendTo("#table1 tbody").show(400);
+            });
         } else {
             fail(data);
         }
