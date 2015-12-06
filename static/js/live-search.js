@@ -71,7 +71,7 @@ $("#table1").on('click', '.item-checkoff button', function () {
     }).success(function (data) {
         if (data == "success") {
             console.log("success: " + data);
-            $("#table1 .item-checkoff button[value="+request_id+"]")
+            $("#table1 .item-checkoff button[value=" + request_id + "]")
                 .parents("tr").hide(400); // remove entry in modal
             // TODO: add to list in background
         } else {
@@ -104,8 +104,17 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
         if (data == "success") {
             console.log("success: " + data);
             $("#table_modal .item-checkoff button[value=" + item_id + "]")
-                .parents("tr").hide(400); // remove entry in modal
-            // TODO: add to list in background
+                .parents("tr").hide(400, function () { // remove entry in modal
+                var me = $(this);
+                me.detach();
+
+                // convert to main list format
+                var btn = me.find(".item-checkoff button");
+                btn.attr('class', 'btn');
+                btn.attr('data-hoverclass', 'btn-success');
+                btn.find('span').attr('class', 'glyphicon glyphicon-ok');
+                me.appendTo("#table1 tbody").show(400);
+            });
         } else {
             fail(data);
         }
