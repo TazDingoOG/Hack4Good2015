@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 
-class Volunteerio
+class TheOneThatWorks // name for now
 {
     const COOKIE_NAME = 'acom_token';
     public $twig;
@@ -65,11 +65,14 @@ class Volunteerio
             $this->render_404();
             return;
         }
+
         $requests = $this->db->getRequestsForAccommodation($acom['id']);
+        $suggestions = $this->db->getSuggestions($acom);
 
         echo $this->twig->render('list.html.twig', array(
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
+            'suggestions' => $suggestions,
         ));
     }
 
@@ -117,6 +120,9 @@ class Volunteerio
         }
 
         if ($post['action'] == 'add') {
+            //TODO: handle duplicates
+            $this->db->addRequest($acom['id'], $item['id']);
+            //TODO: handle insert fail
             echo "success";
         }
     }
@@ -134,8 +140,8 @@ class Volunteerio
     }
 }
 
-$volunteerio = new Volunteerio();
-$volunteerio->serve_url($_SERVER['REQUEST_URI']);
+$totw = new TheOneThatWorks();
+$totw->serve_url($_SERVER['REQUEST_URI']);
 exit;
 
 ?>

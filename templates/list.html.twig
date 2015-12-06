@@ -51,51 +51,24 @@
     <div class="container">
         <h3>Ort: Berlin</h3>
         <table class="table" id="table1">
-            <tr>
-                <td class="item-picture">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description">T-Shirt</td>
-                <!-- <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+            {% for request in requests %}
+                <tr>
+                    <td class="item-picture">
+                        {% if request.image %}
+                            <img src="/static/img/{{ request.image }}" class="img-rounded">
+                        {% else %}
+                            <span class="glyphicon glyphicon-gift"></span>
+                        {% endif %}
+                    </td>
 
-                <td class="item-checkoff table-content">
-                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Pullover</td>
-                <!--  <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
-                <td class="item-checkoff table-content">
-                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Jacke</td>
-                <!-- <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
-                <td class="item-checkoff table-content">
-                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="item-picture table-content">
-                    <img src="../static/img/t-shirt.png" class="img-rounded">
-                </td>
-                <td class="item-description table-content">Hemd</td>
-                <!--   <td class="item-timer table-content"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
-                <td class="item-checkoff table-content">
-                    <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
+                    <td class="item-name">{{ request.name }}</td>
+
+                    <td class="item-checkoff table-content">
+                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
 
 
@@ -116,20 +89,26 @@
                     </div>
                     <div class="modal-body">
                         <table class="table" id="table_modal">
-                            <tr>
-                                <td class="item-picture">
-                                    <img src="/static/img/t-shirt.png" class="img-rounded">
-                                </td>
-                                <td class="item-description">Hose</td>
-                                <!-- <td class="item-timer"><button  class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button><input type="text" class="form-control" value="24"></input><button  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button> Tage</td> -->
+                            {% for item in suggestions %}
+                                <tr>
+                                    <td class="item-picture">
+                                        {% if item.image %}
+                                            <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                        {% else %}
+                                            <span class="glyphicon glyphicon-gift"></span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="item-name">{{ item.name }}</td>
 
-                                <td class="item-checkoff">
-                                    <button type="button" class="btn btn-success" data-desc="Hose hinzuf&uuml;gen"
-                                            value="1">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </td>
-                            </tr>
+                                    <td class="item-checkoff">
+                                        <button type="button" class="btn btn-success"
+                                                data-desc="{{ item.name }} hinzuf&uuml;gen"
+                                                value="{{ item.id }}">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </table>
 
                     </div>

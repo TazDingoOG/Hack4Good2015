@@ -117,10 +117,14 @@ body {
 }
 
 .item-picture > img {
-    height: 64px;
+    height: 32px;
 }
 
-.item-description {
+.item-picture > span.glyphicon {
+    font-size: 32px;
+}
+
+.item-name {
     font-size: 1.5em;
 }
 

@@ -53,7 +53,9 @@ $("#table_modal").on('click', '.item-checkoff button', function () {
     }).success(function (data) {
         if (data == "success") {
             console.log("success: " + data);
-            //TODO: handle successful add
+            $("#table_modal .item-checkoff button[value="+item_id+"]")
+                .parents("tr").remove(); // remove entry in modal
+            // TODO: add to list in background
         } else {
             fail(data);
         }

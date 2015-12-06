@@ -51,7 +51,7 @@ class MyDB extends SQLite3
         return self::singleResult($r);
     }
 
-    private static function fetchAll($result)
+    public static function fetchAll($result)
     {
         $requests = array();
         while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
@@ -60,7 +60,7 @@ class MyDB extends SQLite3
         return $requests;
     }
 
-    private static function singleResult($r)
+    public static function singleResult($r)
     {
         $results = self::fetchAll($r);
         if (count($results) != 1) {
@@ -70,6 +70,33 @@ class MyDB extends SQLite3
             return false;
         }
         return $results[0];
+    }
+
+    public function getSuggestions($acom) //TODO: better suggestions
+    {
+        $stmt = $this->prepare("SELECT * FROM
+  (SELECT id FROM Item
+EXCEPT
+SELECT i.id FROM Accommodation a
+  JOIN Request r ON a.id=r.accommodation_id
+  JOIN Item i ON r.item_id=i.id WHERE a.id=:acom_id LIMIT 5)
+NATURAL JOIN Item
+"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt->bindValue('acom_id', $acom['id']);
+        $result = $stmt->execute();
+
+        return self::fetchAll($result);
+    }
+
+    public function addRequest($acom_id, $item_id)
+    {
+        $stmt = $this->prepare("INSERT INTO Request
+('accommodation_id', 'item_id')
+VALUES (:acom_id, :item_id)"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt->bindValue('acom_id', $acom_id);
+        $stmt->bindValue('item_id', $item_id);
+        $result = $stmt->execute();
+        return $result;
     }
 }
 
