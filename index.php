@@ -30,7 +30,7 @@ class TheOneThatWorks // name for now
         // -> /unterkunft/NAME-DER-UNTERKUNFT
         if ($path == "/") {
             $this->render_homepage();
-        } else if (strpos($path, '/unterkunft') === 0) {
+        } else if (strpos($path, '/unterkunft/') === 0) {
             $acom_name = substr($path, 12); // remove the '/unterkunft/'
 
             $this->renderAccommodationFromName($acom_name);
