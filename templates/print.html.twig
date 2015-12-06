@@ -10,7 +10,75 @@ Bedarfsliste für {{ unterkunft }}
 {% endblock %}
 
 {% block body %}
+<div id="content">
 <h1>{{ block('title') }}</h1>
+<h2>Link: {{ list_url }} </h2>
 <img src="{{ qr_src }}" />
 
+
+
+<br>
+<br>
+<br>
+<p class="topic">
+WICHTIG! 
+</p>
+<br>
+<p class="tab">
+	Du benötigst lokale oder eine mobile Internetverbindung.
+	<br>
+	Bitte stelle sicher, dass nur Befugte, die die Liste bearbeiten dürfen, Zugang zu diesem Dokument haben!
+</p>
+<br>
+<p  class="topic">
+1. QR-Code scannen oder Web-Adresse eingeben
+</p>
+<br>
+<p class="tab">
+	
+	Unter diesem Link (oder QR code) findest Du die Bedarfsliste für deine Unterkunft.
+	<br>
+	Du kannst diesen Link als Lesezeichen speichern, 
+	damit du die Adresse nicht jedes Mal neu scannen oder abtippen musst.
+</p>
+<br>
+<p class="topic">
+2. Bedarfsliste bearbeiten
+</p
+<br>
+<br>
+<p class="tab">
+	2.1 Suche nach schon hinzugefügtem Gegenstand in der Suchleiste oben
+	<br>
+	Drücke in die Suchleiste oben und tippe Namen vom Gegenstand ein, der hinzugefügt werden soll.
+</p>
+<br>
+<p class="tab">
+	2.2 Hinzufügen von Gegenständen zur Liste:
+	<br>
+	Drücke auf das "+" unten rechts.
+	<br>
+	Gib den Namen des Gegenstands ein und drücke auf das "+" auf der rechten Seite des Item-Balkens.
+</p>
+<br>
+<p class="tab">
+	2.3 Markieren von abgearbeiteten von Gegenstand aus der Liste:
+	<br>
+	Drücke auf das Häkchen rechts neben dem Gegenstand, der von der Liste abgearbeitet wurde.
+</p>
+<br>
+<p class="topic">
+3. Nicht änderbare Bedarfsliste
+</p>
+<br>
+<p class="tab">
+	Eine "Nur-Lesen-Version" der Liste zum Verschicken an mögliche Spender findest du hier:
+	<br>
+	<p class="link">
+	{{readonly_list}}
+	</p>
+</p>
+<br>
+<br>
+</div>
 {% endblock %}
