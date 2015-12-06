@@ -33,14 +33,20 @@ $("#modal_search").on("keyup", function () {
 
         if (id.indexOf(value) >= 0) {
             row.show();
-            bol = true;
+            if(id == value) {
+               bol = true;
+            }
         } else {
             row.hide(200);
         }
     });
     if(value.length > 0){
-        $("#table-new-elem").show();
-        $("#item-row-content").html(org_value);
+        if(!bol){
+           $("#table-new-elem").show();
+            $("#item-row-content").html(org_value);
+        } else {
+            $("#table-new-elem").hide();
+        }
     } else {
         $("#table-new-elem").hide();
     }
