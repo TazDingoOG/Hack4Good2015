@@ -42,7 +42,11 @@ class TheOneThatWorks // name for now
                 $this->renderCSVFromName($acom_name);
             }
         } else if ($path == '/register') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $this->handle_registration_post();
+            } else { //GET
             $this->render_registration();
+            }
         } else if ($path == '/api_update') {
             $this->handle_api($_POST);
         } else if (strpos($path, '/a/') === 0) {
@@ -107,6 +111,19 @@ class TheOneThatWorks // name for now
     {
         echo $this->twig->render('index.html.twig');
         exit;
+    }
+
+    function handle_registration_post()
+    {
+        $name = $_POST['name'];
+        $cleanName = '';
+        $email = $_POST['email'];
+        $telnr = $_POST['telnr'];
+        $auttoken = '';
+        $addr = $_POST['addr'];
+        $plz = $_POST['plz'];
+        $city = $_POST['city'];
+//        $this->db->register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city)
     }
 
     function render_registration()

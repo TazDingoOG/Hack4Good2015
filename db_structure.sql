@@ -4,7 +4,10 @@ CREATE TABLE IF NOT EXISTS `Accommodation` (
   `clean_name` TEXT    NOT NULL UNIQUE,
   `email`      TEXT,
   `telnr`      TEXT,
-  `authtoken`  TEXT UNIQUE
+  `authtoken`  TEXT UNIQUE,
+  `addr`       TEXT,
+  `plz`        TEXT,
+  `city`       TEXT
 );
 CREATE TABLE IF NOT EXISTS `Item` (
   `item_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
