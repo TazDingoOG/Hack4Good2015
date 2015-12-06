@@ -11,13 +11,11 @@ class MyDB extends SQLite3
         $this->open(MyDB::DB_FILENAME);
     }
 
-    public function getRequestsForAccommodation($acc_id)
+    public function getRequestsForAccommodation($accom_id)
     {
-
-        $statement = $this->prepare("SELECT * FROM Accommodation a
-  JOIN Request r ON a.id=r.accommodation_id
-  JOIN Item i ON r.item_id=i.id WHERE a.id=:accommodation_id");
-        $statement->bindValue('accommodation_id', $acc_id, SQLITE3_INTEGER);
+        $statement = $this->prepare("SELECT * FROM Request
+  NATURAL JOIN Item WHERE accom_id=:accom_id");
+        $statement->bindValue('accom_id', $accom_id, SQLITE3_INTEGER);
         $result = $statement->execute();
 
         return self::fetchAll($result);
@@ -25,8 +23,8 @@ class MyDB extends SQLite3
 
     public function getAccommodationFromCleanName($cn)
     {
-        $statement = $this->prepare("SELECT * FROM Accommodation a
-            WHERE a.clean_name = :cn");
+        $statement = $this->prepare("SELECT * FROM Accommodation
+            WHERE clean_name = :cn");
         $statement->bindValue('cn', $cn, SQLITE3_TEXT);
         $r = $statement->execute();
 
@@ -35,7 +33,7 @@ class MyDB extends SQLite3
 
     public function getAccommodationFromToken($token)
     {
-        $statement = $this->prepare("SELECT * FROM Accommodation a WHERE a.authtoken = :token");
+        $statement = $this->prepare("SELECT * FROM Accommodation WHERE authtoken = :token");
         $statement->bindValue('token', $token, SQLITE3_TEXT);
         $r = $statement->execute();
 
@@ -44,17 +42,52 @@ class MyDB extends SQLite3
 
     public function getItemFromId($id)
     {
-        $statement = $this->prepare("SELECT * FROM Item i WHERE i.id = :id");
+        $statement = $this->prepare("SELECT * FROM Item WHERE item_id = :id");
         $statement->bindValue('id', $id, SQLITE3_TEXT);
         $r = $statement->execute();
 
         return self::singleResult($r);
     }
 
+    public function getSuggestions($acom) //TODO: better suggestions
+    {
+        $stmt = $this->prepare("SELECT * FROM
+  (SELECT item_id FROM Item
+EXCEPT
+SELECT item_id FROM Request
+  NATURAL JOIN Item
+  WHERE accom_id=:accom_id )
+NATURAL JOIN Item
+"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt->bindValue('accom_id', $acom['accom_id']);
+        $result = $stmt->execute();
+
+        return self::fetchAll($result);
+    }
+
+    public function addRequest($accom_id, $item_id)
+    {
+        $stmt = $this->prepare("INSERT INTO Request
+('accom_id', 'item_id')
+VALUES (:accom_id, :item_id)"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt->bindValue('accom_id', $accom_id);
+        $stmt->bindValue('item_id', $item_id);
+        $stmt->execute();
+        return $this->changes(); // return the change count
+    }
+
+    public function removeRequest($request_id)
+    {
+        $stmt = $this->prepare("DELETE FROM Request WHERE req_id=:request_id"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
+        $stmt->bindValue('request_id', $request_id);
+        $stmt->execute();
+        return $this->changes();
+    }
+
     public static function fetchAll($result)
     {
         $requests = array();
-        while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
+        while ($req = $result->fetchArray()) { // collect all to one array
             array_push($requests, $req);
         }
         return $requests;
@@ -70,33 +103,6 @@ class MyDB extends SQLite3
             return false;
         }
         return $results[0];
-    }
-
-    public function getSuggestions($acom) //TODO: better suggestions
-    {
-        $stmt = $this->prepare("SELECT * FROM
-  (SELECT id FROM Item
-EXCEPT
-SELECT i.id FROM Accommodation a
-  JOIN Request r ON a.id=r.accommodation_id
-  JOIN Item i ON r.item_id=i.id WHERE a.id=:acom_id LIMIT 5)
-NATURAL JOIN Item
-"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
-        $stmt->bindValue('acom_id', $acom['id']);
-        $result = $stmt->execute();
-
-        return self::fetchAll($result);
-    }
-
-    public function addRequest($acom_id, $item_id)
-    {
-        $stmt = $this->prepare("INSERT INTO Request
-('accommodation_id', 'item_id')
-VALUES (:acom_id, :item_id)"); // I'm glad that you asked... That are the first 5 items that are not yet added ;)
-        $stmt->bindValue('acom_id', $acom_id);
-        $stmt->bindValue('item_id', $item_id);
-        $result = $stmt->execute();
-        return $result;
     }
 }
 

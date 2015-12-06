@@ -37,7 +37,7 @@
 
 
             <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
-                   id="search"/>
+                   id="search" autocomplete="off"/>
 
 
             <!-- /.navbar-collapse -->
@@ -63,8 +63,10 @@
 
                     <td class="item-name">{{ request.name }}</td>
 
-                    <td class="item-checkoff table-content">
-                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                    <td class="item-checkoff">
+                        <button class="btn btn-danger"
+                                value="{{ request.req_id }}">
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
                 </tr>
@@ -84,7 +86,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control search-input"
                                    placeholder="Neuen Gegenstand zur Bedarfsliste hinzuf&uuml;gen"
-                                   id="search_modal"/>
+                                   id="search_modal" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -103,7 +105,7 @@
                                     <td class="item-checkoff">
                                         <button type="button" class="btn btn-success"
                                                 data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                                value="{{ item.id }}">
+                                                value="{{ item.item_id }}">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
                                     </td>

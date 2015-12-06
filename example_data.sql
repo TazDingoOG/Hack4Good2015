@@ -1,4 +1,4 @@
-INSERT INTO `Item` (id, name, image) VALUES
+INSERT INTO `Item` (item_id, name, image) VALUES
   (1, 'T-Shirt', 't-shirt.png'),
   (2, 'Pullover', NULL),
   (3, 'Babyflasche', NULL),
@@ -100,13 +100,13 @@ INSERT INTO `Item` (id, name, image) VALUES
   (99, 'Jodsalbe', NULL),
   (100, 'Jacke', NULL);
 
-INSERT INTO `Accommodation` (id, name, clean_name, email, telnr, authtoken) VALUES
+INSERT INTO `Accommodation` (accom_id, name, clean_name, email, telnr, authtoken) VALUES
   (1, 'NUK Brennpunkt', 'test-brennpunkt', 'nonofyour@business.de', '0123/456789', "besser-wisser-martin"),
   (2, 'NUK Moabit', 'test-moabit', 'nonofyour@business.de', '0123/456789', "erde-erde-erde"),
   (3, 'NUK Mitte', 'test-mitte', 'nonofyour@business.de', '0123/456789', "tanz-koch-kurs"),
   (4, 'NUK Steglitz', 'test-steglitz', 'nonofyour@business.de', '0123/456789', "feuer-wasser-luft");
 
-INSERT INTO `Request` (id, accommodation_id, item_id, expiration) VALUES
+INSERT INTO `Request` (req_id, accom_id, item_id, expiration) VALUES
   (1, 1, 1, NULL),
   (2, 1, 13, NULL),
   (3, 1, 16, NULL),
