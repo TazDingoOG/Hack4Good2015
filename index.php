@@ -68,7 +68,7 @@ class TheOneThatWorks // name for now
         $template['unterkunft'] = $accommodation['name'];
         $template['readonly_list'] = $_SERVER['SERVER_NAME'] . '/unterkunft/' . $accomodation['clean_name'];
         $template['qr_src'] = '/qr.php?id=' . $id;
-        $template = $_SERVER['SERVER_NAME'] . '/a/' . $id;
+        $template['list_url'] = $_SERVER['SERVER_NAME'] . '/a/' . $id;
 
         echo $this->twig->render('print.html.twig', $template);
     }
