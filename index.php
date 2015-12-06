@@ -176,7 +176,8 @@ class TheOneThatWorks // name for now
                 time() + 60 * 60 * 24 * 30, // TODO: other cookie expiration ?
                 '/'
             );
-            
+            $_COOKIE[self::COOKIE_NAME] = $token;
+
             $this->render_accommodation($acom, true);
         }
     }
