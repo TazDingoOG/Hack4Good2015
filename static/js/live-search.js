@@ -62,13 +62,15 @@ $(document.body).on('mouseleave', "[data-hoverclass]", function() {
 });
 
 
+function fail(err) {
+    //alert(err);
+    console.log(err);
+    window.location.reload(); // for now, just reload (we dont have sync)
+}
+
 /** Remove items via 'x' **/
 $("#table1").on('click', '.item-checkoff button', function () {
     var request_id = $(this).val();
-
-    function fail(err) {
-        alert(err);
-    }
 
     $.post('/api_update', {
         action: 'delete',
@@ -96,10 +98,6 @@ $("#table1").on('click', '.item-checkoff button', function () {
 $("#myModal").on('click', '.item-checkoff button', function () {
     var item_id = $(this).val();
     var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
-
-    function fail(err) {
-        alert(err);
-    }
 
     $.post('/api_update', {
         action: 'add',
