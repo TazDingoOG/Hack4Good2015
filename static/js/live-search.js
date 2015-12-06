@@ -17,6 +17,7 @@ $("#search").on("keyup", function() {
 
 $("#modal_search").on("keyup", function() {
     var value = $(this).val().toLowerCase();
+    var bol = false;
     $("#table_modal tr").each(function(index) {
 
             $row = $(this);
@@ -25,8 +26,13 @@ $("#modal_search").on("keyup", function() {
 
             if (id.indexOf(value) >= 0) {
                 $row.show();
+                bol = true;
             }else {
                 $row.hide(200);
             }
     });
+    if(!bol) {
+        
+    }
+
 });
