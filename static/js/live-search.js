@@ -24,7 +24,7 @@ $("#search").on("keyup", function () {
 
 $("#search_modal").on("keyup", function () {
     var org_value = $(this).val();
-    var value = value.toLowerCase()
+    var value = $(this).val().toLowerCase()
     var bol = false;
     $("#table_modal tr").each(function (index) {
 
