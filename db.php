@@ -10,6 +10,12 @@ class MyDB extends SQLite3
         $this->open(MyDB::DB_FILENAME);
     }
 
+	public function getAccommodationList()
+	{
+		$result = $this->query("SELECT * FROM Accommodation");
+		return self::fetchAll($result);
+	}
+
     public function getRequestsForAccommodation($accom_id)
     {
         $statement = $this->prepare("SELECT * FROM Request
