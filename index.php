@@ -110,6 +110,12 @@ class Inventeerio // name for now
         echo $this->twig->render('print.html.twig', $template);
     }
 
+    function render_coming_soon()
+    {
+        echo $this->twig->render('coming_soon.html.twig');
+        exit;
+    }
+
     function render_homepage()
     {
         echo $this->twig->render('index.html.twig');
@@ -246,6 +252,7 @@ class Inventeerio // name for now
 }
 
 $main = new Inventeerio();
-$main->serve_url($_SERVER['REQUEST_URI']);
+$main->render_coming_soon();
+//$main->serve_url($_SERVER['REQUEST_URI']);
 
 ?>
