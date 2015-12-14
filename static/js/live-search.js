@@ -79,7 +79,7 @@ function show_alert(type, strong, msg) {
 }
 
 function fail(err) {
-    show_alert('danger', "Error", "Could not save changes to server (see console for more info)");
+    show_alert('danger', "Fehler", "Die Daten konnten nicht mit dem Server synchronisiert werden! Bitte versuche, die Seite neu zu laden.");
     console.log(err);
     //window.location.reload(); // for now, just reload (we dont have sync)
 }

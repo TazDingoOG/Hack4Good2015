@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 require_once __DIR__ . '/phpqrcode/qrlib.php';
+require_once 'utils.php';
 
 class Inventeerio // name for now
 {
@@ -129,7 +130,7 @@ class Inventeerio // name for now
     function handle_registration_post()
     {
         $name = $_POST['name'];
-        $cleanName = preg_replace("/[^A-z0-9äöüßÄÖÜ]+/","-",$name);
+        $cleanName = Utils::generateCleanName($name);
         $email = $_POST['email'];
         $telnr = $_POST['phone_number'];
         $authtoken = $this->generateRandomString(4) . '-' . $this->generateRandomString(4) . '-' . $this->generateRandomString(4);
