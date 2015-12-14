@@ -1,0 +1,46 @@
+{% extends 'simple_jumbotron.html.twig' %}
+
+{% block title %}Demo{% endblock %}
+
+{% block stylesheets %} {# add script to head #}
+    {{ parent() }}
+    <link rel="stylesheet" href="/static/css/main-web.css">
+{% endblock %}
+
+{% block headline %}
+    <div class="fontblue">Inventeerio - DEMO</div>
+{% endblock %}
+
+{% block content %}
+    <h3 class="fontblue">
+        Die Datenbank wird alle 10 Minuten zurückgesetzt
+    </h3>
+
+    <table class="link-list">
+        <tbody>
+        <tr>
+            <td>Beispielliste für Helfer:</td>
+            <td><a href="/a/demo-token">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Beispielliste (read-only):</td>
+            <td><a href="/unterkunft/demo-unterkunft">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Liste der Unterk&uuml;nfte:</td>
+            <td><a href="/liste">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Neue Unterkunft:</td>
+            <td>
+                <a href="/register">
+                    <button class="btn btn-success btn-lg">
+                        <b>Registrieren</b>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

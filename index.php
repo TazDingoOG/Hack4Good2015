@@ -112,7 +112,7 @@ class Inventeerio // name for now
 
     function render_homepage()
     {
-        echo $this->twig->render('index.html.twig');
+        echo $this->twig->render('demo_home.html.twig');
         exit;
     }
 
