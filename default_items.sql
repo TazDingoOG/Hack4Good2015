@@ -98,4 +98,8 @@ INSERT INTO `Item` (item_id, name, image) VALUES
   (97, 'Schmerzmittel', NULL),
   (98, 'Nasenspray', NULL),
   (99, 'Jodsalbe', NULL),
-  (100, 'Jacke', NULL);
+  (100, 'Jacke', NULL),
+  (101, 'Gummistiefel', NULL),
+  (102, 'Hut', NULL),
+  (103, 'Uhr', NULL),
+  (104, 'Regenschirm', NULL);
