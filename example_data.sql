@@ -1,6 +1,6 @@
 INSERT INTO `Accommodation` (accom_id, name, clean_name, email, telnr, authtoken, addr, plz, city) VALUES
-  (1, 'NUK Brennpunkt', 'test-brennpunkt', 'nonofyour@business.de', '0123/456789', 'besser-wisser-martin',
-   'Klosterstraße 62', '10179', 'Berlin');
+  (1, 'Demo Unterkunft', 'demo-unterkunft', 'demo@inventeerio.de', NULL, 'demo-token',
+   NULL, NULL, NULL);
 --  (2, 'NUK Moabit', 'test-moabit', 'nonofyour@business.de', '0123/456789', "erde-erde-erde"),
 --  (3, 'NUK Mitte', 'test-mitte', 'nonofyour@business.de', '0123/456789', "tanz-koch-kurs"),
 --  (4, 'NUK Steglitz', 'test-steglitz', 'nonofyour@business.de', '0123/456789', "feuer-wasser-luft");
