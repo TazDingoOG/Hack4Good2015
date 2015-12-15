@@ -120,8 +120,8 @@
                 {% for request in requests %}
                     <tr>
                         <td class="item-picture">
-                            {% if request.image %}
-                                <img src="/static/img/{{ request.image }}" class="img-rounded">
+                            {% if request.image_url %}
+                                <img src="{{ request.image_url }}" class="img-rounded">
                             {% else %}
                                 <span class="glyphicon glyphicon-gift"></span>
                             {% endif %}
@@ -166,8 +166,8 @@
                                 {% for item in suggestions %}
                                     <tr>
                                         <td class="item-picture">
-                                            {% if item.image %}
-                                                <img src="/static/img/{{ item.image }}" class="img-rounded">
+                                            {% if item.image_url %}
+                                                <img src="{{ item.image_url }}" class="img-rounded">
                                             {% else %}
                                                 <span class="glyphicon glyphicon-gift"></span>
                                             {% endif %}
@@ -186,8 +186,8 @@
                                 {% for request in requests %}
                                     <tr>
                                         <td class="item-picture">
-                                            {% if request.image %}
-                                                <img src="/static/img/{{ request.image }}" class="img-rounded">
+                                            {% if request.image_url %}
+                                                <img src="{{ request.image_url }}" class="img-rounded">
                                             {% else %}
                                                 <span class="glyphicon glyphicon-gift"></span>
                                             {% endif %}

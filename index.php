@@ -46,7 +46,7 @@ class Inventeerio // name for now
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->handle_registration_post();
             } else { //GET
-            $this->render_registration();
+                $this->render_registration();
             }
         } else if ($path == '/api_update') {
             require_once("api.php");
@@ -137,8 +137,11 @@ class Inventeerio // name for now
         $addr = $_POST['street_number'];
         $plz = $_POST['zip'];
         $city = $_POST['city'];
+
+        //TODO: validate registration input
+
         $this->db->register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city);
-        header('Location: /print/'.$authtoken);
+        header('Location: /print/' . $authtoken);
     }
 
     function render_registration()
@@ -166,7 +169,11 @@ class Inventeerio // name for now
         }
 
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
+        Utils::generateIconUrls($requests, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+
         $suggestions = $this->db->getSuggestions($acom);
+        Utils::generateIconUrls($suggestions, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
