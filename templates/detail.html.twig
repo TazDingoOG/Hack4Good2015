@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
 
 {% block title %} {{ acom_name }} {% endblock %}
 
@@ -118,26 +119,7 @@
         <div id="table_content">
             <table class="table" id="table1">
                 {% for request in requests %}
-                    <tr>
-                        <td class="item-picture">
-                            {% if request.image_url %}
-                                <img src="{{ request.image_url }}" class="img-rounded">
-                            {% else %}
-                                <span class="glyphicon glyphicon-gift"></span>
-                            {% endif %}
-                        </td>
-
-                        <td class="item-name">{{ request.name }}</td>
-
-                        {% if editable %}
-                        <td class="item-checkoff">
-                            <button class="btn" data-hoverclass="btn-success"
-                                    value="{{ request.req_id }}">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </button>
-                            {% endif %}
-                        </td>
-                    </tr>
+                    {{  macros.item_request(request, editable) }}
                 {% endfor %}
             </table>
         </div>
@@ -164,41 +146,12 @@
                         <div class="modal-body">
                             <table class="table" id="table_modal">
                                 {% for item in suggestions %}
-                                    <tr>
-                                        <td class="item-picture">
-                                            {% if item.image_url %}
-                                                <img src="{{ item.image_url }}" class="img-rounded">
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-gift"></span>
-                                            {% endif %}
-                                        </td>
-                                        <td class="item-name">{{ item.name }}</td>
-
-                                        <td class="item-checkoff">
-                                            <button type="button" class="btn" data-hoverclass="btn-info"
-                                                    data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                                    value="{{ item.item_id }}">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    {{ macros.item_addable(item) }}
                                 {% endfor %}
+
+                                <!-- already added -->
                                 {% for request in requests %}
-                                    <tr>
-                                        <td class="item-picture">
-                                            {% if request.image_url %}
-                                                <img src="{{ request.image_url }}" class="img-rounded">
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-gift"></span>
-                                            {% endif %}
-                                        </td>
-
-                                        <td class="item-name">{{ request.name }}</td>
-
-                                        <td class="item-checkoff">
-                                            <b>Bereits hinzugefügt</b>
-                                        </td>
-                                    </tr>
+                                    {{ macros.item_already_added(request) }}
                                 {% endfor %}
                             </table>
 
