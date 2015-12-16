@@ -15,11 +15,10 @@
     <h3 class="fontblue">
         Eine simple App für Helfer
     </h3>
-    <h3>Gehe zur Beispielliste von benötigten Gegenständen: <a href="/a/besser-wisser-martin">hier</a></h3>
     <br>
 
-
-    <div>
+    {# TODO: implement accommodation search
+     <div>
         <!-- HTML for SEARCH BAR -->
         <div class="input-group input-group-lg">
             <input type="text" class="form-control" placeholder="Suche nach Flüchtlingsunterkunft"
@@ -31,22 +30,33 @@
                 </button>
             </div>
         </div>
-    </div>
-    <br>
+    </div> #}
 
-    <!--
-        schicke request an server mit Namen des noch nicht eingerichteten Flüchtlingsheims
-        und bekomme pdf mit QR- code und URL zum Ausdrucken und Aufhängenzurück
-    -->
-    <div>
-        <div class="center">
-            <h3>Ist Deine Flüchtlingsunterkunft nicht in der <a href="/liste">Liste</a>?</h3>
-            <a href="/register">
-                <button class="btn btn-success btn-lg">
-                    <b>Registrieren</b>
-                </button>
-            </a>
-        </div>
-    </div>
+    <table class="link-list">
+        <tbody>
+        <tr>
+            <td>Beispielliste für Helfer:</td>
+            <td><a href="/a/demo-token">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Beispielliste (read-only):</td>
+            <td><a href="/unterkunft/demo-unterkunft">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Liste der Unterk&uuml;nfte:</td>
+            <td><a href="/liste">hier klicken</a></td>
+        </tr>
+        <tr>
+            <td>Neue Unterkunft:</td>
+            <td>
+                <a href="/register">
+                    <button class="btn btn-success btn-lg">
+                        <b>Registrieren</b>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 {% endblock %}
