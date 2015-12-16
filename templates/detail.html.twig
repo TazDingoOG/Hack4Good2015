@@ -4,7 +4,7 @@
 
 {% block stylesheets %} {# add script to head #}
     <!-- Custom Theme -->
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 
     {% if editable %}
         <!-- bootstrap tour -->
@@ -19,7 +19,7 @@
         var clean_acom_name = '{{ clean_acom_name }}';
     </script>
     <!-- custom javascript -->
-    <script type="text/javascript" src="/static/js/live-search.js"></script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#floating_button').blur();
