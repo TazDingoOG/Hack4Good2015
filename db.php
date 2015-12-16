@@ -125,7 +125,7 @@ VALUES (:accom_id, :item_id)");
     public static function fetchAll($result)
     {
         $requests = array();
-        while ($req = $result->fetchArray()) { // collect all to one array
+        while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
             array_push($requests, $req);
         }
         return $requests;
