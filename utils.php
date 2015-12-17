@@ -22,21 +22,23 @@ class Utils
     /**
      * Try to find missing icon files, and place them in the array
      *
-     * @param array $requests - array of requests
+     * @param array $items - array of items
      * @param string $icon_dir - directory where the icons are located, with trailing slash
      * @param string $icon_base_url - url to prepend for the embedded images
      */
-    public static function generateIconUrls(&$requests, $icon_dir, $icon_base_url)
+    public static function generateIconUrls(&$items, $icon_dir, $icon_base_url)
     {
-        foreach ($requests as &$req) {
-            if (!empty($req['image'])) {
-                $req['image_url'] = $icon_base_url . $req['image'];
+        foreach ($items as &$item) {
+            if (!empty($item['image'])) { // use specified icon, if given
+                $item['image_url'] = $icon_base_url . $item['image'];
             } else {
-                $cleanname = self::generateCleanName($req['name']);
+                $cleanname = self::generateCleanName($item['name']);
 
                 $imgfile = $cleanname . '.svg';
                 if (is_file($icon_dir . $imgfile)) {
-                    $req['image_url'] = $icon_base_url . $imgfile;
+                    $item['image_url'] = $icon_base_url . $imgfile;
+                } else {
+                    $item['image_url'] = null;
                 }
             }
         }

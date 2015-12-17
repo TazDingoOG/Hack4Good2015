@@ -71,6 +71,14 @@ class MyDB extends SQLite3
         return self::singleResult($r);
     }
 
+    public function getAllItems()
+    {
+        $stmt = $this->prepare("SELECT * FROM Item");
+        $result = $stmt->execute();
+
+        return self::fetchAll($result);
+    }
+
     public function getSuggestions($acom) //TODO: better suggestions
     {
         $stmt = $this->prepare(

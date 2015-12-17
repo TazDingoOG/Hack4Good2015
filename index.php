@@ -171,9 +171,11 @@ class Inventeerio // name for now
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
         Utils::generateIconUrls($requests, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
 
+        $all_items = $this->db->getAllItems();
+        Utils::generateIconUrls($all_items, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+
         $suggestions = $this->db->getSuggestions($acom);
         Utils::generateIconUrls($suggestions, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
-
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
@@ -181,6 +183,7 @@ class Inventeerio // name for now
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
             'suggestions' => $suggestions,
+            'all_items' => $all_items
         ));
     }
 
