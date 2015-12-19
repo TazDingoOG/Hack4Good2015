@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 require_once __DIR__ . '/phpqrcode/qrlib.php';
+require_once 'utils.php';
 
 class Inventeerio // name for now
 {
@@ -45,7 +46,7 @@ class Inventeerio // name for now
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->handle_registration_post();
             } else { //GET
-            $this->render_registration();
+                $this->render_registration();
             }
         } else if ($path == '/api_update') {
             require_once("api.php");
@@ -135,15 +136,18 @@ class Inventeerio // name for now
     function handle_registration_post()
     {
         $name = $_POST['name'];
-        $cleanName = preg_replace("/[^A-z0-9äöüßÄÖÜ]+/","-",$name);
+        $cleanName = Utils::generateCleanName($name);
         $email = $_POST['email'];
         $telnr = $_POST['phone_number'];
         $authtoken = $this->generateRandomString(4) . '-' . $this->generateRandomString(4) . '-' . $this->generateRandomString(4);
         $addr = $_POST['street_number'];
         $plz = $_POST['zip'];
         $city = $_POST['city'];
+
+        //TODO: validate registration input
+
         $this->db->register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city);
-        header('Location: /print/'.$authtoken);
+        header('Location: /print/' . $authtoken);
     }
 
     function render_registration()
@@ -171,7 +175,13 @@ class Inventeerio // name for now
         }
 
         $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
+        Utils::generateIconUrls($requests, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+
+        $all_items = $this->db->getAllItems();
+        Utils::generateIconUrls($all_items, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+
         $suggestions = $this->db->getSuggestions($acom);
+        Utils::generateIconUrls($suggestions, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
@@ -179,6 +189,7 @@ class Inventeerio // name for now
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
             'suggestions' => $suggestions,
+            'all_items' => $all_items
         ));
     }
 

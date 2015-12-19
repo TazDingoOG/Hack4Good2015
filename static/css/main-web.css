@@ -3,14 +3,25 @@
 }
 
 .fontblue {
-    color: #3F51B5;
+    color: #092fb8;
 }
 
 body {
+    background: url('/static/img/sunrise_background_1920.jpg') no-repeat center center fixed;
     background-size: cover;
-    background: url('/static/img/main_background.jpg') no-repeat fixed center center;
+}
+@media(max-width: 768px) { /* version for smaller screen sizes */
+    body {
+        background: url('/static/img/sunrise_background_768.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
 }
 
 .transparent-background {
     background-color: rgba(255, 255, 255, 0.75);
+}
+
+table.link-list td {
+    font-size: 1.5em;
+    padding: 10px 5px;
 }

@@ -1,72 +1,18 @@
-$("#search").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
-    var bol = false;
-    $("#table1 tr").each(function (index) {
+// generate main items
+$(function() {
+    $("#table_content").find('img.loading-animation').remove();  // remove loading gif
+    var table1 = $("#table1");
 
-        $row = $(this);
-
-        var id = $row.find("td").eq(1).text().toLowerCase();
-
-        if (id.indexOf(value) >= 0) {
-            $row.show();
-            bol = true;
-        } else {
-            $row.hide(400);
-        }
-    });
-    if(!bol) {
-        $("#table_content").hide(400);
-    } else {
-        $("#table_content").show(400);
+    for(var i in all_requests) {
+        var item = all_requests[i];
+        var html = generateItemElement(item, true);
+        table1.append(html);
     }
 });
 
-
-$("#modal_search").on("keyup", function () {
-    var org_value = $(this).val();
-    var value = $(this).val().toLowerCase()
-    var bol = false;
-    $("#table_modal tr").each(function (index) {
-        var row = $(this);
-
-        var id = row.find("td").eq(1).text().toLowerCase();
-
-        if (id.indexOf(value) >= 0) {
-            row.show();
-            if(id == value) {
-               bol = true;
-            }
-        } else {
-            row.hide(200);
-        }
-    });
-    if(value.length > 0){
-        if(!bol){
-           $("#table-new-elem").show();
-            $("#item-row-content").html(org_value);
-        } else {
-            $("#table-new-elem").hide();
-        }
-    } else {
-        $("#table-new-elem").hide();
-    }
-});
-
-
-/** animate btn hovers **/
-$(document.body).on('mouseenter', "[data-hoverclass]", function() {
-    $(this).addClass($(this).data('hoverclass'));
-});
-$(document.body).on('mouseleave', "[data-hoverclass]", function() {
-    $(this).removeClass($(this).data('hoverclass'));
-});
-
-
-function fail(err) {
-    //alert(err);
-    console.log(err);
-    window.location.reload(); // for now, just reload (we dont have sync)
-}
+/*
+ * MODAL FOR ADDING ITEMS
+ */
 
 /** Remove items via 'x' **/
 $("#table1").on('click', '.item-checkoff button', function () {
@@ -92,6 +38,14 @@ $("#table1").on('click', '.item-checkoff button', function () {
     // TODO: add item to list in bg
     // TODO: remove item from list of items that one could add
     // -> maybe move it from the modal to the background list
+});
+
+
+// focus search
+$('#myModal').on('shown.bs.modal', function () {
+    $('#floating_button').blur();
+    $('#modal_search').focus();
+    $("#table-new-elem").hide();
 });
 
 /** Modal -> Add items via '+' **/

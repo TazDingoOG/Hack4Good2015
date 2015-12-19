@@ -195,3 +195,9 @@ body {
     display: inline-block;
     width:100%;
 }
+
+/* center loading gif */
+img.loading-animation {
+    display: block;
+    margin: 0 auto;
+}

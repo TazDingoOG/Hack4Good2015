@@ -10,7 +10,7 @@ class MyDB extends SQLite3
         $this->open(MyDB::DB_FILENAME);
     }
 
-	public function getAccommodationList()
+    public function getAccommodationList()
 	{
 		$result = $this->query("SELECT * FROM Accommodation");
 		return self::fetchAll($result);
@@ -45,7 +45,7 @@ class MyDB extends SQLite3
     public function getAccommodationFromCleanName($cn)
     {
         $statement = $this->prepare("SELECT * FROM Accommodation
-            WHERE clean_name = :cn");
+            WHERE LOWER(clean_name) = LOWER(:cn)"); // case insensitive matching
         $statement->bindValue('cn', $cn, SQLITE3_TEXT);
         $r = $statement->execute();
 
@@ -54,7 +54,8 @@ class MyDB extends SQLite3
 
     public function getAccommodationFromToken($token)
     {
-        $statement = $this->prepare("SELECT * FROM Accommodation WHERE authtoken = :token");
+        $statement = $this->prepare("SELECT * FROM Accommodation
+            WHERE authtoken = :token"); // TODO: case insensitive token?
         $statement->bindValue('token', $token, SQLITE3_TEXT);
         $r = $statement->execute();
 
@@ -68,6 +69,14 @@ class MyDB extends SQLite3
         $r = $statement->execute();
 
         return self::singleResult($r);
+    }
+
+    public function getAllItems()
+    {
+        $stmt = $this->prepare("SELECT * FROM Item");
+        $result = $stmt->execute();
+
+        return self::fetchAll($result);
     }
 
     public function getSuggestions($acom) //TODO: better suggestions
@@ -124,7 +133,7 @@ VALUES (:accom_id, :item_id)");
     public static function fetchAll($result)
     {
         $requests = array();
-        while ($req = $result->fetchArray()) { // collect all to one array
+        while ($req = $result->fetchArray(SQLITE3_ASSOC)) { // collect all to one array
             array_push($requests, $req);
         }
         return $requests;
