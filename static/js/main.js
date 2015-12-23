@@ -30,8 +30,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
         }
     }
 
-    html += '</tr>';
-    return html;
+    return html + '</tr>';
 }
 
 function initSearch(search, table, items, is_suggestions, is_editable) {
@@ -48,11 +47,11 @@ function initSearch(search, table, items, is_suggestions, is_editable) {
             if (needle != "") { // if a needle is entered, check if the item matches it
                 if (item['name'].toLowerCase().indexOf(needle) == -1)
                     continue;
-            } else if(is_suggestions && item['is_added']) // empty search - don't display added items as suggestions
+            } else if(is_suggestions && item['already_added']) // empty search - don't display added items as suggestions
                 continue;
 
             if(is_suggestions)
-                is_editable = !item['is_added']; // when dealing with suggestions, they are editable only when not already added
+                is_editable = !item['already_added']; // when dealing with suggestions, they are editable only when not already added
 
             table.append(generateItemElement(item, is_suggestions, is_editable)); // generate element
         }
@@ -61,37 +60,6 @@ function initSearch(search, table, items, is_suggestions, is_editable) {
     updateSearch(); // execute once to initialize
     search.on("input", updateSearch);
 }
-
-
-$("#modal_search").on("keyup", function () {
-    var org_value = $(this).val();
-    var value = $(this).val().toLowerCase()
-    var bol = false;
-    $("#table_modal tr").each(function (index) {
-        var row = $(this);
-
-        var id = row.find("td").eq(1).text().toLowerCase();
-
-        if (id.indexOf(value) >= 0) {
-            row.show();
-            if (id == value) {
-                bol = true;
-            }
-        } else {
-            row.hide(200);
-        }
-    });
-    if (value.length > 0) {
-        if (!bol) {
-            $("#table-new-elem").show();
-            $("#item-row-content").html(org_value);
-        } else {
-            $("#table-new-elem").hide();
-        }
-    } else {
-        $("#table-new-elem").hide();
-    }
-});
 
 /** shows a bootstrap alert at the top of #main_container
  *
