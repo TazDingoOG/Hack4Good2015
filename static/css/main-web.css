@@ -25,3 +25,7 @@ table.link-list td {
     font-size: 1.5em;
     padding: 10px 5px;
 }
+
+table.link-list {
+    max-width: 400px;
+}
