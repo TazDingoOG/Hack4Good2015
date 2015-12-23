@@ -1,5 +1,12 @@
-.centered-jumbotron {
-    margin-top: 50px;
+@media (max-width: 768px) {
+    .centered-jumbotron {
+        margin-top: 0;
+    }
+}
+@media (min-width: 767px) {
+    .centered-jumbotron {
+        margin-top: 50px;
+    }
 }
 
 .fontblue {
