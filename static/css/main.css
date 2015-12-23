@@ -79,7 +79,8 @@ body {
 
 .table > tbody > tr > td {
     vertical-align: middle;
-    line-height:4em;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .table > tbody > tr:last-child {
