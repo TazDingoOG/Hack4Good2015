@@ -1,13 +1,15 @@
 // generate main items
 $(function() {
-    $("#table_content").find('img.loading-animation').remove();  // remove loading gif
     var table1 = $("#table1");
+    var table_modal = $("#table_modal");
 
-    for(var i in all_requests) {
-        var item = all_requests[i];
-        var html = generateItemElement(item, true);
-        table1.append(html);
-    }
+    // remove loading gifs
+    table1.parent().find('img.loading-animation').remove();
+    table_modal.parent().find('img.loading-animation').remove();
+
+    // INITIALIZE SEARCH
+    initSearch($("#search"), table1, all_requests, false, true);
+    initSearch($("#modal_search"), table_modal, all_items, true, true);
 });
 
 /*
