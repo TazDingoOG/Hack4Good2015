@@ -8,8 +8,8 @@ $(function() {
     table_modal.parent().find('img.loading-animation').remove();
 
     // INITIALIZE SEARCH
-    initSearch($("#search"), table1, all_requests, false);
-    initSearch($("#modal_search"), table_modal, all_items, true);
+    initSearch($("#search"), table1, all_requests, false, true);
+    initSearch($("#modal_search"), table_modal, all_items, true, true);
 });
 
 /*

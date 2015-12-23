@@ -37,7 +37,7 @@ function initSearch(search, table, items, is_suggestions, is_editable) {
     updateSearch = function() {
         var needle = search.val().toLowerCase(); // the string to search for
 
-        // clean old one
+        // clean old ones, TODO: nice search animation (old items fading away, new ones coming in)
         table.find("tr").remove();
 
         // show new ones
