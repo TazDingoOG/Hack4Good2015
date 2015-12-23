@@ -1,12 +1,28 @@
 // generate main items
 $(function() {
-    $("#table_content").find('img.loading-animation').remove();  // remove loading gif
     var table1 = $("#table1");
+    table1.parent().find('img.loading-animation').remove();  // remove loading gif
+    // MAIN LIST
 
-    for(var i in all_requests) {
+    var i, html;
+    for(i in all_requests) {
         var item = all_requests[i];
-        var html = generateItemElement(item, true);
+        html = generateItemElement(item, false, true);
         table1.append(html);
+    }
+
+    // Modal - suggested item
+    var table_modal = $("#table_modal");
+    table_modal.parent().find('img.loading-animation').remove();
+    var count = 0;
+    for(i in all_items) {
+        if(!all_items[i]['is_added']) {
+            html = generateItemElement(all_items[i], true, true);
+            table_modal.append(html);
+            count++;
+        }
+        if(count == 7) // max X item
+            break;
     }
 });
 

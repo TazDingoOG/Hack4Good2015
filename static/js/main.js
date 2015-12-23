@@ -1,7 +1,7 @@
 /**
  * LIVE ITEM GENERATION
  */
-function generateItemElement(item, is_editable) {
+function generateItemElement(item, is_suggestion, is_editable) {
     var html = '<tr><td class="item-picture">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
@@ -10,17 +10,29 @@ function generateItemElement(item, is_editable) {
 
     html += '</td><td class="item-name">' + item['name'] + '</td>';
 
-    if (is_editable) {
-        html += '<td class="item-checkoff"> \
-                    <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
-                <span class="glyphicon glyphicon-ok"></span></button></td>';
+    if (!is_suggestion) {
+        if (is_editable) {
+            html += '<td class="item-checkoff"> \
+                        <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
+                    <span class="glyphicon glyphicon-ok"></span></button></td>';
+        }
+    } else {
+        if (is_editable) {
+            html += '<td class="item-checkoff"> \
+                <button type="button" class="btn" data-hoverclass="btn-info" \
+                    data-desc="{{ item.name }} hinzuf&uuml;gen" \
+                    value="{{ item.item_id }}"> \
+                <span class="glyphicon glyphicon-plus"></span></button></td>';
+        } else {
+            html += '<td class="item-checkoff"> \
+                <b>Bereits hinzugefügt</b>\
+                </button></td>';
+        }
     }
-    html += '</tr>';
 
+    html += '</tr>';
     return html;
 }
-
-
 
 
 /**

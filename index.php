@@ -174,15 +174,23 @@ class Inventeerio // name for now
         $all_items = $this->db->getAllItems();
         Utils::generateIconUrls($all_items, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
 
-        $suggestions = $this->db->getSuggestions($acom);
-        Utils::generateIconUrls($suggestions, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+        // generate 'is_added' variable to item array
+        foreach ($all_items as &$item) {
+            $added = false;
+            foreach($requests as $req) {
+                if($req['item_id'] == $item['item_id']) {
+                    $added = true;
+                    break;
+                }
+            }
+            $item['already_added'] = $added;
+        }
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
             'acom_name' => $acom['name'],
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
-            'suggestions' => $suggestions,
             'all_items' => $all_items
         ));
     }

@@ -6,7 +6,7 @@ $(function() {
 
     for(var i in all_requests) {
         var item = all_requests[i];
-        var html = generateItemElement(item, false);
+        var html = generateItemElement(item, fa,se, false);
         table1.append(html);
     }
 });
