@@ -1,29 +1,15 @@
 // generate main items
 $(function() {
     var table1 = $("#table1");
-    table1.parent().find('img.loading-animation').remove();  // remove loading gif
-    // MAIN LIST
-
-    var i, html;
-    for(i in all_requests) {
-        var item = all_requests[i];
-        html = generateItemElement(item, false, true);
-        table1.append(html);
-    }
-
-    // Modal - suggested item
     var table_modal = $("#table_modal");
+
+    // remove loading gifs
+    table1.parent().find('img.loading-animation').remove();
     table_modal.parent().find('img.loading-animation').remove();
-    var count = 0;
-    for(i in all_items) {
-        if(!all_items[i]['is_added']) {
-            html = generateItemElement(all_items[i], true, true);
-            table_modal.append(html);
-            count++;
-        }
-        if(count == 7) // max X item
-            break;
-    }
+
+    // INITIALIZE SEARCH
+    initSearch($("#search"), table1, all_requests, false);
+    initSearch($("#modal_search"), table_modal, all_items, true);
 });
 
 /*
