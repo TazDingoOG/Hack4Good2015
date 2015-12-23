@@ -3,22 +3,16 @@
     .navbar-form .input-group-addon {
         width: auto;
     }
-    
-    body {
-        padding-top: 70px;
-    }
 }
-@media (max-width: 767px) {
-    body {
-        padding-top: 20px;
-    }
-}
+
 .modal .modal-body {
     max-height: 420px;
     overflow-y: auto;
 }
 
-
+body {
+    padding-top: 70px;
+}
 
 
 /*

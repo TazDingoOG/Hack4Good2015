@@ -1,9 +1,13 @@
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .centered-jumbotron {
         margin-top: 0;
     }
+    body {
+        padding-top: 20px;
+    }
 }
-@media (min-width: 767px) {
+
+@media (min-width: 768px) {
     .centered-jumbotron {
         margin-top: 50px;
     }
