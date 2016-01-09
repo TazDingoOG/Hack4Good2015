@@ -1,5 +1,56 @@
+var Data = {
+    requests: all_requests,
+    items: all_items
+};
+
+function RequestList($search, $table, itemList) {
+    this.$search = $search;
+    this.$table = $table;
+    this.isEditable = false;
+
+
+    var self = this; // when the functions/methods are called from eg. an event handler, 'this' is something different, so we use self
+
+    self.getItemList = function() {
+        return Data.requests;
+    };
+
+    self.initList = function () {
+        self.updateList(); // execute once to initialize
+        self.$search.on("input", self.updateList);
+    };
+    self.updateList = function () {
+        var searchTerm = self.$search.val().toLowerCase();
+        var itemList = self.getItemList();
+
+        // clean old ones, TODO: nice search animation (old items fading away, new ones coming in) ?
+        self.$table.find("tr").remove();
+
+        // show new ones
+        for (var i = 0, len = itemList.length; i < len; i++) {
+            var item = itemList[i];
+            if (!self.shouldDisplayItem(item, searchTerm))
+                continue;
+
+            self.$table.append(self.generateElement(item)); // generate element
+        }
+    };
+
+    self.generateElement = function (item) {
+        return generateItemElement(item, false, self.isEditable);
+    };
+
+    self.shouldDisplayItem = function (item, searchTerm) {
+        if (searchTerm)
+            return item['name'].toLowerCase().indexOf(searchTerm) > -1; // if a searchTerm is entered, check if the item matches it
+        return true; // no search -> display all items
+    };
+}
+var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
+// the modalList will be defined in main-editable.js
+
 /**
- * LIVE ITEM GENERATION
+ * FUNCTIONS FOR ITEM GENERATION
  */
 function generateItemElement(item, is_suggestion, is_editable) {
     var html = '<tr><td class="item-picture">';
@@ -20,8 +71,8 @@ function generateItemElement(item, is_suggestion, is_editable) {
         if (is_editable) {
             html += '<td class="item-checkoff"> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
-                    data-desc="{{ item.name }} hinzuf&uuml;gen" \
-                    value="{{ item.item_id }}"> \
+                    data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
+                    value="' + item['item_id'] + '"> \
                 <span class="glyphicon glyphicon-plus"></span></button></td>';
         } else {
             html += '<td class="item-checkoff"> \
@@ -33,32 +84,30 @@ function generateItemElement(item, is_suggestion, is_editable) {
     return html + '</tr>';
 }
 
-function initSearch(search, table, items, is_suggestions, is_editable) {
-    updateSearch = function() {
-        var needle = search.val().toLowerCase(); // the string to search for
+function updateLists() {
+    console.log("updating list(s)...");
+    mainList.updateList();
+    if (modalList) {
+        modalList.updateList();
+    }
+}
 
-        // clean old ones, TODO: nice search animation (old items fading away, new ones coming in)
-        table.find("tr").remove();
 
-        // show new ones
-        for (var i in items) {
-            var item = items[i];
-
-            if (needle != "") { // if a needle is entered, check if the item matches it
-                if (item['name'].toLowerCase().indexOf(needle) == -1)
-                    continue;
-            } else if(is_suggestions && item['already_added']) // empty search - don't display added items as suggestions
-                continue;
-
-            if(is_suggestions)
-                is_editable = !item['already_added']; // when dealing with suggestions, they are editable only when not already added
-
-            table.append(generateItemElement(item, is_suggestions, is_editable)); // generate element
-        }
-    };
-
-    updateSearch(); // execute once to initialize
-    search.on("input", updateSearch);
+function getRequest(request_id) {
+    for (var i = 0, len = Data.requests.length; i < len; i++) {
+        var req = Data.requests[i];
+        if (req.req_id == request_id)
+            return request_id;
+    }
+    return null;
+}
+function getItem(item_id) {
+    for (var i = 0, len = Data.items.length; i < len; i++) {
+        var item = Data.items[i];
+        if (item['item_id'] == item_id)
+            return item_id;
+    }
+    return null;
 }
 
 /** shows a bootstrap alert at the top of #main_container
@@ -79,10 +128,16 @@ function show_alert(type, strong, msg) {
 }
 
 function fail(err) {
-    show_alert('danger', "Fehler", "Die Daten konnten nicht mit dem Server synchronisiert werden! Bitte versuche, die Seite neu zu laden.");
-    console.log(err);
-    //window.location.reload(); // for now, just reload (we dont have sync)
+    show_alert('danger', "Fehler", "Die Daten konnten nicht mit dem Server synchronisiert werden! Bitte versuche, die <a href='javascript:window.reload()'>Seite neu zu laden.</a>");
+    console.error(err);
 }
+
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function (from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};
 
 
 /*

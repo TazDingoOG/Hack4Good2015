@@ -3,7 +3,7 @@ require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 require_once __DIR__ . '/phpqrcode/qrlib.php';
 require_once 'utils.php';
 
-class Inventeerio // name for now
+class Inventeerio
 {
     const COOKIE_NAME = 'acom_token';
     public $twig;
@@ -50,7 +50,7 @@ class Inventeerio // name for now
             }
         } else if ($path == '/api_update') {
             require_once("api.php");
-            handle_api($this->db, $_POST);
+            handle_api($this, $this->db, $_POST);
         } else if ($path == '/liste') {
             $this->render_liste();
         } else if (strpos($path, '/a/') === 0) {
@@ -168,17 +168,14 @@ class Inventeerio // name for now
             }
         }
 
-        $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
-        Utils::generateIconUrls($requests, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
-
-        $all_items = $this->db->getAllItems();
-        Utils::generateIconUrls($all_items, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
+        $requests = $this->getAllRequests($acom['accom_id'], true);
+        $all_items = $this->getAllItems(true);
 
         // generate 'is_added' variable to item array
         foreach ($all_items as &$item) {
             $added = false;
-            foreach($requests as $req) {
-                if($req['item_id'] == $item['item_id']) {
+            foreach ($requests as $req) {
+                if ($req['item_id'] == $item['item_id']) {
                     $added = true;
                     break;
                 }
@@ -261,6 +258,22 @@ class Inventeerio // name for now
         } else {
             $this->render_accommodation($acom);
         }
+    }
+
+    function getAllRequests($accom_id, $icons_needed = true)
+    {
+        $requests = $this->db->getRequestsForAccommodation($icons_needed);
+        if ($icons_needed)
+            Utils::generateIconUrls($requests, __DIR__ . '/static/img/item_icons/', '/static/img/item_icons/');
+        return $requests;
+    }
+
+    function getAllItems($icons_needed = true)
+    {
+        $items = $this->db->getAllItems();
+        if ($icons_needed)
+            Utils::generateIconUrls($items, __DIR__ . '/static/img/item_icons/', '/static/img/item_icons/');
+        return $items;
     }
 }
 

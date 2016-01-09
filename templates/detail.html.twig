@@ -16,8 +16,6 @@
 {% endblock %}
 
 {% block scripts_bottom %}
-    <!-- main JS file - will be loaded on both pages -->
-    <script type="text/javascript" src="/static/js/main.js"></script>
 
     <!-- the rest of the scripts differ if editable or not -->
     {% if editable %}
@@ -27,12 +25,17 @@
             var all_requests = $.parseJSON('{{ requests|json_encode|raw }}');
             var all_items = $.parseJSON('{{ all_items|json_encode|raw }}');
         </script>
-        <script type="text/javascript" src="/static/js/main-editable.js"></script>
     {% else %}
         <script type="text/javascript">
             // some information from php to JS about the current page
             var all_requests = $.parseJSON('{{ requests|json_encode|raw }}');
         </script>
+    {% endif %}
+
+    <script type="text/javascript" src="/static/js/main.js"></script> <!-- main JS file - will be loaded on both pages -->
+    {% if editable %}
+        <script type="text/javascript" src="/static/js/main-editable.js"></script>
+    {% else %}
         <script type="text/javascript" src="/static/js/main-readonly.js"></script>
     {% endif %}
 
