@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
+{% use 'blocks.html.twig' %}
 
 {% block title %} {{ acom_name }} {% endblock %}
 
 {% block stylesheets %} {# add script to head #}
     <!-- Custom Theme -->
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 
     {% if editable %}
         <!-- bootstrap tour -->
@@ -14,26 +15,28 @@
 {% endblock %}
 
 {% block scripts_bottom %}
-    <script type="text/javascript">
-        // some information from php to JS about the current page
-        var clean_acom_name = '{{ clean_acom_name }}';
-    </script>
-    <!-- custom javascript -->
-    <script type="text/javascript" src="/static/js/live-search.js"></script>
-    <script>
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#floating_button').blur();
-            $('#modal_search').focus();
-            $("#table-new-elem").hide();
-        })
-    </script>
 
-    <!-- tooltip script -->
-    <script>
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-        });
-    </script>
+    <!-- the rest of the scripts differ if editable or not -->
+    {% if editable %}
+        <script type="text/javascript">
+            // some information from php to JS about the current page
+            var clean_acom_name = '{{ clean_acom_name }}';
+            var all_requests = $.parseJSON('{{ requests|json_encode|raw }}');
+            var all_items = $.parseJSON('{{ all_items|json_encode|raw }}');
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            // some information from php to JS about the current page
+            var all_requests = $.parseJSON('{{ requests|json_encode|raw }}');
+        </script>
+    {% endif %}
+
+    <script type="text/javascript" src="/static/js/main.js"></script> <!-- main JS file - will be loaded on both pages -->
+    {% if editable %}
+        <script type="text/javascript" src="/static/js/main-editable.js"></script>
+    {% else %}
+        <script type="text/javascript" src="/static/js/main-readonly.js"></script>
+    {% endif %}
 
     {% if editable %}
         <!-- bootstrap tour -->
@@ -83,20 +86,13 @@
 
 {% block body %}
     <nav class="navbar navbar-default navbar-fixed-top">
-        <a href="/" style="color:black; text-decoration: none;"><span class="glyphicon glyphicon-home" style="position: absolute; font-size: 19px; left: 8px; top: 14px"></span></a>
+        <a href="/"><span id="home-icon" class="glyphicon glyphicon-home"></span></a>
 
-        <div class="container-fluid" style="margin-left: 22px">
-
+        <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
-
-
-            <input type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
-                   id="search" autocomplete="off"/>
-
-
-            <!-- /.navbar-collapse -->
+            <input id="search" type="text" class="form-control search-input" placeholder="Suche nach Gegenst&auml;nden"
+                   autocomplete="off"/>
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
     {% if editable %}
@@ -108,6 +104,15 @@
     {% endif %}
 
     <div id="main_container" class="container">
+        <noscript>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>JavaScript ist deaktiviert!</strong>
+                Diese Seite ben&ouml;tigt Javascript f&uuml;r die Funktionalität!<br>
+                Folge diesen <a href="http://javascripton.com/de/" target="_blank">Anweisungen, um Javascript in Ihrem
+                    Browser zu aktivieren.</a>
+            </div>
+        </noscript>
         <h3>{{ acom_name }}</h3>
         {% if editable %}
             <button class="btn btn-info guided-tour-button" id="help-button" onclick="startGuidedTour()">
@@ -117,28 +122,7 @@
 
         <div id="table_content">
             <table class="table" id="table1">
-                {% for request in requests %}
-                    <tr>
-                        <td class="item-picture">
-                            {% if request.image_url %}
-                                <img src="{{ request.image_url }}" class="img-rounded">
-                            {% else %}
-                                <span class="glyphicon glyphicon-gift"></span>
-                            {% endif %}
-                        </td>
-
-                        <td class="item-name">{{ request.name }}</td>
-
-                        {% if editable %}
-                        <td class="item-checkoff">
-                            <button class="btn" data-hoverclass="btn-success"
-                                    value="{{ request.req_id }}">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
+                {{ block('loading_animation') }} {# The items will be generated by Javascript later #}
             </table>
         </div>
 
@@ -163,64 +147,8 @@
 
                         <div class="modal-body">
                             <table class="table" id="table_modal">
-                                {% for item in suggestions %}
-                                    <tr>
-                                        <td class="item-picture">
-                                            {% if item.image_url %}
-                                                <img src="{{ item.image_url }}" class="img-rounded">
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-gift"></span>
-                                            {% endif %}
-                                        </td>
-                                        <td class="item-name">{{ item.name }}</td>
-
-                                        <td class="item-checkoff">
-                                            <button type="button" class="btn" data-hoverclass="btn-info"
-                                                    data-desc="{{ item.name }} hinzuf&uuml;gen"
-                                                    value="{{ item.item_id }}">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                {% for request in requests %}
-                                    <tr>
-                                        <td class="item-picture">
-                                            {% if request.image_url %}
-                                                <img src="{{ request.image_url }}" class="img-rounded">
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-gift"></span>
-                                            {% endif %}
-                                        </td>
-
-                                        <td class="item-name">{{ request.name }}</td>
-
-                                        <td class="item-checkoff">
-                                            <b>Bereits hinzugefügt</b>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                {{ block('loading_animation') }} {# The items will be generated by Javascript later #}
                             </table>
-
-                            <div id="table-new-elem">
-                                <h4>Neues Item erstellen:</h4>
-                                <table class="table  table-bottom new-item" id="new-item-table">
-                                    <tr id="row-content">
-                                        <td class="item-picture">
-                                            <span class="glyphicon glyphicon-gift"></span>
-                                        </td>
-                                        <td class="item-name" id="item-row-content"></td>
-
-                                        <td class="item-checkoff">
-                                            <button type="button" class="btn btn-success"
-                                                    data-desc="neues Item hinzuf&uuml;gen"
-                                                    value="-1">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>

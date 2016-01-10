@@ -4,6 +4,7 @@
         width: auto;
     }
 }
+
 .modal .modal-body {
     max-height: 420px;
     overflow-y: auto;
@@ -13,6 +14,37 @@ body {
     padding-top: 70px;
 }
 
+
+/*
+ * NAVBAR
+ */
+.navbar a {
+    color: black;
+    text-decoration: none;
+}
+
+#home-icon {
+    position: absolute;
+    font-size: 19px;
+    left: 8px;
+    top: 14px;
+}
+.navbar div.container-fluid {
+    margin-left: 22px;
+}
+
+.search-form {
+    text-align: center;
+}
+
+#search {
+    margin-top: 7px;
+    width: 100%;
+}
+
+.search-input {
+    text-align: center;
+}
 
 .floating-add-button {
     position: fixed;
@@ -35,23 +67,6 @@ body {
     margin-bottom: 50px;
 }
 
-.navbar-location {
-
-}
-
-.search-form {
-    text-align: center;
-}
-
-#search {
-    margin-top: 7px;
-    width: 100%;
-}
-
-.search-input {
-    text-align: center;
-}
-
 .container > h3 {
     display: inline-block;
 }
@@ -66,7 +81,8 @@ body {
 
 .table > tbody > tr > td {
     vertical-align: middle;
-    line-height:4em;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .table > tbody > tr:last-child {
@@ -153,10 +169,6 @@ body {
 }
 
 .item-name {
-    font-size: 1.5em;
-}
-
-.item-name {
     font-size: 1.2em;
 }
 
@@ -194,4 +206,14 @@ body {
 .register-form {
     display: inline-block;
     width:100%;
+}
+
+/* center loading gif */
+img.loading-animation {
+    display: block;
+    margin: 0 auto;
+}
+.btn > img.loading-animation {
+    width: 1em;
+    height: 1em;
 }

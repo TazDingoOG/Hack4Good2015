@@ -1,5 +1,16 @@
-.centered-jumbotron {
-    margin-top: 50px;
+@media (max-width: 767px) {
+    .centered-jumbotron {
+        margin-top: 0;
+    }
+    body {
+        padding-top: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .centered-jumbotron {
+        margin-top: 50px;
+    }
 }
 
 .fontblue {
@@ -25,4 +36,8 @@ body {
 table.link-list td {
     font-size: 1.5em;
     padding: 10px 5px;
+}
+
+table.link-list {
+    max-width: 400px;
 }

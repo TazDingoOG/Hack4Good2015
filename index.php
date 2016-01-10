@@ -3,7 +3,7 @@ require_once __DIR__ . '/vendor/autoload.php'; // composer autoloader
 require_once __DIR__ . '/phpqrcode/qrlib.php';
 require_once 'utils.php';
 
-class Inventeerio // name for now
+class Inventeerio
 {
     const COOKIE_NAME = 'acom_token';
     public $twig;
@@ -50,16 +50,16 @@ class Inventeerio // name for now
             }
         } else if ($path == '/api_update') {
             require_once("api.php");
-            handle_api($this->db, $_POST);
+            handle_api($this, $this->db, $_POST);
         } else if ($path == '/liste') {
             $this->render_liste();
         } else if (strpos($path, '/a/') === 0) {
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
-		} else if (strpos($path, '/qr/') === 0) {
+        } else if (strpos($path, '/qr/') === 0) {
             $token = substr($path, 4);
-			$this->qr($token);
+            $this->qr($token);
         } else if (strpos($path, '/print/') === 0) {
             $token = substr($path, 7);
             $this->print_qr($token);
@@ -77,16 +77,16 @@ class Inventeerio // name for now
         return $host;
     }
 
-	//this function creates the qr code for a given id as a png image
-	function qr($id)
-	{
-		$codeText = $this->getHostString() . '/a/' . $id;
+    //this function creates the qr code for a given id as a png image
+    function qr($id)
+    {
+        $codeText = $this->getHostString() . '/a/' . $id;
 
-		QRcode::png($codeText, false, null, 10);
-	}
+        QRcode::png($codeText, false, null, 10);
+    }
 
-	//this function is responsible for creating the printable page that
-	//containsthe qr code, not the qr code itself
+    //this function is responsible for creating the printable page that
+    //containsthe qr code, not the qr code itself
     function print_qr($id)
     {
         //check if the id is benevolent
@@ -117,15 +117,16 @@ class Inventeerio // name for now
         exit;
     }
 
-	private function generateRandomString($length = 10) {
-		$characters = 'abcdefghijklmnopqrstuvwxyz';
-		$charactersLength = strlen($characters);
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, $charactersLength - 1)];
-		}
-		return $randomString;
-	}
+    private function generateRandomString($length = 10)
+    {
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     function handle_registration_post()
     {
@@ -168,19 +169,16 @@ class Inventeerio // name for now
             }
         }
 
-        $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
-        Utils::generateIconUrls($requests, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
-
-        $suggestions = $this->db->getSuggestions($acom);
-        Utils::generateIconUrls($suggestions, __DIR__.'/static/img/item_icons/', '/static/img/item_icons/');
-
+        $requests = $this->getAllRequests($acom['accom_id'], true);
+        $all_items = $this->getAllItems(true);
+        Utils::generateAlreadyAddedProp($all_items, $requests);
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
             'acom_name' => $acom['name'],
             'clean_acom_name' => $acom['clean_name'],
             'requests' => $requests,
-            'suggestions' => $suggestions,
+            'all_items' => $all_items
         ));
     }
 
@@ -231,14 +229,14 @@ class Inventeerio // name for now
         if ($acom === false) {
             $this->render_404();
         } else {
-			$requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
-			$items = array();
-			foreach ($requests as $request) {
-				$items[] = $request['name'];
-			}
-			//name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
-			$first = array($acom['name'],$acom['addr'],$acom['plz'],$acom['telnr'],$acom['email'],"Das hier sind eventuell noch Testdaten. Bitte nur aus dem Haus gehen, wenn ihr wirklich sicher seid, dass hier eine Unterkunft ist","","","","12",join('|',$items));
-			echo join(',',$first);
+            $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
+            $items = array();
+            foreach ($requests as $request) {
+                $items[] = $request['name'];
+            }
+            //name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
+            $first = array($acom['name'], $acom['addr'], $acom['plz'], $acom['telnr'], $acom['email'], "Das hier sind eventuell noch Testdaten. Bitte nur aus dem Haus gehen, wenn ihr wirklich sicher seid, dass hier eine Unterkunft ist", "", "", "", "12", join('|', $items));
+            echo join(',', $first);
         }
     }
 
@@ -250,6 +248,22 @@ class Inventeerio // name for now
         } else {
             $this->render_accommodation($acom);
         }
+    }
+
+    function getAllRequests($accom_id, $icons_needed = true)
+    {
+        $requests = $this->db->getRequestsForAccommodation($icons_needed);
+        if ($icons_needed)
+            Utils::generateIconUrls($requests, __DIR__ . '/static/img/item_icons/', '/static/img/item_icons/');
+        return $requests;
+    }
+
+    function getAllItems($icons_needed = true)
+    {
+        $items = $this->db->getAllItems();
+        if ($icons_needed)
+            Utils::generateIconUrls($items, __DIR__ . '/static/img/item_icons/', '/static/img/item_icons/');
+        return $items;
     }
 }
 
