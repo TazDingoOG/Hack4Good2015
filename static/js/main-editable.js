@@ -1,7 +1,10 @@
-// this is a child prototype of RequestList, it's kindof like a child class...
-// explained here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
-// it's pretty fucking complicated, but simplifies the process of adding functionality to the item lists. (imho)
-var modalList;
+/**
+ * this whole SuggestionList thing is a child prototype of RequestList(from main.js), it's kind of like a child class...
+ * explained here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
+ *
+ * it's pretty complicated, but simplifies the process of adding functionality to the item lists. (imho)
+ */
+var modalList; // declare variable for later
 SuggestionList = function ($search, $table, itemList) {
     // call the parent constructor
     RequestList.call(this, $search, $table, itemList);
@@ -9,7 +12,7 @@ SuggestionList = function ($search, $table, itemList) {
 
     var self = this; // see RequestList for explanation
 
-    self.getItemList = function() {
+    self.getItemList = function () {
         return Data.items;
     };
 
@@ -24,14 +27,48 @@ SuggestionList = function ($search, $table, itemList) {
         var editable = !item['already_added']; // suggestions they are only editable(=add-able) when not already added
         return generateItemElement(item, true, editable);
     };
+
+    self.parent_updateList = self.updateList; // save overridden function
+    self.updateList = function () {
+        self.parent_updateList(); // call parent function
+        var searchTerm = self.$search.val();
+
+        /**
+         * We add the item with id=-1 to the list, and then add the .new-item class,
+         * and btn-success to the button
+         */
+        var tbody = self.$table.find('tbody') || self.$table;
+        if (searchTerm.length) {
+            // check if that item already exists
+            for (var i = 0, len = Data.items.length; i < len; i++) {
+                if (Data.items[i]['name'].toLowerCase() == searchTerm.toLowerCase())
+                    return;
+            }
+
+            var newHtml = generateItemElement({
+                item_id: -1,
+                name: searchTerm
+                //TODO: icon url for new-item ?
+            }, true, true);
+
+            var newItem = $(newHtml);
+            newItem.addClass('new-item')
+                .find('button').addClass('btn-success');
+
+            tbody.append(newItem);
+        }
+    };
 };
 // Create a Student.prototype object that inherits from Person.prototype.
 SuggestionList.prototype = Object.create(RequestList.prototype);
 // Set the "constructor" property to refer to Student
 SuggestionList.prototype.constructor = SuggestionList;
+// those two statements are explained in the link above, too...
 
 
-// generate main items
+/**
+ * Init lists and remove loading animations when page is ready.
+ */
 $(function () {
     var table_modal = $("#table_modal");
 
@@ -48,7 +85,10 @@ $(function () {
 });
 
 /*
- * MODAL FOR ADDING ITEMS
+ * Handle the result from an API call:
+ * - show error if needed
+ * - update data from api result
+ * - update item lists
  */
 function handleApiResult(result) {
     try {
@@ -81,36 +121,31 @@ table1.on('click', '.item-checkoff button', function () {
 
     $.post('/api_update', {
         action: 'delete',
-        clean_acom_name: clean_acom_name, // we got that from the little javascript inserted into the body by php
+        clean_acom_name: Data.clean_acom_name, // we got that from the little javascript inserted into the body by php
         request_id: request_id
     }).success(function (data) {
         handleApiResult(data);
     }).fail(function (err) {
         fail(err);
     });
-
-    // TODO: add item to list in bg
-    // TODO: remove item from list of items that one could add
-    // -> maybe move it from the modal to the background list
 });
 
 
-searchModal = $('#myModal');
-searchModal.on('shown.bs.modal', function () { // focus search
+/** focus search on modal open**/
+$searchModal = $('#myModal');
+$searchModal.on('shown.bs.modal', function () { // focus search
     $('#floating_button').blur();
-    $('#modal_search').focus();
-    $("#table-new-elem").hide();
+    $searchModal.find('#modal_search').focus();
 });
 
 /** Modal -> Add items via '+' **/
-searchModal.on('click', '.item-checkoff button', function () {
+$searchModal.on('click', '.item-checkoff button', function () {
     var item_id = $(this).val();
     var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
-    console.log()
     $.post('/api_update', {
         action: 'add',
-        clean_acom_name: clean_acom_name, // we got that from the little javascript inserted into the body by php
+        clean_acom_name: Data.clean_acom_name, // we got that from the little javascript inserted into the body by php
         item_id: item_id,
         item_name: item_name
     }).success(function (data) {
@@ -118,8 +153,4 @@ searchModal.on('click', '.item-checkoff button', function () {
     }).fail(function (err) {
         fail(err);
     });
-
-    // TODO: add item to list in bg
-    // TODO: remove item from list of items that one could add
-    // -> maybe move it from the modal to the background list
 });

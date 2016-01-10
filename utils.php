@@ -43,6 +43,21 @@ class Utils
             }
         }
     }
+
+    public static function generateAlreadyAddedProp(&$all_items, $requests)
+    {
+        // generate 'is_added' variable to item array
+        foreach ($all_items as &$item) {
+            $added = false;
+            foreach ($requests as $req) {
+                if ($req['item_id'] == $item['item_id']) {
+                    $added = true;
+                    break;
+                }
+            }
+            $item['already_added'] = $added;
+        }
+    }
 }
 
 ?>

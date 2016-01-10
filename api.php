@@ -2,10 +2,21 @@
 
 require_once('db.php');
 
+/**
+ * for exceptions thrown from the API (which should be sent to the client)
+ */
 class ApiException extends \Exception
 {
 }
 
+/**
+ * Handle a call to the API, and print out a JSON array as result.
+ * (which should be the only thing to print out)
+ *
+ * @param Inventeerio $main
+ * @param MyDB $db
+ * @param $post - POST data
+ */
 function handle_api(Inventeerio $main, MyDB $db, $post)
 {
     $result = array(
@@ -77,8 +88,13 @@ function handle_api(Inventeerio $main, MyDB $db, $post)
 
 
         // add new data to result
-        $result['requests'] = $main->getAllRequests($acom['accom_id'], true);
-        $result['items'] = $main->getAllItems(true);
+        $requests = $main->getAllRequests($acom['accom_id'], true);
+        $items = $main->getAllItems(true);
+        Utils::generateAlreadyAddedProp($items, $requests);
+
+        $result['requests'] = $requests;
+        $result['items'] = $items;
+
 
     } catch (APIException $e) {
         $result['error'] = $e->getMessage();

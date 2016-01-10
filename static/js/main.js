@@ -1,6 +1,11 @@
+/**
+ * Store that data we got from php in a explictly declared variable
+ * -> only use these variables, that way it's easier to change the way the data is gathered later.
+ */
 var Data = {
     requests: all_requests,
-    items: all_items
+    items: all_items,
+    clean_acom_name: clean_acom_name
 };
 
 function RequestList($search, $table, itemList) {

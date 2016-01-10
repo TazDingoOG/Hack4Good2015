@@ -170,18 +170,7 @@ class Inventeerio
 
         $requests = $this->getAllRequests($acom['accom_id'], true);
         $all_items = $this->getAllItems(true);
-
-        // generate 'is_added' variable to item array
-        foreach ($all_items as &$item) {
-            $added = false;
-            foreach ($requests as $req) {
-                if ($req['item_id'] == $item['item_id']) {
-                    $added = true;
-                    break;
-                }
-            }
-            $item['already_added'] = $added;
-        }
+        Utils::generateAlreadyAddedProp($all_items, $requests);
 
         echo $this->twig->render('detail.html.twig', array(
             'editable' => $editable,
