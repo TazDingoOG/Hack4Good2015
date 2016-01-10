@@ -130,7 +130,7 @@ function show_alert(type, strong, msg) {
 }
 
 function fail(err) {
-    show_alert('danger', "Fehler", "Die Daten konnten nicht mit dem Server synchronisiert werden! Bitte versuche, die <a href='javascript:window.reload()'>Seite neu zu laden.</a>");
+    show_alert('danger', "Fehler", "Die Daten konnten nicht mit dem Server synchronisiert werden! Bitte versuche, die <a href='javascript:window.location.reload()'>Seite neu zu laden.</a>");
     console.error(err);
 }
 
