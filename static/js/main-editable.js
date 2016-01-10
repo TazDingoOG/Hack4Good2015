@@ -103,12 +103,17 @@ function handleApiResult(result) {
 
         if (json['requests'])
             Data.requests = json['requests'];
-        else
+        else {
             console.error("no 'requests' found in API result, can't update!");
+            return;
+        }
+
         if (json['items'])
             Data.items = json['items'];
-        else
+        else {
             console.error("no 'items' found in API result, can't update!");
+            return;
+        }
 
         // update lists
         updateLists();
