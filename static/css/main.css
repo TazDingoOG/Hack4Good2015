@@ -172,6 +172,14 @@ body {
     font-size: 1.2em;
 }
 
+.item-discription {
+    max-width: 500px;
+}
+
+.item-hidden {
+    display: none;
+}
+
 .item-timer {
     text-align: center;
 }
