@@ -213,3 +213,7 @@ img.loading-animation {
     display: block;
     margin: 0 auto;
 }
+.btn > img.loading-animation {
+    width: 1em;
+    height: 1em;
+}

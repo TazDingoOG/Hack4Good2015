@@ -122,19 +122,35 @@ function handleApiResult(result) {
     }
 }
 
+function setButtonLoading($btn, flag) {
+    if (flag) {
+        $btn.children().hide();
+        $btn.append('<img class="loading-animation" src="/static/img/loading-animation.gif">');
+    } else {
+        $btn.children('.loading-animation').remove();
+        $btn.children().show();
+    }
+}
+
 /** Remove items via checkoff-button **/
 var table1 = $("#table1");
 table1.on('click', '.item-checkoff button', function () {
-    var request_id = $(this).val();
+    $this = $(this);
+    // show loading animation in button
+    setButtonLoading($this, true);
+
+    var request_id = $this.val();
 
     $.post('/api_update', {
         action: 'delete',
         clean_acom_name: Data.clean_acom_name, // we got that from the little javascript inserted into the body by php
         request_id: request_id
-    }).success(function (data) {
+    }).done(function (data) {
         handleApiResult(data);
     }).fail(function (err) {
         fail(err);
+    }).always(function() {
+        setButtonLoading($this, false);
     });
 });
 
@@ -148,17 +164,23 @@ $searchModal.on('shown.bs.modal', function () { // focus search
 
 /** Modal -> Add items via '+' **/
 $searchModal.on('click', '.item-checkoff button', function () {
-    var item_id = $(this).val();
-    var item_name = $(this).parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
+    $this = $(this);
+    // show loading animation in button
+    setButtonLoading($this, true);
+
+    var item_id = $this.val();
+    var item_name = $this.parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
     $.post('/api_update', {
         action: 'add',
         clean_acom_name: Data.clean_acom_name, // we got that from the little javascript inserted into the body by php
         item_id: item_id,
         item_name: item_name
-    }).success(function (data) {
+    }).done(function (data) {
         handleApiResult(data);
     }).fail(function (err) {
         fail(err);
+    }).always(function() {
+        setButtonLoading($this, false);
     });
 });
