@@ -57,9 +57,9 @@ class Inventeerio
             $token = substr($path, 3); // remove the '/a/'
 
             $this->handle_token($token);
-		} else if (strpos($path, '/qr/') === 0) {
+        } else if (strpos($path, '/qr/') === 0) {
             $token = substr($path, 4);
-			$this->qr($token);
+            $this->qr($token);
         } else if (strpos($path, '/print/') === 0) {
             $token = substr($path, 7);
             $this->print_qr($token);
@@ -77,16 +77,16 @@ class Inventeerio
         return $host;
     }
 
-	//this function creates the qr code for a given id as a png image
-	function qr($id)
-	{
-		$codeText = $this->getHostString() . '/a/' . $id;
+    //this function creates the qr code for a given id as a png image
+    function qr($id)
+    {
+        $codeText = $this->getHostString() . '/a/' . $id;
 
-		QRcode::png($codeText, false, null, 10);
-	}
+        QRcode::png($codeText, false, null, 10);
+    }
 
-	//this function is responsible for creating the printable page that
-	//containsthe qr code, not the qr code itself
+    //this function is responsible for creating the printable page that
+    //containsthe qr code, not the qr code itself
     function print_qr($id)
     {
         //check if the id is benevolent
@@ -117,15 +117,16 @@ class Inventeerio
         exit;
     }
 
-	private function generateRandomString($length = 10) {
-		$characters = 'abcdefghijklmnopqrstuvwxyz';
-		$charactersLength = strlen($characters);
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, $charactersLength - 1)];
-		}
-		return $randomString;
-	}
+    private function generateRandomString($length = 10)
+    {
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     function handle_registration_post()
     {
@@ -228,14 +229,14 @@ class Inventeerio
         if ($acom === false) {
             $this->render_404();
         } else {
-			$requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
-			$items = array();
-			foreach ($requests as $request) {
-				$items[] = $request['name'];
-			}
-			//name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
-			$first = array($acom['name'],$acom['addr'],$acom['plz'],$acom['telnr'],$acom['email'],"Das hier sind eventuell noch Testdaten. Bitte nur aus dem Haus gehen, wenn ihr wirklich sicher seid, dass hier eine Unterkunft ist","","","","12",join('|',$items));
-			echo join(',',$first);
+            $requests = $this->db->getRequestsForAccommodation($acom['accom_id']);
+            $items = array();
+            foreach ($requests as $request) {
+                $items[] = $request['name'];
+            }
+            //name,adresse,plz,telnr,verantwortlicher,annahmezeitraum,website,anz helfer, gueltigkeit in stunden
+            $first = array($acom['name'], $acom['addr'], $acom['plz'], $acom['telnr'], $acom['email'], "Das hier sind eventuell noch Testdaten. Bitte nur aus dem Haus gehen, wenn ihr wirklich sicher seid, dass hier eine Unterkunft ist", "", "", "", "12", join('|', $items));
+            echo join(',', $first);
         }
     }
 
