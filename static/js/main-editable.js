@@ -1,3 +1,6 @@
+Data.items = all_items;
+Data.clean_acom_name = clean_acom_name;
+
 /**
  * this whole SuggestionList thing is a child prototype of RequestList(from main.js), it's kind of like a child class...
  * explained here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance

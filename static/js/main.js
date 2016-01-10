@@ -3,9 +3,7 @@
  * -> only use these variables, that way it's easier to change the way the data is gathered later.
  */
 var Data = {
-    requests: all_requests,
-    items: all_items,
-    clean_acom_name: clean_acom_name
+    requests: all_requests
 };
 
 function RequestList($search, $table, itemList) {
@@ -17,9 +15,8 @@ function RequestList($search, $table, itemList) {
     var self = this; // when the functions/methods are called from eg. an event handler, 'this' is something different, so we use self
 
     self.getItemList = function() {
-        return Data.requests;
+        return Data.requests; // can't store as a variable, because if Data.requests changes, our variable wouldn't be updated
     };
-
     self.initList = function () {
         self.updateList(); // execute once to initialize
         self.$search.on("input", self.updateList);
