@@ -58,32 +58,37 @@ function generateItemElement(item, is_suggestion, is_editable) {
     //TODO: change to array entry that came from server
     var discription = 'Discription placeholder Lorem ipsum dolor sit amet,<br/> consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem <br/> ipsum dolor sit amet.';
 
-    var colDistribution = [1,3,7,1];
-    var html = '<tr><td class="item-picture col-md-' + colDistribution[0] + '">';
+    var colMDdistribution = [1,2,8,1];
+    var colXSdistribution = [1,4,6,1];
+    var html = '<tr><td class="item-picture col-md-' + colMDdistribution[0] + ' col-xs-' + colXSdistribution[0] + '">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
     else
         html += '<span class="glyphicon glyphicon-gift"></span>';
 
-    html += '</td><td class="item-name col-md-' + colDistribution[1] + '">' + item['name'] + '</td>';
-
-    html += '<td id="td-description" class="col-md-' + colDistribution[2] + '"><div class="item-description">' + discription + '</div></td>';
-
     if (!is_suggestion) {
+        /* Differend col-md-X and col-xs-Y properties */
+        html += '</td><td class="item-name col-md-' + colMDdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
+        html += '<td id="td-description" class="col-md-' + colMDdistribution[2] + ' col-xs-' + colXSdistribution[2] + '""><div class="item-description">' + discription + '</div></td>';
+
         if (is_editable) {
-            html += '<td class="item-checkoff col-md-1"> \
+            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] +' col-xs-' + colXSdistribution[3] + '"> \
                         <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
                     <span class="glyphicon glyphicon-ok"></span></button></td>';
         }
     } else {
+        /* Differend col-md-X and col-xs-Y properties */
+        html += '</td><td class="item-name col-md-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
+        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + '""><div class="item-description">' + discription + '</div></td>';
+
         if (is_editable) {
-            html += '<td class="item-checkoff col-md-' + colDistribution[3] + '"> \
+            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
                     data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
                     value="' + item['item_id'] + '"> \
                 <span class="glyphicon glyphicon-plus"></span></button></td>';
         } else {
-            html += '<td class="item-checkoff col-md-' + colDistribution[3] + '"> \
+            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
                 <b>Bereits hinzugefügt</b>\
                 </button></td>';
         }
