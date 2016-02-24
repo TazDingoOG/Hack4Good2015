@@ -174,6 +174,7 @@ class Inventeerio
         Utils::generateAlreadyAddedProp($all_items, $requests);
 
         echo $this->twig->render('detail.html.twig', array(
+            'embedded' => (isset($_GET['iframe']) ? true : false),
             'editable' => $editable,
             'acom_name' => $acom['name'],
             'clean_acom_name' => $acom['clean_name'],
