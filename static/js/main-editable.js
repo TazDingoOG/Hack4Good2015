@@ -184,3 +184,59 @@ $searchModal.on('click', '.item-checkoff button', function () {
         setButtonLoading($this, false);
     });
 });
+
+/* discription conent */
+var mapTable1 = {};
+
+/* expands the item description */
+table1.on('click', '.item-description', function () {
+    $this = $(this);
+    if (mapTable1[$this] == true) {
+        $this.addClass("chop");
+        mapTable1[$this] = false;
+    } else {
+        mapTable1[$this] = true;
+        $this.removeClass("chop");
+    }
+});
+
+/* clsoes the given .item-description div */
+function closeTextarea() {
+    var div = $("#textarea-input").parent();
+
+    /* information to send */
+    var text = $("#textarea-input").val();
+    var itemId = div.parents("tr").children(".item-checkoff").children("button").val();
+    var item_name = $this.parents("tr").children(".item-name").text();
+
+    div.text(text);
+    div.addClass("chop");
+
+    //TODO: send text to server, update description
+}
+
+/* opens the given .item-description div */
+function openTextarea(div) {
+    $this.removeClass("chop");
+    var html = $this.html().replace(/<br>/g, "\n");
+    $this.html('<textarea class="form-control" rows=5 id="textarea-input">' + html + '</textarea>');
+}
+
+/* if the user clicks on the item-description in modal search */
+$searchModal.on('click', '#td-description', function () {
+    $this = $(this).children('.item-description');
+
+    /* pls manu don't hate me, but this ugly as me in the morning */
+    if (!$this.children().is("textarea")) {
+        /* other element is textarea */
+        closeTextarea();
+        openTextarea($this);
+    }
+});
+
+/* close textare if the user clicks outside the textarea */
+$(document).click(function(event) {
+    if ( !$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('#td-description')) {
+        closeTextarea($('#textarea-input').parent());
+    }
+});

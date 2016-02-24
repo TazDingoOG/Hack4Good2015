@@ -186,7 +186,12 @@ body {
     font-size: 1.2em;
 }
 
-.item-description {
+#td-description {
+    /* curser properties */
+    cursor:pointer;
+}
+
+.chop {
     /* chopping */
     display: block;
     display: -webkit-box;
@@ -194,8 +199,6 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* curser properties */
-    cursor:pointer
 }
 
 .item-hidden {

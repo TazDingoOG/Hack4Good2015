@@ -58,7 +58,7 @@ var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
  */
 function generateItemElement(item, is_suggestion, is_editable) {
     //TODO: change to array entry that came from server
-    var discription = 'Discription placeholder Lorem ipsum dolor sit amet,<br/> consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem <br/> ipsum dolor sit amet.';
+    var discription = 'Menge 5 Stück <br> am besten in Blau.<br> und klein.';
 
     var colMDdistribution = [1,2,8,1];
     var colXSdistribution = [1,4,5,2];
@@ -71,7 +71,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
     if (!is_suggestion) {
         /* Differend col-md-X and col-xs-Y properties */
         html += '</td><td class="item-name col-md-' + colMDdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
-        html += '<td id="td-description" class="col-md-' + colMDdistribution[2] + ' col-xs-' + colXSdistribution[2] + '""><div class="item-description">' + discription + '</div></td>';
+        html += '<td id="td-description" class="col-md-' + colMDdistribution[2] + ' col-xs-' + colXSdistribution[2] + '""><div class="item-description chop">' + discription + '</div></td>';
 
         if (is_editable) {
             html += '<td class="item-checkoff col-md-' + colMDdistribution[3] +' col-xs-' + colXSdistribution[3] + '"> \
@@ -81,7 +81,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
     } else {
         /* Differend col-md-X and col-xs-Y properties */
         html += '</td><td class="item-name col-md-' + colXSdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
-        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + ' col-xs-' + colXSdistribution[2] + '"><div class="item-description">' + discription + '</div></td>';
+        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + ' col-xs-' + colXSdistribution[2] + '"><div class="item-description chop">' + discription + '</div></td>';
 
         if (is_editable) {
             html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
@@ -173,4 +173,3 @@ $(document).ready(function () {
     $('[data-tooltip="tooltip"]').tooltip();
 });
 
-var expaned = new Map();
