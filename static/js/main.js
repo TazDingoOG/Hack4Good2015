@@ -22,7 +22,9 @@ function RequestList($search, $table, itemList) {
         self.$search.on("input", self.updateList);
     };
     self.updateList = function () {
-        var searchTerm = self.$search.val().toLowerCase();
+        // the embedded version of the page doesn't have a search bar
+        var searchTerm = (self.$search.val() === undefined) ?
+            "" : self.$search.val().toLowerCase();
         var itemList = self.getItemList();
 
         // clean old ones, TODO: nice search animation (old items fading away, new ones coming in) ?

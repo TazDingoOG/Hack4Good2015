@@ -19,7 +19,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 
-<body>
+<body {% if embedded %}style="padding-top: initial"{% endif %}>
 
 {% block body %}
     BODY
