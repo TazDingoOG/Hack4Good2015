@@ -59,7 +59,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
     var discription = 'Discription placeholder Lorem ipsum dolor sit amet,<br/> consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem <br/> ipsum dolor sit amet.';
 
     var colMDdistribution = [1,2,8,1];
-    var colXSdistribution = [1,4,6,1];
+    var colXSdistribution = [1,4,5,2];
     var html = '<tr><td class="item-picture col-md-' + colMDdistribution[0] + ' col-xs-' + colXSdistribution[0] + '">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
@@ -78,8 +78,8 @@ function generateItemElement(item, is_suggestion, is_editable) {
         }
     } else {
         /* Differend col-md-X and col-xs-Y properties */
-        html += '</td><td class="item-name col-md-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
-        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + '""><div class="item-description">' + discription + '</div></td>';
+        html += '</td><td class="item-name col-md-' + colXSdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
+        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + ' col-xs-' + colXSdistribution[2] + '"><div class="item-description">' + discription + '</div></td>';
 
         if (is_editable) {
             html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
