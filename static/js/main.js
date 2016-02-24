@@ -34,7 +34,7 @@ function RequestList($search, $table, itemList) {
             if (!self.shouldDisplayItem(item, searchTerm))
                 continue;
 
-            self.$table.append(self.generateElement(item)); // generate element
+            self.$table.append(self.generateElement(item)); // generate elemet
         }
     };
 
@@ -56,69 +56,40 @@ var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
  */
 function generateItemElement(item, is_suggestion, is_editable) {
     //TODO: change to array entry that came from server
-    var discription = 'Discription placeholder Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+    var discription = 'Discription placeholder Lorem ipsum dolor sit amet,<br/> consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem <br/> ipsum dolor sit amet.';
 
-    var html = '<tr><td class="item-picture">';
+    var colDistribution = [1,3,7,1];
+    var html = '<tr><td class="item-picture col-md-' + colDistribution[0] + '">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
     else
         html += '<span class="glyphicon glyphicon-gift"></span>';
 
-    html += '</td><td class="item-name">' + item['name'] + '</td>';
+    html += '</td><td class="item-name col-md-' + colDistribution[1] + '">' + item['name'] + '</td>';
 
-    discriptionPreview = cut(discription);
-    html += '<td id="td-discription" class="item-discription"><div id="item-discription-preview">' + discriptionPreview + '</div>'
-        +'<div id="item-discription" class="item-hidden">' + discription + '</div></td>';
+    html += '<td id="td-description" class="col-md-' + colDistribution[2] + '"><div class="item-description">' + discription + '</div></td>';
 
     if (!is_suggestion) {
         if (is_editable) {
-            html += '<td class="item-checkoff"> \
+            html += '<td class="item-checkoff col-md-1"> \
                         <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
                     <span class="glyphicon glyphicon-ok"></span></button></td>';
         }
     } else {
         if (is_editable) {
-            html += '<td class="item-checkoff"> \
+            html += '<td class="item-checkoff col-md-' + colDistribution[3] + '"> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
                     data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
                     value="' + item['item_id'] + '"> \
                 <span class="glyphicon glyphicon-plus"></span></button></td>';
         } else {
-            html += '<td class="item-checkoff"> \
+            html += '<td class="item-checkoff col-md-' + colDistribution[3] + '"> \
                 <b>Bereits hinzugefügt</b>\
                 </button></td>';
         }
     }
 
     return html + '</tr>';
-}
-
-/*
-* Cuts the given string to a value depending to the screen width
-*/
-function cut(string) {
-    var cutTo = 97; //default
-    var width = $(document).width();
-    if(width < 1200) {
-        cutTo = 77;
-    }
-    if(width < 992) {
-        cutTo = 57;
-    }
-    if(width<660) {
-        cutTo = 37;
-    }
-    if(width<550) {
-        cutTo= 20;
-    }
-    if(width<426) {
-        cutTo = 0;
-    }
-    var result = string;
-    if(result.length >= cutTo) {
-        result = result.substring(0,cutTo) + '...';
-    }
-    return result;
 }
 
 function updateLists() {
@@ -196,15 +167,3 @@ $(document).ready(function () {
 });
 
 var expaned = new Map();
-$("#table1").on("click","#td-discription", function(){
-    if(expaned[$(this)] == null || expaned[$(this)] == undefined || expaned[$(this)] == false) {
-        expaned[$(this)] = true;
-        $(this).find("#item-discription-preview").slideUp();
-        $(this).find("#item-discription").slideDown(1000);  
-    } else {
-        expaned[$(this)] = false;
-        $(this).find("#item-discription").slideUp(1000);
-        $(this).find("#item-discription-preview").slideDown();
-    }
-    
-});
