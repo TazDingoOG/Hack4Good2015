@@ -149,7 +149,7 @@ table1.on('click', '.item-checkoff button', function () {
         handleApiResult(data);
     }).fail(function (err) {
         fail(err);
-    }).always(function() {
+    }).always(function () {
         setButtonLoading($this, false);
     });
 });
@@ -180,7 +180,7 @@ $searchModal.on('click', '.item-checkoff button', function () {
         handleApiResult(data);
     }).fail(function (err) {
         fail(err);
-    }).always(function() {
+    }).always(function () {
         setButtonLoading($this, false);
     });
 });
@@ -202,24 +202,33 @@ table1.on('click', '.item-description', function () {
 
 /* clsoes the given .item-description div */
 function closeTextarea() {
-    var div = $("#textarea-input").parent();
+    if (typeof($("#textarea-input").val()) !== "undefined") {
 
-    /* information to send */
-    var text = $("#textarea-input").val();
-    var itemId = div.parents("tr").children(".item-checkoff").children("button").val();
-    var item_name = $this.parents("tr").children(".item-name").text();
+        var div = $("#textarea-input").parent();
 
-    div.text(text);
-    div.addClass("chop");
+        /* information to send */
+        var text = $("#textarea-input").val();
+        var itemId = div.parents("tr").children(".item-checkoff").children("button").val();
+        var item_name = $(this).parents("tr").children(".item-name").text();
 
-    //TODO: send text to server, update description
+        text = text.replace(/\n/g, "<br>");
+        div.html(text);
+        div.addClass("chop");
+
+        //TODO: send text to server, update description
+    }
 }
 
 /* opens the given .item-description div */
 function openTextarea(div) {
     $this.removeClass("chop");
     var html = $this.html().replace(/<br>/g, "\n");
-    $this.html('<textarea class="form-control" rows=5 id="textarea-input">' + html + '</textarea>');
+    $this.html('<textarea class="form-control" rows=5 id="textarea-input">' + html + '</textarea>' +
+        '<div class="counting-div" id="countingTextarea">' + calculateRemainingSpaces(html) + '</div>');
+}
+var maxLength = 100;
+function calculateRemainingSpaces(text) {
+    return maxLength - text.length;
 }
 
 /* if the user clicks on the item-description in modal search */
@@ -234,9 +243,19 @@ $searchModal.on('click', '#td-description', function () {
     }
 });
 
+$(document).on('keydown', '#textarea-input', function () {
+    var count = calculateRemainingSpaces($(this).val());
+    if(count < 0) {
+        $('#countingTextarea').css('color','#ff8888');
+    } else {
+        $('#countingTextarea').css('color','#cccccc');
+    }
+    $('#countingTextarea').text(count);
+});
+
 /* close textare if the user clicks outside the textarea */
-$(document).click(function(event) {
-    if ( !$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('#td-description')) {
+$(document).click(function (event) {
+    if (!$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('#td-description')) {
         closeTextarea($('#textarea-input').parent());
     }
 });

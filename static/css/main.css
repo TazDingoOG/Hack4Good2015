@@ -186,6 +186,20 @@ body {
     font-size: 1.2em;
 }
 
+.item-description {
+    position: relative;
+}
+.counting-div {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    color: #cccccc;
+}
+
+#textarea-input {
+    resize: vertical;
+}
+
 #td-description {
     /* curser properties */
     cursor:pointer;
