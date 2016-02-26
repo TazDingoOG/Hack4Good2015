@@ -264,3 +264,36 @@ img.loading-animation {
     width: 1em;
     height: 1em;
 }
+
+#unterkunft-title{
+    font-weight: bold;
+}
+#print-qr-code {
+    margin-top: 6em;
+    margin-bottom: 1em;
+}
+
+#unterkunft-link{
+    background-color: #dbdbdb;
+    display: inline-block;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    padding: 0px 15px;
+}
+
+.print-important {
+    font-weight:bold;
+    line-height: 2em;
+}
+
+@media print {
+    a:link:after,
+    a:visited:after {
+        content: "" !important;
+    }
+
+    .dont-print{
+        display: none !important;
+    }
+}
+
