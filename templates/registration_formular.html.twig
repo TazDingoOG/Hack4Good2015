@@ -20,7 +20,7 @@
                     <label class="field" for="name">
                         <span>* </span>Flüchtlingsunterkunft:
                     </label>
-                    <input type="text" name="name" class="form-control"/>
+                    <input type="text" id="name" name="name" class="form-control" required/>
                 </div>
 
                 <!-- street number -->
@@ -28,23 +28,23 @@
                     <label class="field" for="street_number">
                         <span>* </span>Straße, Hausnummer:
                     </label>
-                    <input type="text" name="street_number" class="form-control"/>
+                    <input type="text" id="street_number" name="street_number" class="form-control" required/>
                 </div>
 
-                <!-- PLZ / ZIP -->
+                <!-- city -->
                 <div class="form-group">
                     <label class="field" for="city">
                         <span>* </span>Stadt:
                     </label>
-                    <input type="text" name="city" class="form-control"/>
+                    <input type="text" id="city" name="city" class="form-control" required/>
                 </div>                
 
                 <!-- PLZ / ZIP -->
                 <div class="form-group">
                     <label class="field" for="zip">
-                        <span>* </span>PLZ:
+                        <span>*</span> PLZ:
                     </label>
-                    <input type="integer" name="zip" class="form-control"/>
+                    <input type="text" pattern="\d{5}" id="zip" name="zip" class="form-control" required/>
                 </div>
 
                 <!-- phone number -->
@@ -52,7 +52,7 @@
                     <label class="field" for="phone_number">
                         Telefonnummer:
                     </label>
-                    <input type="integer" name="phone_number" class="form-control"/>
+                    <input type="tel" id="phone_number" name="phone_number" class="form-control"/>
                 </div>
 
                 <!-- contact person -->
@@ -60,7 +60,7 @@
                     <label class="field" for="contact_person">
                         <span>* </span>Kontaktperson:
                     </label>
-                    <input type="text" name="contact_person" class="form-control"/>
+                    <input type="text" id="contact_person" name="contact_person" class="form-control" required/>
                 </div>
 
                 <!-- email -->
@@ -68,12 +68,12 @@
                     <label class="field" for="email">
                         <span>* </span>Email:
                     </label>
-                    <input type="email" name="email" class="form-control"/>
+                    <input type="email" id="email" name="email" class="form-control" required/>
                 </div>
                 
                 <p class="required">* erforderlich</p>
                 <input type="submit" name="submit" value="Bestätigen" class="btn btn-primary"/>
-                <input type="reset" name="cancel" value="Abbrechen" class="btn btn-default" style="margin-right: 5px"/>
+                <a href="/"><button type="button" class="btn btn-default">Abbrechen</button></a> <!-- send back to homepage -->
               
             </form>
         </div>
