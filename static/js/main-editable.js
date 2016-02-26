@@ -232,7 +232,7 @@ function calculateRemainingSpaces(text) {
 }
 
 /* if the user clicks on the item-description in modal search */
-$searchModal.on('click', '#td-description', function () {
+$searchModal.on('click', '.item-description-td', function () {
     $this = $(this).children('.item-description');
 
     /* pls manu don't hate me, but this ugly as me in the morning */
@@ -255,7 +255,7 @@ $(document).on('keydown', '#textarea-input', function () {
 
 /* close textare if the user clicks outside the textarea */
 $(document).click(function (event) {
-    if (!$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('#td-description')) {
+    if (!$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('.item-description-td')) {
         closeTextarea($('#textarea-input').parent());
     }
 });

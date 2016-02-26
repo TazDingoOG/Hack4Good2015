@@ -7,10 +7,10 @@
 
 /* Hide description on very small displays */
 @media (max-width: 435px) {
-    #td-description div{
+    .item-description-td div{
         display: none;
     }
-    #td-description:after {
+    .item-description-td:after {
         content: '...';
     }
 }
@@ -184,6 +184,7 @@ body {
 
 .item-name {
     font-size: 1.2em;
+    white-space: nowrap;
 }
 
 .item-description {
@@ -200,7 +201,7 @@ body {
     resize: vertical;
 }
 
-#td-description {
+.item-description-td {
     /* curser properties */
     cursor:pointer;
 }

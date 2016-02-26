@@ -58,39 +58,35 @@ var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
  */
 function generateItemElement(item, is_suggestion, is_editable) {
     //TODO: change to array entry that came from server
-    var discription = 'Menge 5 Stück <br> am besten in Blau.<br> und klein.';
+    var description = 'Menge 5 Stück, am besten in Blau, und klein.';
 
-    var colMDdistribution = [1,2,8,1];
-    var colXSdistribution = [1,4,5,2];
-    var html = '<tr><td class="item-picture col-md-' + colMDdistribution[0] + ' col-xs-' + colXSdistribution[0] + '">';
+    // PICTURE //
+    var html = '<tr><td class="item-picture">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
     else
         html += '<span class="glyphicon glyphicon-gift"></span>';
 
-    if (!is_suggestion) {
-        /* Differend col-md-X and col-xs-Y properties */
-        html += '</td><td class="item-name col-md-' + colMDdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
-        html += '<td id="td-description" class="col-md-' + colMDdistribution[2] + ' col-xs-' + colXSdistribution[2] + '""><div class="item-description chop">' + discription + '</div></td>';
+    // NAME //
+    html += '</td><td class="item-name">' + item['name'] + '</td>';
+    // DESCRIPTION //
+    html += '<td class="item-description-td"><div class="item-description chop">' + description + '</div></td>';
 
+    if (!is_suggestion) {
         if (is_editable) {
-            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] +' col-xs-' + colXSdistribution[3] + '"> \
+            html += '<td class="item-checkoff"> \
                         <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
                     <span class="glyphicon glyphicon-ok"></span></button></td>';
         }
     } else {
-        /* Differend col-md-X and col-xs-Y properties */
-        html += '</td><td class="item-name col-md-' + colXSdistribution[1] + ' col-xs-' + colXSdistribution[1] + '">' + item['name'] + '</td>';
-        html += '<td id="td-description" class="col-md-' + colXSdistribution[2] + ' col-xs-' + colXSdistribution[2] + '"><div class="item-description chop">' + discription + '</div></td>';
-
         if (is_editable) {
-            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
+            html += '<td class="item-checkoff""> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
                     data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
                     value="' + item['item_id'] + '"> \
                 <span class="glyphicon glyphicon-plus"></span></button></td>';
         } else {
-            html += '<td class="item-checkoff col-md-' + colMDdistribution[3] + ' col-xs-' + colXSdistribution[3] + '""> \
+            html += '<td class="item-checkoff""> \
                 <b>Bereits hinzugefügt</b>\
                 </button></td>';
         }
