@@ -11,7 +11,24 @@
 {% block body %}
     <div class="container">
         <div class="jumbotron transparent-background register-form">
-            <h2 class="fontblue">Registrierungsformular</h2>
+
+            <!-- temporäre Registrierung per E-Mail -->
+            <h2 class="fontblue">Registrierung einer Unterkunft</h2>
+
+            <p>Es freut uns, dass du dich für die Registrierung entschieden hast. Schreib' uns jetzt einfach eine Email an:</p>
+            <a class="email" href="mailto:registrieren@inventeerio.de">registrieren@inventeerio.de</a>
+            <p>Wir benötigen folgende Daten:</p>
+            <ul>
+                <li>Name der Unterkunft</li>
+                <li>Addresse (Straße, Hausnr., PLZ, Stadt)</li>
+                <li>Telefonnummer [optional]</li>
+                <li>Kontaktperson (falls abweichend von der Addresse, mit der sie uns schreiben)</li>
+            </ul>
+            <p>Wir freuen uns auf die Zusammenarbeit!</p>
+            <p>Dein Inventeerio-Team</p>
+            
+
+            {# <h2 class="fontblue">Registrierungsformular</h2>
 
             <form role="form" name="registration" onsubmit="return formValidation();" method="POST" action="/register">
 
@@ -75,7 +92,7 @@
                 <input type="submit" name="submit" value="Bestätigen" class="btn btn-primary"/>
                 <a href="/"><button type="button" class="btn btn-default">Abbrechen</button></a> <!-- send back to homepage -->
               
-            </form>
+            </form> #}
         </div>
     </div>
 {% endblock %}

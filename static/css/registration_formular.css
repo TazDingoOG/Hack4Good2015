@@ -18,3 +18,11 @@ label span, .required {
 input.btn {
     float: right;
 }
+
+a.email {
+    color: #092fb8;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px;
+}
