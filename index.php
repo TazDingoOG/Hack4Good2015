@@ -70,8 +70,10 @@ class Inventeerio
 
     function getHostString()
     {
-        $host = "http://" . $_SERVER['SERVER_NAME'];
-        if ($_SERVER['SERVER_PORT'] != "80") {
+        $host  = @$_SERVER['HTTPS'] ? "https://" : "http://";
+        $host .= $_SERVER['SERVER_NAME'];
+
+        if ($_SERVER['SERVER_PORT'] != "80" && $_SERVER['SERVER_PORT'] != "443") { // dont print port when it's not necessary
             $host .= ":" . $_SERVER['SERVER_PORT'];
         }
         return $host;
