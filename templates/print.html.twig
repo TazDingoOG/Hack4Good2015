@@ -12,9 +12,9 @@
 {% block body %}
 	<div class="row text-center dont-print">
 		<h1>Bitte drucke diese Seite aus, damit Mitarbeiter über den QR-Code oder Link die Bedarfsliste bearbeiten können.</h1>
-		<button type="button" class="btn btn-primary" onClick="window.print()">Seite ausdrucken</button>
+		<button type="button" class="btn btn-primary print-button" onClick="window.print()">Seite ausdrucken</button>
 	</div>
-	<div class="container text-center">
+	<div class="container text-center print-area">
 		<h1>Bedarfsliste für</h1>
 		<h1 id="unterkunft-title">{{ unterkunft }}</h1>
 		<div class="row" id="print-qr-code"><img src="{{ qr_src }}" /><br></div>
@@ -35,12 +35,14 @@
 				Bitte stelle sicher, dass nur Befugte Zugang zu diesem Dokument haben!
 			</p>
 		</div>
+		<div class="row">
 		<h3>
 			ANLEITUNG
 		</h3>
 		<p>
 			Einfach den QR-Code per App scannen oder den obigen Link im Browser eingeben.
 		</p>
+		</div>
 		{#<p class="topic">#}
 		{#2. Bedarfsliste bearbeiten#}
 		{#</p>#}

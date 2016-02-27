@@ -269,6 +269,17 @@ img.loading-animation {
 #unterkunft-title{
     font-weight: bold;
 }
+
+.print-button {
+    margin-top: 2em;
+}
+
+.print-area{
+    border: 1px solid rgb(206, 206, 206);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+}
+
 #print-qr-code {
     margin-top: 6em;
     margin-bottom: 1em;
@@ -296,6 +307,15 @@ img.loading-animation {
 
     .dont-print{
         display: none !important;
+    }
+
+    body {
+        padding-top: 0 !important;
+    }
+
+    .print-area {
+        border: none;
+        box-shadow: none;
     }
 }
 
