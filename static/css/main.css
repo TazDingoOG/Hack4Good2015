@@ -94,7 +94,11 @@ body {
 }
 
 .th {
-    border-top: 0px;
+    border-top: 0;
+}
+
+tr:hover {
+    background-color: #fbfbfb;
 }
 
 .new-item {
