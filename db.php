@@ -11,10 +11,10 @@ class MyDB extends SQLite3
     }
 
     public function getAccommodationList()
-	{
-		$result = $this->query("SELECT * FROM Accommodation");
-		return self::fetchAll($result);
-	}
+    {
+        $result = $this->query("SELECT * FROM Accommodation");
+        return self::fetchAll($result);
+    }
 
     public function register($name, $cleanName, $email, $telnr, $authtoken, $addr, $plz, $city)
     {
@@ -71,6 +71,19 @@ class MyDB extends SQLite3
         return self::singleResult($r);
     }
 
+    /**
+     * @param $id
+     * @return array|bool
+     */
+    public function getRequestFromId($id)
+    {
+        $statement = $this->prepare("SELECT * FROM Request WHERE req_id = :id");
+        $statement->bindValue('id', $id, SQLITE3_TEXT);
+        $r = $statement->execute();
+
+        return self::singleResult($r);
+    }
+
     public function getAllItems()
     {
         $stmt = $this->prepare("SELECT * FROM Item");
@@ -110,6 +123,25 @@ VALUES (:accom_id, :item_id)");
             return -1; // insert failed
     }
 
+    /**
+     * Update a request entry in the database
+     *
+     * @param array $request The full request data array
+     * @return int The number of rows changed during this query (should be 1 if everything is normal)
+     */
+    public function updateRequest($request)
+    {
+        $stmt = $this->prepare("UPDATE Request SET accom_id=:accom_id, item_id=:item_id, expiration=:expiration, description=:description WHERE req_id=:req_id");
+        $stmt->bindValue('req_id', $request['req_id']);
+        $stmt->bindValue('accom_id', $request['accom_id']);
+        $stmt->bindValue('item_id', $request['item_id']);
+        $stmt->bindValue('expiration', $request['expiration']);
+        $stmt->bindValue('description', $request['description']);
+
+        $stmt->execute();
+        return $this->changes();
+    }
+
     public function removeRequest($request_id)
     {
         $stmt = $this->prepare("DELETE FROM Request WHERE req_id=:request_id");
@@ -139,6 +171,12 @@ VALUES (:accom_id, :item_id)");
         return $requests;
     }
 
+    /**
+     * Checks if the result contains exactly one row, return that or otherwise false
+     *
+     * @param $r
+     * @return array|bool
+     */
     public static function singleResult($r)
     {
         $results = self::fetchAll($r);

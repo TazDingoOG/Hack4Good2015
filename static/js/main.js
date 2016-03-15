@@ -57,9 +57,6 @@ var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
  * FUNCTIONS FOR ITEM GENERATION
  */
 function generateItemElement(item, is_suggestion, is_editable) {
-    //TODO: change to array entry that came from server
-    var description = 'Menge 5 Stück, am besten in Blau, und klein.';
-
     // PICTURE //
     var html = '<tr><td class="item-picture">';
     if (item['image_url'])
@@ -70,7 +67,8 @@ function generateItemElement(item, is_suggestion, is_editable) {
     // NAME //
     html += '</td><td class="item-name">' + item['name'] + '</td>';
     // DESCRIPTION //
-    html += '<td class="item-description-td"><div class="item-description chop">' + description + '</div></td>';
+    var desc = item['description'] ? item['description'] : "";
+    html += '<td class="item-description-td"><div class="item-description chop">' + desc + '</div></td>';
 
     if (!is_suggestion) {
         if (is_editable) {
