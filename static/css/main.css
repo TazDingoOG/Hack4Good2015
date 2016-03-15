@@ -79,6 +79,10 @@ body {
     text-align: right;
 }
 
+.table {
+    table-layout: fixed;
+}
+
 .table > tbody > tr > td {
     vertical-align: middle;
     padding-top: 20px;
@@ -145,19 +149,20 @@ body {
     height: 80px;
 }
 
-.item-picture, .item-timer, .item-name, .item-checkoff {
+.item-picture, .item-timer, .item-name-desc, .item-checkoff {
     vertical-align: middle;
 }
 
 .item-checkoff {
     text-align:right;
+    width: 50px; /* fixed width needed so that the item-name-desc column stretches to full width */
 }
 
 .item-checkoff > button {
     line-height: 1em;
 }
 
-.item-picture: {
+.item-picture {
     width: 50px;
 }
 .item-picture > img {
@@ -170,6 +175,29 @@ body {
 
 .item-name {
     font-size: 1.2em;
+    white-space: nowrap;
+}
+
+.counting-div {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    color: #cccccc;
+}
+
+#textarea-input {
+    resize: vertical;
+}
+
+.chop {
+    /* chopping */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-hidden {
+    display: none;
 }
 
 .item-timer {
@@ -217,3 +245,57 @@ img.loading-animation {
     width: 1em;
     height: 1em;
 }
+
+#unterkunft-title{
+    font-weight: bold;
+}
+
+.print-button {
+    margin-top: 2em;
+}
+
+.print-area{
+    border: 1px solid rgb(206, 206, 206);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+}
+
+#print-qr-code {
+    margin-top: 6em;
+    margin-bottom: 1em;
+}
+
+#unterkunft-link{
+    background-color: #dbdbdb;
+    display: inline-block;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 2em;
+}
+
+.print-important {
+    font-weight:bold;
+    line-height: 2em;
+}
+
+@media print {
+    a:link:after,
+    a:visited:after {
+        content: "" !important;
+    }
+
+    .dont-print{
+        display: none !important;
+    }
+
+    body {
+        padding-top: 0 !important;
+    }
+
+    .print-area {
+        border: none;
+        box-shadow: none;
+    }
+}
+

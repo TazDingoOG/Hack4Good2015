@@ -74,16 +74,31 @@ function handle_api(Inventeerio $main, MyDB $db, $post)
             if (!array_key_exists('request_id', $post)) // no accommodation name given
                 throw new ApiException("no api request_id given");
 
-            $item = $db->getItemFromId($post['request_id']);
-            if (!$item)
+            $request = $db->getRequestFromId($post['request_id']);
+            if (!$request)
                 throw new ApiException("invalid api request_id " . $post['request_id']);
 
             if ($db->removeRequest($post['request_id']) > 0) {
                 $result['success'] = true;
             } else
                 throw new ApiException("delete failed");
+        } else if ($post['action'] == 'update_desc') {
+            if (!array_key_exists('request_id', $post)) // no accommodation name given
+                throw new ApiException("no api request_id given");
+            if (!array_key_exists('new_desc', $post)) // no accommodation name given
+                throw new ApiException("no 'new_desc' given");
+
+            $request = $db->getRequestFromId($post['request_id']);
+            if (!$request)
+                throw new ApiException("invalid api request_id " . $post['request_id']);
+
+            $request['description'] = $post['new_desc'];
+            if ($db->updateRequest($request) > 0) {
+                $result['success'] = true;
+            } else
+                throw new ApiException("update_desc failed");
         } else {
-            throw new ApiException("unknown api action " . $post['action']);
+            throw new ApiException("unknown api action: " . $post['action']);
         }
 
 

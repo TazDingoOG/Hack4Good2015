@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `Request` (
   `accom_id`    INTEGER NOT NULL,
   `item_id`    INTEGER NOT NULL,
   `expiration` TEXT,
+  `description` TEXT,
   FOREIGN KEY (`accom_id`) REFERENCES Accommodation (accom_id),
   FOREIGN KEY (`item_id`) REFERENCES Item (item_id)
 );

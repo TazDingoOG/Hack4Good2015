@@ -14,7 +14,7 @@ function RequestList($search, $table, itemList) {
 
     var self = this; // when the functions/methods are called from eg. an event handler, 'this' is something different, so we use self
 
-    self.getItemList = function() {
+    self.getItemList = function () {
         return Data.requests; // can't store as a variable, because if Data.requests changes, our variable wouldn't be updated
     };
     self.initList = function () {
@@ -22,7 +22,9 @@ function RequestList($search, $table, itemList) {
         self.$search.on("input", self.updateList);
     };
     self.updateList = function () {
-        var searchTerm = self.$search.val().toLowerCase();
+        // the embedded version of the page doesn't have a search bar
+        var searchTerm = (self.$search.val() === undefined) ?
+            "" : self.$search.val().toLowerCase();
         var itemList = self.getItemList();
 
         // clean old ones, TODO: nice search animation (old items fading away, new ones coming in) ?
@@ -34,7 +36,7 @@ function RequestList($search, $table, itemList) {
             if (!self.shouldDisplayItem(item, searchTerm))
                 continue;
 
-            self.$table.append(self.generateElement(item)); // generate element
+            self.$table.append(self.generateElement(item)); // generate elemet
         }
     };
 
@@ -48,36 +50,44 @@ function RequestList($search, $table, itemList) {
         return true; // no search -> display all items
     };
 }
-var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
+var table1 = $("#table1");
+var mainList = new RequestList($("#search"), table1, Data.requests);
 // the modalList will be defined in main-editable.js
 
 /**
  * FUNCTIONS FOR ITEM GENERATION
  */
 function generateItemElement(item, is_suggestion, is_editable) {
+    // PICTURE //
     var html = '<tr><td class="item-picture">';
     if (item['image_url'])
         html += '<img src="' + item['image_url'] + '" class="img-rounded">';
     else
         html += '<span class="glyphicon glyphicon-gift"></span>';
 
-    html += '</td><td class="item-name">' + item['name'] + '</td>';
+    // NAME + DESCRIPTION //
+    html += '</td><td class="item-name-desc"><div class="item-name">' + item['name'] + "</div>";
 
     if (!is_suggestion) {
+        var desc = item['description'] ? item['description'] : "";
+        html += '<div class="item-description chop">' + desc + '</div></td>'; // close name-desc div
+
         if (is_editable) {
             html += '<td class="item-checkoff"> \
                         <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
                     <span class="glyphicon glyphicon-ok"></span></button></td>';
         }
     } else {
+        html += '</td>'; // close name-desc div
+
         if (is_editable) {
-            html += '<td class="item-checkoff"> \
+            html += '<td class="item-checkoff""> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
                     data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
                     value="' + item['item_id'] + '"> \
                 <span class="glyphicon glyphicon-plus"></span></button></td>';
         } else {
-            html += '<td class="item-checkoff"> \
+            html += '<td class="item-checkoff""> \
                 <b>Bereits hinzugefügt</b>\
                 </button></td>';
         }
@@ -142,6 +152,17 @@ Array.prototype.remove = function (from, to) {
 };
 
 
+/* expands the item description */
+table1.on('click', '.item-description', function () {
+    var $this = $(this);
+    if (!$this.hasClass('chop')) {
+        $this.addClass("chop");
+    } else {
+        $this.removeClass("chop");
+    }
+});
+
+
 /*
  * EXTRAS
  */
@@ -159,3 +180,4 @@ $(document.body).on('mouseleave', "[data-hoverclass]", function () {
 $(document).ready(function () {
     $('[data-tooltip="tooltip"]').tooltip();
 });
+
