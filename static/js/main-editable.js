@@ -185,17 +185,13 @@ $searchModal.on('click', '.item-checkoff button', function () {
     });
 });
 
-/* discription conent */
-var mapTable1 = {};
 
 /* expands the item description */
 table1.on('click', '.item-description', function () {
-    $this = $(this);
-    if (mapTable1[$this] == true) {
+    var $this = $(this);
+    if (!$this.hasClass('chop')) {
         $this.addClass("chop");
-        mapTable1[$this] = false;
     } else {
-        mapTable1[$this] = true;
         $this.removeClass("chop");
     }
 });
