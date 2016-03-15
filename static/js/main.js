@@ -14,7 +14,7 @@ function RequestList($search, $table, itemList) {
 
     var self = this; // when the functions/methods are called from eg. an event handler, 'this' is something different, so we use self
 
-    self.getItemList = function() {
+    self.getItemList = function () {
         return Data.requests; // can't store as a variable, because if Data.requests changes, our variable wouldn't be updated
     };
     self.initList = function () {
@@ -50,7 +50,8 @@ function RequestList($search, $table, itemList) {
         return true; // no search -> display all items
     };
 }
-var mainList = new RequestList($("#search"), $("#table1"), Data.requests);
+var table1 = $("#table1");
+var mainList = new RequestList($("#search"), table1, Data.requests);
 // the modalList will be defined in main-editable.js
 
 /**
@@ -64,19 +65,21 @@ function generateItemElement(item, is_suggestion, is_editable) {
     else
         html += '<span class="glyphicon glyphicon-gift"></span>';
 
-    // NAME //
-    html += '</td><td class="item-name">' + item['name'] + '</td>';
-    // DESCRIPTION //
-    var desc = item['description'] ? item['description'] : "";
-    html += '<td class="item-description-td"><div class="item-description chop">' + desc + '</div></td>';
+    // NAME + DESCRIPTION //
+    html += '</td><td class="item-name-desc"><div class="item-name">' + item['name'] + "</div>";
 
     if (!is_suggestion) {
+        var desc = item['description'] ? item['description'] : "";
+        html += '<div class="item-description chop">' + desc + '</div></td>'; // close name-desc div
+
         if (is_editable) {
             html += '<td class="item-checkoff"> \
                         <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
                     <span class="glyphicon glyphicon-ok"></span></button></td>';
         }
     } else {
+        html += '</td>'; // close name-desc div
+
         if (is_editable) {
             html += '<td class="item-checkoff""> \
                 <button type="button" class="btn" data-hoverclass="btn-info" \
@@ -147,6 +150,17 @@ Array.prototype.remove = function (from, to) {
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
 };
+
+
+/* expands the item description */
+table1.on('click', '.item-description', function () {
+    var $this = $(this);
+    if (!$this.hasClass('chop')) {
+        $this.addClass("chop");
+    } else {
+        $this.removeClass("chop");
+    }
+});
 
 
 /*

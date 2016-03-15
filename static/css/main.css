@@ -5,16 +5,6 @@
     }
 }
 
-/* Hide description on very small displays */
-@media (max-width: 435px) {
-    .item-description-td div{
-        display: none;
-    }
-    .item-description-td:after {
-        content: '...';
-    }
-}
-
 .modal .modal-body {
     max-height: 420px;
     overflow-y: auto;
@@ -159,12 +149,13 @@ body {
     height: 80px;
 }
 
-.item-picture, .item-timer, .item-name, .item-checkoff {
+.item-picture, .item-timer, .item-name-desc, .item-checkoff {
     vertical-align: middle;
 }
 
 .item-checkoff {
     text-align:right;
+    width: 50px; /* fixed width needed so that the item-name-desc column stretches to full width */
 }
 
 .item-checkoff > button {
@@ -187,9 +178,6 @@ body {
     white-space: nowrap;
 }
 
-.item-description {
-    position: relative;
-}
 .counting-div {
     position: absolute;
     right: 20px;
@@ -201,17 +189,9 @@ body {
     resize: vertical;
 }
 
-.item-description-td {
-    /* curser properties */
-    cursor:pointer;
-}
-
 .chop {
     /* chopping */
-    display: block;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

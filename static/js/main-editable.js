@@ -186,16 +186,6 @@ $searchModal.on('click', '.item-checkoff button', function () {
 });
 
 
-/* expands the item description */
-table1.on('click', '.item-description', function () {
-    var $this = $(this);
-    if (!$this.hasClass('chop')) {
-        $this.addClass("chop");
-    } else {
-        $this.removeClass("chop");
-    }
-});
-
 /* clsoes the given .item-description div */
 function closeTextarea() {
     if (typeof($("#textarea-input").val()) !== "undefined") {
