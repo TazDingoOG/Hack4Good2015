@@ -70,12 +70,15 @@ function generateItemElement(item, is_suggestion, is_editable) {
 
     if (!is_suggestion) {
         var desc = item['description'] ? item['description'] : "";
-        html += '<div class="item-description chop">' + desc + '</div></td>'; // close name-desc div
+        html += '<div class="item-description chop" contenteditable="false">' + desc + '</div></td>'; // close name-desc div
 
         if (is_editable) {
             html += '<td class="item-checkoff"> \
-                        <button class="btn" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
-                    <span class="glyphicon glyphicon-ok"></span></button></td>';
+                        <button class="btn button-checkoff" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
+                    <span class="glyphicon glyphicon-ok"></span></button>\
+                    <button type="button" class="btn button-edit" data-hoverclass="btn-warning" style="margin-top: 5px"><span class="glyphicon glyphicon-pencil"></span></button> \
+                </td>';
+
         }
     } else {
         html += '</td>'; // close name-desc div
@@ -85,7 +88,8 @@ function generateItemElement(item, is_suggestion, is_editable) {
                 <button type="button" class="btn" data-hoverclass="btn-info" \
                     data-desc="' + item['name'] + ' hinzuf&uuml;gen" \
                     value="' + item['item_id'] + '"> \
-                <span class="glyphicon glyphicon-plus"></span></button></td>';
+                <span class="glyphicon glyphicon-plus"></span></button>\
+                </td>';
         } else {
             html += '<td class="item-checkoff""> \
                 <b>Bereits hinzugefügt</b>\
@@ -155,10 +159,12 @@ Array.prototype.remove = function (from, to) {
 /* expands the item description */
 table1.on('click', '.item-description', function () {
     var $this = $(this);
-    if (!$this.hasClass('chop')) {
-        $this.addClass("chop");
-    } else {
-        $this.removeClass("chop");
+    if($this.attr("contenteditable") === "false") {
+        if (!$this.hasClass('chop')) {
+            $this.addClass("chop");
+        } else {
+            $this.removeClass("chop");
+        }
     }
 });
 

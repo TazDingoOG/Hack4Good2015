@@ -134,7 +134,7 @@ function setButtonLoading($btn, flag) {
 
 /** Remove items via checkoff-button **/
 var table1 = $("#table1");
-table1.on('click', '.item-checkoff button', function () {
+table1.on('click', '.item-checkoff .button-checkoff', function () {
     $this = $(this);
     // show loading animation in button
     setButtonLoading($this, true);
@@ -152,6 +152,14 @@ table1.on('click', '.item-checkoff button', function () {
     }).always(function () {
         setButtonLoading($this, false);
     });
+});
+
+table1.on('click', '.item-checkoff .button-edit',function () {
+    //find content description
+    var description = $(this).parents("tr").children(".item-name-desc").children(".item-description");
+    description.removeClass("chop");
+    description.attr("contenteditable","true");
+    description.focus();
 });
 
 
@@ -186,48 +194,11 @@ $searchModal.on('click', '.item-checkoff button', function () {
 });
 
 
-/* clsoes the given .item-description div */
-function closeTextarea() {
-    if (typeof($("#textarea-input").val()) !== "undefined") {
-
-        var div = $("#textarea-input").parent();
-
-        /* information to send */
-        var text = $("#textarea-input").val();
-        var itemId = div.parents("tr").children(".item-checkoff").children("button").val();
-        var item_name = $(this).parents("tr").children(".item-name").text();
-
-        text = text.replace(/\n/g, "<br>");
-        div.html(text);
-        div.addClass("chop");
-
-        //TODO: send text to server, update description
-    }
-}
-
-/* opens the given .item-description div */
-function openTextarea(div) {
-    $this.removeClass("chop");
-    var html = $this.html().replace(/<br>/g, "\n");
-    $this.html('<textarea class="form-control" rows=5 id="textarea-input">' + html + '</textarea>' +
-        '<div class="counting-div" id="countingTextarea">' + calculateRemainingSpaces(html) + '</div>');
-}
+//unused in the moment
 var maxLength = 100;
 function calculateRemainingSpaces(text) {
     return maxLength - text.length;
 }
-
-/* if the user clicks on the item-description in modal search */
-$searchModal.on('click', '.item-description-td', function () {
-    $this = $(this).children('.item-description');
-
-    /* pls manu don't hate me, but this ugly as me in the morning */
-    if (!$this.children().is("textarea")) {
-        /* other element is textarea */
-        closeTextarea();
-        openTextarea($this);
-    }
-});
 
 $(document).on('keydown', '#textarea-input', function () {
     var count = calculateRemainingSpaces($(this).val());
@@ -237,11 +208,4 @@ $(document).on('keydown', '#textarea-input', function () {
         $('#countingTextarea').css('color','#cccccc');
     }
     $('#countingTextarea').text(count);
-});
-
-/* close textare if the user clicks outside the textarea */
-$(document).click(function (event) {
-    if (!$(event.target).is('#textarea-input') && !$(event.target).hasClass('item-description') && !$(event.target).is('.item-description-td')) {
-        closeTextarea($('#textarea-input').parent());
-    }
 });
