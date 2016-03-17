@@ -11,4 +11,4 @@ target/
 .classpath
 .settings
 .idea/
-data/data.db
+
