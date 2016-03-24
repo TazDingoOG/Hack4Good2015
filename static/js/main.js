@@ -75,7 +75,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
         if (is_editable) {
             html += '<td class="item-checkoff"> \
                         <button class="btn button-checkoff" data-hoverclass="btn-success" value="' + item['req_id'] + '"> \
-                    <span class="glyphicon glyphicon-ok"></span></button>\
+                    <span class="glyphicon glyphicon-remove"></span></button>\
                     <button type="button" class="btn button-edit" data-hoverclass="btn-warning" style="margin-top: 5px"><span class="glyphicon glyphicon-pencil"></span></button> \
                 </td>';
 
