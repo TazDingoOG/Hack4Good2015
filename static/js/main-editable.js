@@ -154,12 +154,41 @@ table1.on('click', '.item-checkoff .button-checkoff', function () {
     });
 });
 
+$editModal = $('#editModal');
+
 table1.on('click', '.item-checkoff .button-edit',function () {
     //find content description
     var description = $(this).parents("tr").children(".item-name-desc").children(".item-description");
-    description.removeClass("chop");
-    description.attr("contenteditable","true");
-    description.focus();
+    var titel = $(this).parents("tr").children(".item-name-desc").children(".item-name");
+    var id = $(this).parent("td").children(".button-checkoff").val();
+    var img = $(this).parents("tr").children(".item-picture");
+
+    $editModal.modal('show');
+    $editModal.find('#item-description-edit').val(description.text());
+    $editModal.find('.modal-header').html('<div class="item-picture" style="float: left">' + img.html() + '</div><h4>' + titel.text() + '</h4>');
+    $editModal.find('#submit-edit').val(id);
+});
+
+$('#submit-edit').on('click', function () {
+    $this = $(this);
+    setButtonLoading($this, true);
+
+    var newDescription = $editModal.find('#item-description-edit').val();
+    var item_id = $editModal.find('#submit-edit').val();
+
+    $.post('/api_update', {
+        action: 'update_desc',
+        clean_acom_name: Data.clean_acom_name, // we got that from the little javascript inserted into the body by php
+        request_id: item_id,
+        new_desc: newDescription
+    }).done(function (data) {
+        handleApiResult(data);
+    }).fail(function (err) {
+        fail(err);
+    }).always(function () {
+        setButtonLoading($this, false);
+        $editModal.modal('hide');
+    });
 });
 
 
