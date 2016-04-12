@@ -122,13 +122,16 @@ function handleApiResult(result) {
     }
 }
 
+var saveValue;
 function setButtonLoading($btn, flag) {
     if (flag) {
         $btn.children().hide();
+        saveValue = $btn.text();
         $btn.text("");
         $btn.append('<img class="loading-animation" src="/static/img/loading-animation.gif">');
     } else {
         $btn.children('.loading-animation').remove();
+        $btn.text(saveValue);
         $btn.children().show();
     }
 }
@@ -168,10 +171,19 @@ table1.on('click', '.item-checkoff .button-edit',function () {
     $editModal.find('#item-description-edit').val(description.text());
     $editModal.find('.modal-header').html('<div class="item-picture" style="float: left">' + img.html() + '</div><h4>' + titel.text() + '</h4>');
     $editModal.find('#submit-edit').val(id);
+    updateCountingDiv();
 });
 
 $('#submit-edit').on('click', function () {
     $this = $(this);
+    if(updateCountingDiv() === false) {
+        //invalid to many characters
+        var target =$('#countingTextarea');
+        target.css('color','#FF0000');
+        target.css('font-weight','bold');
+        target.effect( "shake", {times:3, distance:5}, 500 );
+        return;
+    }
     setButtonLoading($this, true);
 
     var newDescription = $editModal.find('#item-description-edit').val();
@@ -223,19 +235,24 @@ $searchModal.on('click', '.item-checkoff button', function () {
     });
 });
 
-
-//unused in the moment
-var maxLength = 100;
-function calculateRemainingSpaces(text) {
-    return maxLength - text.length;
-}
-
-$(document).on('keydown', '#textarea-input', function () {
-    var count = calculateRemainingSpaces($(this).val());
-    if(count < 0) {
-        $('#countingTextarea').css('color','#ff8888');
-    } else {
-        $('#countingTextarea').css('color','#cccccc');
-    }
-    $('#countingTextarea').text(count);
+$(document).on('keydown', '#item-description-edit',function() {
+    updateCountingDiv();
 });
+
+function updateCountingDiv () {
+    //unused in the moment
+    var maxLength = 256;
+    var count = maxLength - $('#item-description-edit').val().length;
+    var target = $('#countingTextarea');
+    target.css('font-weight','normal');
+    var ret;
+    if(count < 0) {
+        target.css('color','#ff8888');
+        ret = false;
+    } else {
+        target.css('color','#cccccc');
+        ret = true;
+    }
+    target.text(count);
+    return ret;
+}

@@ -184,12 +184,12 @@ tr:hover {
 
 .counting-div {
     position: absolute;
-    right: 20px;
-    bottom: 0;
+    right: 25px;
+    bottom: 36px;
     color: #cccccc;
 }
 
-#textarea-input {
+.textarea-resize {
     resize: vertical;
 }
 
