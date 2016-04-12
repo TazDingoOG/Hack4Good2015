@@ -235,6 +235,11 @@ tr:hover {
     width: 34px;
 }
 
+.fixed-size {
+    min-width: 100px;
+    min-height: 33px;
+}
+
 .register-form {
     display: inline-block;
     width:100%;

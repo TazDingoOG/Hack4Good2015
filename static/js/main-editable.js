@@ -125,6 +125,7 @@ function handleApiResult(result) {
 function setButtonLoading($btn, flag) {
     if (flag) {
         $btn.children().hide();
+        $btn.text("");
         $btn.append('<img class="loading-animation" src="/static/img/loading-animation.gif">');
     } else {
         $btn.children('.loading-animation').remove();
