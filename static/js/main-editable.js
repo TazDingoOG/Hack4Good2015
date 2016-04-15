@@ -126,12 +126,14 @@ var saveValue;
 function setButtonLoading($btn, flag) {
     if (flag) {
         $btn.children().hide();
-        saveValue = $btn.text();
+        if($btn.hasClass("fixed-size"))
+            saveValue = $btn.text();
         $btn.text("");
         $btn.append('<img class="loading-animation" src="/static/img/loading-animation.gif">');
     } else {
         $btn.children('.loading-animation').remove();
-        $btn.text(saveValue);
+        if($btn.hasClass("fixed-size"))
+            $btn.text(saveValue);
         $btn.children().show();
     }
 }
