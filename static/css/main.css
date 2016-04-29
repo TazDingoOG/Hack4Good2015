@@ -55,9 +55,15 @@ body {
     height: 50px;
     border-radius: 25px;
     border: none;
-    box-shadow: grey 0px 0px 7px;
+    box-shadow: grey 0 0 7px;
 }
 
+@media all and (orientation:portrait) {
+    .floating-add-button {
+        right: 10px;
+        bottom: 10px;
+    }
+}
 
 .list-categories-header {
     margin-bottom: 50px;
