@@ -83,10 +83,14 @@ body {
     table-layout: fixed;
 }
 
+#table_content {
+    padding-bottom: 50px;
+}
+
 .table > tbody > tr > td {
     vertical-align: middle;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .table > tbody > tr:last-child {
