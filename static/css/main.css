@@ -168,8 +168,8 @@ tr:hover {
 }
 
 .item-checkoff {
-    text-align:right;
-    width: 50px; /* fixed width needed so that the item-name-desc column stretches to full width */
+    text-align:center;
+    width: 70px; /* fixed width needed so that the item-name-desc column stretches to full width */
 }
 
 .item-checkoff > button {
@@ -245,6 +245,10 @@ tr:hover {
 }
 .search_modal .cell-right {
     width: 34px;
+}
+
+.already-added-text {
+    font-size: 7pt;
 }
 
 .fixed-size {

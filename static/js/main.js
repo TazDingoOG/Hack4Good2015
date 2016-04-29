@@ -92,7 +92,7 @@ function generateItemElement(item, is_suggestion, is_editable) {
                 </td>';
         } else {
             html += '<td class="item-checkoff""> \
-                <b>Bereits hinzugefügt</b>\
+                <b class="already-added-text">Bereits hinzugefügt</b>\
                 </button></td>';
         }
     }
