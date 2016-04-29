@@ -190,6 +190,8 @@ tr:hover {
 .item-name {
     font-size: 1.2em;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .counting-div {

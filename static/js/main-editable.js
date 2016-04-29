@@ -222,7 +222,7 @@ $searchModal.on('click', '.item-checkoff button', function () {
     setButtonLoading($this, true);
 
     var item_id = $this.val();
-    var item_name = $this.parents("tr").children(".item-name").text(); // only needed when creating a new item, because id will be -1
+    var item_name = $this.parents("tr").children(".item-name-desc").children(".item-name").text(); // only needed when creating a new item, because id will be -1
 
     $.post('/api_update', {
         action: 'add',
