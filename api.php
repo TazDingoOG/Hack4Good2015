@@ -40,11 +40,11 @@ function handle_api(Inventeerio $main, MyDB $db, $post)
 
         // action=ADD
         if ($post['action'] == 'add') {
-            if (!array_key_exists('item_id', $post)) // no accommodation name given
+            if (!array_key_exists('item_id', $post)) // no item name given
                 throw new ApiException("no api item given");
 
             if ($post['item_id'] == -1) { // id=-1 -> CREATE new item
-                if (!array_key_exists('item_name', $post))  // no accommodation name given
+                if (!array_key_exists('item_name', $post) || empty($post['item_name']))  // no item name given
                     throw new ApiException("no item name given");
 
                 $new_name = $post['item_name'];
@@ -71,7 +71,7 @@ function handle_api(Inventeerio $main, MyDB $db, $post)
 
             // action=DELETE
         } else if ($post['action'] == 'delete') {
-            if (!array_key_exists('request_id', $post)) // no accommodation name given
+            if (!array_key_exists('request_id', $post))
                 throw new ApiException("no api request_id given");
 
             $request = $db->getRequestFromId($post['request_id']);
@@ -83,9 +83,9 @@ function handle_api(Inventeerio $main, MyDB $db, $post)
             } else
                 throw new ApiException("delete failed");
         } else if ($post['action'] == 'update_desc') {
-            if (!array_key_exists('request_id', $post)) // no accommodation name given
+            if (!array_key_exists('request_id', $post))
                 throw new ApiException("no api request_id given");
-            if (!array_key_exists('new_desc', $post)) // no accommodation name given
+            if (!array_key_exists('new_desc', $post))
                 throw new ApiException("no 'new_desc' given");
 
             $request = $db->getRequestFromId($post['request_id']);

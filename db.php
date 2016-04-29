@@ -152,6 +152,8 @@ VALUES (:accom_id, :item_id)");
 
     public function createItem($name)
     {
+        if(empty($name))
+            throw new Exception('Cannot create item empty name');
         $stmt = $this->prepare("INSERT INTO ITEM (name) VALUES (:name)");
         $stmt->bindValue('name', $name);
         $stmt->execute();
